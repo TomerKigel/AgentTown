@@ -1,0 +1,3 @@
+Music:fantasy.wav
+SFX:HitHurt.wav
+SFX:Jump.wav
