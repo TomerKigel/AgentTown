@@ -87,9 +87,6 @@
     <ClCompile Include="StaticObject.cpp">
       <Filter>Engine\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Module.ixx">
-      <Filter>AI_Elements</Filter>
-    </ClCompile>
     <ClCompile Include="agent.cpp">
       <Filter>AI_Elements</Filter>
     </ClCompile>
@@ -168,9 +165,6 @@
       <Filter>AI_Elements</Filter>
     </ClInclude>
     <ClInclude Include="distanceCalculatable.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="event_message.h">
       <Filter>AI_Elements</Filter>
     </ClInclude>
     <ClInclude Include="interface_calculatable.h">

@@ -10,9 +10,6 @@
 #include "ThreadSafeQueue.h"
 #include <boost/lexical_cast.hpp>
 
-#include <cmath>
-#include <matplot/matplot.h>
-
 
 class GameEngine
 {
