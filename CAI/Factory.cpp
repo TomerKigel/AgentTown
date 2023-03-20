@@ -32,7 +32,7 @@ std::shared_ptr<Car> Factory::CreateCar()
 {
 	std::shared_ptr<sf::Texture> text = std::make_shared<sf::Texture>();
 	text->loadFromFile("car.png");
-	std::shared_ptr<Car> tm = std::make_shared<Car>(Car_Parameters.speed,Car_Parameters.range, Car_Parameters.window_, text, Car_Parameters.id);
+	std::shared_ptr<Car> tm = std::make_shared<Car>(Car_Parameters.speed,Car_Parameters.range, Car_Parameters.window_, text, Car_Parameters.id, Car_Parameters.connection_id);
 	Object_List->push_back(tm);
 	return tm;
 }
@@ -64,28 +64,31 @@ std::shared_ptr<Textures> Factory::CreatGameAssets()
 }
 
 
-void Factory::SetUpCar::new_SetUpCar(double tlx, double tly, double brx, double bry, double spd, std::shared_ptr<sf::RenderWindow> window_, int id)
+void Factory::SetUpCar::new_SetUpCar(double tlx, double tly, double brx, double bry, double spd, std::shared_ptr<sf::RenderWindow> window_, int id,int connection)
 {
 	Car_Parameters.range(tlx, tly, brx, bry);
 	Car_Parameters.window_ = window_;
 	Car_Parameters.speed = spd;
 	Car_Parameters.id = id;
+	Car_Parameters.connection_id = connection;
 }
 
-void Factory::SetUpCar::new_SetUpCar(Point Tl, Point Br, double spd, std::shared_ptr<sf::RenderWindow> window_, int id)
+void Factory::SetUpCar::new_SetUpCar(Point Tl, Point Br, double spd, std::shared_ptr<sf::RenderWindow> window_, int id, int connection)
 {
 	Car_Parameters.range(Tl, Br);
 	Car_Parameters.window_ = window_;
 	Car_Parameters.speed = spd;
 	Car_Parameters.id = id;
+	Car_Parameters.connection_id = connection;
 }
 
-void Factory::SetUpCar::new_SetUpCar(AABB range, double spd, std::shared_ptr<sf::RenderWindow> window_, int id)
+void Factory::SetUpCar::new_SetUpCar(AABB range, double spd, std::shared_ptr<sf::RenderWindow> window_, int id, int connection)
 {
 	Car_Parameters.range = range;
 	Car_Parameters.window_ = window_;
 	Car_Parameters.speed = spd;
 	Car_Parameters.id = id;
+	Car_Parameters.connection_id = connection;
 }
 
 

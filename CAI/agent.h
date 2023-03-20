@@ -19,24 +19,29 @@ private:
 
 	void EventController();
 
+protected:
+	virtual void destroy() { destruct = true; alive = false;}
 public:
 	agent();
 
-	agent(int id);
+	agent(int id,int connection);
 
 	agent(agent &other_agent);
 
 	virtual ~agent();
 
-	bool add_neighbour(agent *neigh);
+	bool add_neighbour(int id);
 
-	bool remove_neighbour(agent* neigh);
+	bool remove_neighbour(int id);
 
 	void run();
 
 	unsigned int get_agent_id();
 
+	unsigned int get_connection_id();
+
 	void push_message(message::message &msg);
 
 	virtual void process_message(message::message& msg) = 0;
+
 };

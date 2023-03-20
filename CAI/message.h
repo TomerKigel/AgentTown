@@ -13,6 +13,7 @@ namespace message
 	{
 		std::string type;
 		uint32_t body_size = 0;
+		uint32_t connection_id = 0;
 	};
 
 	class message
@@ -33,6 +34,11 @@ namespace message
 			header.type = "";
 			body.clear();
 			body.shrink_to_fit();
+		}
+
+		std::string to_string() const
+		{
+			return "["+header.type+"]" + "{"+body.data()+"}";
 		}
 
 		// Override for std::cout compatibility - produces friendly description of message

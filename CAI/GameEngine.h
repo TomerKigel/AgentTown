@@ -9,20 +9,21 @@
 #include "APH.h"
 #include "ThreadSafeQueue.h"
 #include <boost/lexical_cast.hpp>
+#include "QueueManager.h"
 
 
-class GameEngine
+class GameEngine : public interface_runnable
 {
 private:
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
-	int engine_state;
+	int engine_state_;
 
 	std::shared_ptr<sf::RenderWindow> window_;
-	sf::Event event;
-	std::shared_ptr<ThreadSafeQueue<message::message>> message_queue_;
+	sf::Event event_;
+	std::shared_ptr<QueueManager<message::message>> message_pipeline_;
 	std::unique_ptr<QuadTree> Quadtree_;
-	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector;
-	std::map<int,std::shared_ptr<agent>> agents;
+	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector_;
+	std::unordered_map<int,std::shared_ptr<agent>> agents_;
 
 	void event_loop();
 	void handle_messages();
@@ -36,7 +37,7 @@ private:
 	void game_loop();
 public:
 	GameEngine();
-	GameEngine(std::shared_ptr<ThreadSafeQueue<message::message>> &message_queue);
+	GameEngine(std::shared_ptr<QueueManager<message::message>> message_pipeline_);
 	~GameEngine();
 	
 	void operator=(const GameEngine&& gm);

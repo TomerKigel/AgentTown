@@ -40,8 +40,8 @@
     <Filter Include="Framework">
       <UniqueIdentifier>{4b98e61d-3422-4a51-8228-037c5715d79e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SharedMessageQueue">
-      <UniqueIdentifier>{fa2a89f1-667a-4c6a-8b23-223613a9392b}</UniqueIdentifier>
+    <Filter Include="MessageSystem">
+      <UniqueIdentifier>{5be148d5-6e10-4ee0-b2e6-8c5120484b26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -192,13 +192,16 @@
       <Filter>Communications</Filter>
     </ClInclude>
     <ClInclude Include="message.h">
-      <Filter>Communications</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreadSafeQueue.h">
-      <Filter>SharedMessageQueue</Filter>
+      <Filter>MessageSystem</Filter>
     </ClInclude>
     <ClInclude Include="MessageParser.h">
-      <Filter>Communications</Filter>
+      <Filter>MessageSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueManager.h">
+      <Filter>MessageSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeQueue.h">
+      <Filter>MessageSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

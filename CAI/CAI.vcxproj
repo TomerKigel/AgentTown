@@ -201,6 +201,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="PseudoServer.h" />
     <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="QueueManager.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="task.h" />

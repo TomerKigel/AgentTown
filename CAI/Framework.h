@@ -2,6 +2,7 @@
 #include "MainServer.h"
 #include "message.h"
 #include "GameEngine.h"
+#include "QueueManager.h"
 
 class Framework
 {
@@ -16,7 +17,7 @@ private:
 	std::string host;
 	int port;
 
-	std::shared_ptr<ThreadSafeQueue<message::message>> Queue;
+	std::shared_ptr<QueueManager<message::message>> message_pipeline_;
 public:
 	Framework();
 	~Framework();

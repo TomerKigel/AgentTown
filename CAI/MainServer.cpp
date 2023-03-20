@@ -2,10 +2,10 @@
 #include "ClientThreadConnection.h"
 
 
-MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint, std::shared_ptr<ThreadSafeQueue<message::message>> message_queue) : acceptor_(io_context, endpoint)
+MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint, std::shared_ptr<QueueManager<message::message>> message_pipeline_) : acceptor_(io_context, endpoint)
 {
-	running_connection_id = 0;
-	this->message_queue = message_queue;
+	running_connection_id_ = 0;
+	this->message_pipeline_ = message_pipeline_;
 }
 
 
@@ -33,9 +33,9 @@ void MainServer::wait_for_connection()
 			{
 				if (!ec)
 				{
-					cout << "Established connection with connection id: " << running_connection_id << endl;
-					auto connection_ptr = std::make_shared<ClientThreadConnection>(std::move(socket), connections_, running_connection_id++,message_queue);
-					connections_.insert(std::make_pair(running_connection_id, connection_ptr));
+					cout << "Established connection with connection id: " << running_connection_id_ << endl;
+					auto connection_ptr = std::make_shared<ClientThreadConnection>(std::move(socket), connections_, running_connection_id_++, message_pipeline_);
+					connections_.insert(std::make_pair(running_connection_id_, connection_ptr));
 					connection_ptr->run();
 				}
 

@@ -7,6 +7,7 @@
 #include "Connection.h"
 #include "message.h"
 #include "ThreadSafeQueue.h"
+#include "QueueManager.h"
 
 using std::cin;
 using std::cout;
@@ -25,12 +26,12 @@ private:
 	tcp::acceptor acceptor_;
 
 	std::unordered_map<int,std::shared_ptr<Connection>> connections_;
-	int running_connection_id;
-	std::vector<std::thread> threads;
-	std::shared_ptr<ThreadSafeQueue<message::message>> message_queue;
+	int running_connection_id_;
+	std::vector<std::thread> threads_;
+	std::shared_ptr<QueueManager<message::message>> message_pipeline_;
 
 public:
-	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint, std::shared_ptr<ThreadSafeQueue<message::message>> message_queue);
+	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint, std::shared_ptr<QueueManager<message::message>> message_pipeline_);
 
 	virtual ~MainServer();
 

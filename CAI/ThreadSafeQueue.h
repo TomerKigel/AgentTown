@@ -8,15 +8,33 @@ class ThreadSafeQueue : public std::enable_shared_from_this <ThreadSafeQueue<T>>
 private:
 	std::mutex queue_mutex;
 	std::queue<T> safe_queue;
+	std::unique_lock<std::mutex> ulock;
+	std::condition_variable pop_condition;
 public:
 	ThreadSafeQueue<T>()
 	{
-
+		ulock = std::move(std::unique_lock<std::mutex>(queue_mutex));
+		ulock.unlock();
 	}
 
 	~ThreadSafeQueue<T>()
 	{
 
+	}
+
+
+	ThreadSafeQueue(const ThreadSafeQueue& other)
+	{
+		ulock = std::move(std::unique_lock<std::mutex>(queue_mutex));
+		ulock.unlock();
+		safe_queue = other.safe_queue;
+	}
+
+	ThreadSafeQueue(const ThreadSafeQueue&& other)
+	{
+		ulock = std::move(std::unique_lock<std::mutex>(queue_mutex));
+		ulock.unlock();
+		safe_queue = std::move(other.safe_queue);
 	}
 
 	std::queue<T>& operator=(const std::queue<T>& other)
@@ -33,8 +51,10 @@ public:
 
 	void push(const T element)
 	{
-		std::scoped_lock lock(queue_mutex);
+		ulock.lock();
 		safe_queue.push(element);
+		pop_condition.notify_one();
+		ulock.unlock();
 	}
 
 	void pop()
@@ -66,5 +86,17 @@ public:
 		std::scoped_lock lock(queue_mutex);
 		return safe_queue.size();
 	}
+
+	T until_pop()
+	{
+		ulock.lock();
+		if (safe_queue.empty())
+			pop_condition.wait(ulock, [this]() {return !safe_queue.empty(); });
+		T element = safe_queue.back();
+		safe_queue.pop();
+		ulock.unlock();
+		return element;
+	}
+
 };
 

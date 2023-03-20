@@ -8,8 +8,8 @@ class agent;
 
 class agent_parameters
 {
-	unsigned int id_;
-	std::vector<agent*> neighbours_;
+	unsigned int id_,connection_id_;
+	std::vector<int> neighbours_;
 	int max_neighbour_capacity_;
 	bool changable_;
 public:
@@ -20,6 +20,7 @@ public:
 		max_neighbour_capacity_ = 100;
 		changable_ = true;
 		id_ = -1;
+		connection_id_ = -1;
 	}
 
 	agent_parameters(int id)
@@ -27,7 +28,17 @@ public:
 		max_neighbour_capacity_ = 100;
 		changable_ = true;
 		id_ = id;
+		connection_id_ = -1;
 	}
+
+	agent_parameters(int id,int connection)
+	{
+		max_neighbour_capacity_ = 100;
+		changable_ = true;
+		id_ = id;
+		connection_id_ = connection;
+	}
+
 
 	agent_parameters(agent_parameters &other_parameters)
 	{
@@ -53,32 +64,25 @@ public:
 		return *this;
 	}
 
-	bool add_neighbour(agent *neigh)
+	bool add_neighbour(int id)
 	{
 		if (!changable_)
 			throw std::runtime_error("agent not mutable");
 
 		if (neighbours_.size() < max_neighbour_capacity_) {
-			neighbours_.push_back(neigh);
+			neighbours_.push_back(id);
 			return true;
 		}
 		return false;
 	}
 
-	bool remove_neighbour(agent* neigh)
+	bool remove_neighbour(int id)
 	{
 		if (!changable_)
 			throw std::runtime_error("agent not mutable");
 
-		for (std::vector<agent*>::iterator iter = neighbours_.begin(); iter != neighbours_.end(); iter++)
-		{
-			if (*iter == neigh) {
-				neighbours_.erase(iter);
-				return true;
-			}
-		}
+		std::erase(neighbours_,id);
 		return false;
-		
 	}
 
 	void open_for_change()
@@ -94,5 +98,10 @@ public:
 	unsigned int get_id()
 	{
 		return id_;
+	}
+
+	unsigned int get_connection_id()
+	{
+		return connection_id_;
 	}
 };

@@ -3,8 +3,8 @@
 
 GameEngine::GameEngine()
 {
-	this->message_queue_ = nullptr;
-	engine_state = RUNNING;
+	this->message_pipeline_ = nullptr;
+	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
 	loading_screen();
@@ -12,10 +12,10 @@ GameEngine::GameEngine()
 	window_->setActive(false);
 }
 
-GameEngine::GameEngine(std::shared_ptr<ThreadSafeQueue<message::message>>& message_queue)
+GameEngine::GameEngine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
 {
-	this->message_queue_ = message_queue;
-	engine_state = RUNNING;
+	this->message_pipeline_ = message_pipeline_;
+	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 5/*sf::Style::Resize*/);
 	loading_screen();
@@ -27,9 +27,9 @@ GameEngine::GameEngine(std::shared_ptr<ThreadSafeQueue<message::message>>& messa
 
 void GameEngine::operator=(const GameEngine&& gm)
 {
-	message_queue_ = gm.message_queue_;
-	engine_state = gm.engine_state;
-	window_ = std::move(gm.window_);
+	message_pipeline_ = gm.message_pipeline_;
+	engine_state_ = gm.engine_state_;
+	window_ = gm.window_;
 	loading_screen();
 	Quadtree_ = std::make_unique<QuadTree>( -1980, -1080, 1980, 1080);
 	window_->setActive(false);
@@ -50,7 +50,7 @@ void GameEngine::run()
 	window_->setActive(true);
 	
 	
-	object_vector = Factory::extract_object_list();
+	object_vector_ = Factory::extract_object_list();
 
 	
 	
@@ -62,7 +62,7 @@ void GameEngine::run()
 
 void GameEngine::game_loop()
 {
-	if (engine_state == RUNNING) {
+	if (engine_state_ == RUNNING) {
 		clean_dead_objects();
 		activate_objects();
 		objects_to_quadtree();
@@ -73,30 +73,35 @@ void GameEngine::game_loop()
 
 void GameEngine::clean_dead_objects()
 {
-	for (short i = 0; i < object_vector->size(); i++)
+	/*for (short i = 0; i < object_vector_->size(); i++)
 	{
-		bool ti = object_vector->at(i)->isUpForDestruction();
+		bool ti = object_vector_->at(i)->isUpForDestruction();
 		if (ti) {
-			object_vector->erase(object_vector->begin() + i);
-			object_vector->shrink_to_fit();
+			object_vector_->erase(object_vector_->begin() + i);
+			object_vector_->shrink_to_fit();
 		}
+	}*/
+	if(object_vector_->size() != 0)
+		std::erase_if(*object_vector_, [](std::shared_ptr<Object> a) {return a->isUpForDestruction(); });
+	if (agents_.size() != 0) {
+		std::erase_if(agents_, [](std::pair<int, std::shared_ptr<agent>> a) {return a.second->isUpForDestruction(); });
 	}
 }
 
 void GameEngine::activate_objects()
 {
-	for (int i = 0; i < object_vector->size(); i++)
+	for (int i = 0; i < object_vector_->size(); i++)
 	{
-		object_vector->at(i)->action(); //check cooldown
+		object_vector_->at(i)->action(); //check cooldown
 	}
 }
 
 void GameEngine::objects_to_quadtree()
 {
 	Quadtree_->CleanTree();
-	for (short i = 0; i < object_vector->size(); i++)
+	for (short i = 0; i < object_vector_->size(); i++)
 	{
-		Quadtree_->insert(object_vector->at(i).get());
+		Quadtree_->insert(object_vector_->at(i).get());
 	}
 	Quadtree_->QueryNodes();
 }
@@ -104,45 +109,47 @@ void GameEngine::objects_to_quadtree()
 void GameEngine::draw_objects()
 {
 	window_->clear();
-	for (short i = 0; i < object_vector->size(); i++)
+	for (short i = 0; i < object_vector_->size(); i++)
 	{
-		object_vector->at(i)->draw();
+		object_vector_->at(i)->draw();
 	}
 	window_->display();
 }
 
 void GameEngine::event_loop()
 {
-	while (window_->pollEvent(event))
+	while (window_->pollEvent(event_))
 	{
-		if (event.type == sf::Event::Closed) {
+		if (event_.type == sf::Event::Closed) {
 			window_->close();
 		}
-		if (event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::Escape)
+		if (event_.type == sf::Event::KeyPressed) {
+			if (event_.key.code == sf::Keyboard::Escape)
 			{
 				window_->close();
 			}
 		}
-		if (event.type == sf::Event::LostFocus)
+		if (event_.type == sf::Event::LostFocus)
 		{
 
 		}
-		if (event.type == sf::Event::GainedFocus)
+		if (event_.type == sf::Event::GainedFocus)
 		{
 
 		}
 	}
-	while (message_queue_->size() > 0)
-	{
-		handle_messages();
+	if (message_pipeline_ != nullptr) {
+		while (message_pipeline_->size_in() > 0)
+		{
+			handle_messages();
+		}
 	}
 
-	if (engine_state == TERMINATED)
+	if (engine_state_ == TERMINATED)
 	{
 	
 	}
-	else if (engine_state == PAUSED)
+	else if (engine_state_ == PAUSED)
 	{
 	
 	}
@@ -150,8 +157,7 @@ void GameEngine::event_loop()
 
 void GameEngine::handle_messages()
 {
-	message::message msg = message_queue_->back();
-	message_queue_->pop();
+	message::message msg = message_pipeline_->stop_until_in_pop();
 
 	if (msg.header.type == "new")
 	{
@@ -176,11 +182,11 @@ void GameEngine::handle_new_agent_message(message::message& msg)
 		return;
 	}
 
-	Factory::SetUpCar::new_SetUpCar(AABB(0, 0, 50, 115), 5, window_, id);
-	if (agents.count(id) == 0) {
-		agents.emplace(std::pair(id, Factory::CreateCar()));
-		object_vector->push_back(agents.at(id));
-		agents.at(id)->run();
+	Factory::SetUpCar::new_SetUpCar(AABB(0, 0, 50, 115), 5, window_, id,msg.header.connection_id);
+	if (agents_.count(id) == 0) {
+		agents_.emplace(std::pair(id, Factory::CreateCar()));
+		object_vector_->push_back(agents_.at(id));
+		agents_.at(id)->run();
 	}
 	else
 	{
@@ -194,7 +200,7 @@ void GameEngine::handle_message_to_existing_agent(message::message& msg)
 	std::string body = msg.body.data();
 	if ((start = body.find("to:")) != -1) {
 		id = boost::lexical_cast<int>(body.substr(start + 3, body.find('\n') - (start + 3)));
-		for (auto obj : agents)
+		for (auto obj : agents_)
 		{
 			if (obj.second->get_agent_id() == id)
 			{

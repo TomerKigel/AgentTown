@@ -1,7 +1,7 @@
 #include "Car.h"
 #include "Factory.h"
 
-Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id) : agent(id)
+Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id,int connection_id) : agent(id, connection_id)
 {
 	setAABB(range);
 	sf::Vector2f cor(range.GetTL().GetX(), range.GetTL().GetY());
@@ -84,4 +84,6 @@ void Car::process_message(message::message& msg)
 		getAABB()->SetTL(pmsg.x_position.value(), pmsg.y_position.value());
 		getAABB()->SetBR(pmsg.x_position.value()+ getAABB()->GetLen(), pmsg.y_position.value() + getAABB()->GetWid());
 	}
+	if (pmsg.type == "disconnect")
+		destroy();
 }

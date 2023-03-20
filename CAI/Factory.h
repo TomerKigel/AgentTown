@@ -20,6 +20,7 @@ struct CarParameters
 	std::shared_ptr<sf::Texture> texture;
 	double speed = 1;
 	int id;
+	int connection_id;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -80,9 +81,9 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////
 	union SetUpCar
 	{
-		static void new_SetUpCar(double tlx = 0, double tly = 0, double brx = 0, double bry = 0, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr,int id = -1);
-		static void new_SetUpCar(Point Tl, Point Br, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr, int id = -1);
-		static void new_SetUpCar(AABB range, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr, int id = -1);
+		static void new_SetUpCar(double tlx = 0, double tly = 0, double brx = 0, double bry = 0, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr,int id = -1, int connection = 0);
+		static void new_SetUpCar(Point Tl, Point Br, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr, int id = -1, int connection = 0);
+		static void new_SetUpCar(AABB range, double spd = 5, std::shared_ptr<sf::RenderWindow> window_ = nullptr, int id = -1, int connection = 0);
 	};
 	union SetUpStatic
 	{

@@ -33,14 +33,13 @@ void agent::push_message(message::message &msg)
 }
 
 
-agent::agent(int id)
+agent::agent(int id,int connection_id)
 {
 	alive = true;
-	agent_parameters a(id);
+	agent_parameters a(id, connection_id);
 	parameters_ = a;
 	//events_thread = new std::thread(&agent::EventController, this);
 }
-
 
 agent::agent()
 {
@@ -66,19 +65,22 @@ agent::~agent()
 	agent_thread.join();
 }
 
-bool agent::add_neighbour(agent *neigh)
+bool agent::add_neighbour(int id)
 {
 	std::lock_guard<std::mutex>lock(param_mutex);
-	return parameters_.add_neighbour(neigh);
+	return parameters_.add_neighbour(id);
 }
 
-bool agent::remove_neighbour(agent* neigh)
+bool agent::remove_neighbour(int id)
 {
 	std::lock_guard<std::mutex>lock(param_mutex);
-	return parameters_.remove_neighbour(neigh);
+	return parameters_.remove_neighbour(id);
 }
 
-
+unsigned int  agent::get_connection_id()
+{
+	return parameters_.get_connection_id();
+}
 
 unsigned int agent::get_agent_id()
 {

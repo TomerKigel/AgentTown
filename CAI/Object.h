@@ -2,7 +2,7 @@
 #include "AABB.h"
 #include "Drawable.h"
 #include "Actionable.h"
-#include "Interactable.h"
+#include "Interactable.h" 
 
 enum types { Obj = 100, mveble, sttc, cartype };
 enum directions { top = 1, bottom, left, right };
@@ -15,7 +15,7 @@ protected:
 	AABB Lastspace;
 	Object() {}
 	bool destruct = false;
-	void destroy() { destruct = true; }
+	virtual void destroy() { destruct = true; }
 public:
 	virtual short reType() { return Obj; }
 	bool isUpForDestruction() { return destruct; }

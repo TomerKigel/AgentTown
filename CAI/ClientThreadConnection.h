@@ -4,6 +4,7 @@
 #include "message.h"
 #include <boost/asio.hpp>
 #include <iostream>
+#include "QueueManager.h"
 
 #define MAX_MESSAGE_SIZE 10240
 
@@ -20,15 +21,16 @@ using ip::tcp;
 class ClientThreadConnection : virtual public Connection , public std::enable_shared_from_this<ClientThreadConnection>
 {
 private: 
-	int connection_id;
+	int connection_id_;
 	tcp::socket socket_;
 	std::unordered_map<int, std::shared_ptr<Connection>> *connections_;
-	message::message incoming_msg,outgoing_msg;
+	message::message incoming_msg;
 	std::vector<char> message_buffer;
-	std::shared_ptr<ThreadSafeQueue<message::message>> message_queue;
-
+	std::shared_ptr<QueueManager<message::message>> message_pipeline_;
+	std::thread out_messages_thread;
+	
 public:
-	ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id, std::shared_ptr<ThreadSafeQueue<message::message>> message_queue);
+	ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, std::shared_ptr<QueueManager<message::message>> message_pipeline);
 
 	~ClientThreadConnection();
 
@@ -45,6 +47,8 @@ public:
 	void send_all(const std::string& message);
 
 	void read();
+
+	void manage_outgoing_messages();
 
 	void disconnect();
 
