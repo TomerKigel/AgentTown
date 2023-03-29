@@ -43,165 +43,203 @@
     <Filter Include="MessageSystem">
       <UniqueIdentifier>{5be148d5-6e10-4ee0-b2e6-8c5120484b26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI_Elements\Interfaces">
+      <UniqueIdentifier>{edc4505b-0abd-4923-9ccf-b557d378a430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communications\interfaces">
+      <UniqueIdentifier>{a546d489-748c-48d0-8276-e82647807828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterpretingMessages">
+      <UniqueIdentifier>{1c2a5038-87d0-45c1-981e-15446e66134f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cooldown.cpp">
-      <Filter>Engine</Filter>
+    <ClCompile Include="Server_Communications\ClientThreadConnection.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
-      <Filter>Engine</Filter>
+    <ClCompile Include="Server_Communications\MainServer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Engine</Filter>
+    <ClCompile Include="Server_Communications\PseudoServer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Engine\Space</Filter>
+    <ClCompile Include="Framework\Framework.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Engine\Objects</Filter>
+    <ClCompile Include="AI_Elements\agent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Engine\Space</Filter>
+    <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
-      <Filter>Engine\Space</Filter>
+    <ClCompile Include="Graphics_Engine\Graphics\Textures.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Engine\MultiMedia</Filter>
+    <ClCompile Include="Graphics_Engine\Objects\Car.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>Engine\MultiMedia</Filter>
+    <ClCompile Include="Graphics_Engine\Objects\Movable.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Engine\MultiMedia</Filter>
+    <ClCompile Include="Graphics_Engine\Objects\StaticObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Engine\Physics</Filter>
+    <ClCompile Include="Graphics_Engine\Physics\Physics.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Movable.cpp">
-      <Filter>Engine\Objects</Filter>
+    <ClCompile Include="Graphics_Engine\Sound\Sound.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StaticObject.cpp">
-      <Filter>Engine\Objects</Filter>
+    <ClCompile Include="Graphics_Engine\Space\AABB.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="agent.cpp">
-      <Filter>AI_Elements</Filter>
+    <ClCompile Include="Graphics_Engine\Space\Point.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainServer.cpp">
-      <Filter>Communications</Filter>
+    <ClCompile Include="Graphics_Engine\Space\QuadTree.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PseudoServer.cpp">
-      <Filter>Communications</Filter>
+    <ClCompile Include="Graphics_Engine\Cooldown.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClientThreadConnection.cpp">
-      <Filter>Communications</Filter>
+    <ClCompile Include="Graphics_Engine\Factory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Framework.h">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework.cpp">
-      <Filter>Framework</Filter>
+    <ClCompile Include="Graphics_Engine\GameEngine.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cooldown.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Factory.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Engine\Space</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Engine\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Engine\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Engine\Space</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadTree.h">
-      <Filter>Engine\Space</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Engine\MultiMedia</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Engine\MultiMedia</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Engine\MultiMedia</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Engine\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Actionable.h">
-      <Filter>Engine\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Engine\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interactable.h">
-      <Filter>Engine\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Movable.h">
-      <Filter>Engine\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticObject.h">
-      <Filter>Engine\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="agent.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="agent_parameters.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="distanceCalculatable.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="interface_calculatable.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="interface_runnable.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="task.h">
-      <Filter>AI_Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="APH.h">
+    <ClInclude Include="Message_System\message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainServer.h">
-      <Filter>Communications</Filter>
+    <ClInclude Include="Message_System\MessageGenerator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PseudoServer.h">
-      <Filter>Communications</Filter>
+    <ClInclude Include="Message_System\MessageParser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Connection.h">
-      <Filter>Communications</Filter>
+    <ClInclude Include="Message_System\QueueManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientThreadConnection.h">
-      <Filter>Communications</Filter>
+    <ClInclude Include="Server_Communications\ClientThreadConnection.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="message.h">
-      <Filter>MessageSystem</Filter>
+    <ClInclude Include="Server_Communications\MainServer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MessageParser.h">
-      <Filter>MessageSystem</Filter>
+    <ClInclude Include="Server_Communications\PseudoServer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QueueManager.h">
-      <Filter>MessageSystem</Filter>
+    <ClInclude Include="Message_Interpreting_System\Interpreter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadSafeQueue.h">
-      <Filter>MessageSystem</Filter>
+    <ClInclude Include="Header_Files\APH.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\ConcreteMediator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements\agent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements\agent_parameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements\Interfaces\interface_calculatable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements\Interfaces\distanceCalculatable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Interfaces\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Interfaces\interface_runnable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Interfaces\Mediator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Server_Communications\Interfaces\Connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Graphics\Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Graphics\Textures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Interfaces\Actionable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Interfaces\Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Objects\Car.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Objects\Movable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Objects\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Objects\StaticObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Physics\Physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Sound\Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Space\AABB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Space\Point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Space\QuadTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Cooldown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\GameEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine\Interfaces\Interactable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="car.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Loading.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sfml-audio-2.dll" />
+    <None Include="sfml-audio-d-2.dll" />
+    <None Include="sfml-graphics-2.dll" />
+    <None Include="sfml-graphics-d-2.dll" />
+    <None Include="sfml-network-2.dll" />
+    <None Include="sfml-network-d-2.dll" />
+    <None Include="sfml-system-2.dll" />
+    <None Include="sfml-system-d-2.dll" />
+    <None Include="sfml-window-2.dll" />
+    <None Include="sfml-window-d-2.dll" />
   </ItemGroup>
 </Project>

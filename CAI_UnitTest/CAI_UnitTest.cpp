@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../CAI/task.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
