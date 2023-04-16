@@ -13,9 +13,14 @@ The flactuation between centralized and distributed computing never stops. Each 
 ---
 
 In this project the focus is to create an infrastructure for solving distributed constraint optimization problems(DCOPs). 
-Both for research and for the development of a realworld application for that type of computation.
-More on the subject of DCOPs on this [wikipedia page](https://en.wikipedia.org/wiki/Distributed_constraint_optimization)
+Both for research and for the development of a real-world application for that type of computation.
+More on the subject of DCOPs can be found on this [wikipedia page](https://en.wikipedia.org/wiki/Distributed_constraint_optimization)
 
+<h3>DSA</h3>
+To demonstrate the problems this project aims to solve and one approach to sloving them i've decided to record the following introduction
+that focuses on an algortihm called: 'Distributed stochastic algorithm' or DSA.
+In the video below i am explaining DSA and concepts in distributed calculation.
+[![DSA explained](https://freeimage.host/i/Hvwl32S)](https://youtu.be/vt5fpE0bzSY)
 
 <h2>The goal</h2>
 
