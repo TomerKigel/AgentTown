@@ -20,8 +20,9 @@ More on the subject of DCOPs can be found on this [wikipedia page](https://en.wi
 To demonstrate the problems this project aims to solve and one approach to sloving them i've decided to record the following introduction
 that focuses on an algortihm called: 'Distributed stochastic algorithm' or DSA.
 In the video below i am explaining DSA and concepts in distributed calculation.
-(soon to be uploaded)
 
+
+[![DSA](https://img.youtube.com/vi/8pCxg9HOu_M/0.jpg)](https://www.youtube.com/watch?v=8pCxg9HOu_M)
 
 
 <h2>The goal</h2>
