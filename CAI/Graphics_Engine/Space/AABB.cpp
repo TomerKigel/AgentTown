@@ -1,5 +1,5 @@
 #include "AABB.h"
-#include "Movable.h"
+#include "../Objects/Object.h"
 
 #define PI 3.14159265
 
@@ -17,11 +17,11 @@ AABB::AABB(Point tl, Point br)
 
 }
 
-std::shared_ptr<Point> AABB::getCenter()
+Point AABB::getCenter()
 {
-	std::shared_ptr<Point> Center = std::make_shared<Point>();
-	Center->SetX((TL.GetX() + BR.GetX()) / 2);
-	Center->SetY((TL.GetY() + BR.GetY()) / 2);
+	Point Center;
+	Center.SetX((TL.GetX() + BR.GetX()) / 2);
+	Center.SetY((TL.GetY() + BR.GetY()) / 2);
 	return Center;
 }
 
@@ -78,11 +78,11 @@ int AABB::operator-=(AABB& range)
 	{
 		return 2;
 	}
-	if (*getAABB() == range)
+	if (*this == range)
 	{
 		return 4;
 	}
-	return false;
+	return 0;
 }
 
 bool AABB::isContaining(Point pnt) const
@@ -134,15 +134,11 @@ void AABB::SetBR(double x, double y)
 	BR.SetY(y);
 }
 
-AABB* AABB::getAABB()
-{
-	return this;
-}
 short AABB::WIRTTO(AABB other)
 {
 	int directions_count[4] = {0};
-	auto last_x = this->getAABB()->getCenter()->GetX();
-	auto last_y = this->getAABB()->getCenter()->GetY();
+	auto last_x = getCenter().GetX();
+	auto last_y = getCenter().GetY();
 
 	auto other_right_x = other.GetBR().GetX();
 	auto other_bottom_y = other.GetBR().GetY();

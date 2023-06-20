@@ -111,6 +111,9 @@
     <ClCompile Include="Graphics_Engine\GameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Network_Representation\Agent_Network.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Message_System\message.h">
@@ -221,6 +224,9 @@
     <ClInclude Include="Graphics_Engine\Interfaces\Interactable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Network_Representation\Network.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="car.png">
@@ -231,15 +237,19 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sfml-audio-2.dll" />
-    <None Include="sfml-audio-d-2.dll" />
-    <None Include="sfml-graphics-2.dll" />
-    <None Include="sfml-graphics-d-2.dll" />
-    <None Include="sfml-network-2.dll" />
-    <None Include="sfml-network-d-2.dll" />
-    <None Include="sfml-system-2.dll" />
-    <None Include="sfml-system-d-2.dll" />
-    <None Include="sfml-window-2.dll" />
-    <None Include="sfml-window-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-audio-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-audio-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-graphics-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-graphics-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-network-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-network-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-system-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-system-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-window-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\sfml-window-d-2.dll" />
+    <None Include="I:\SFML-2.5.1\bin\openal32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SFML\Graphics.hpp"
+#include <SFML\Graphics.hpp>
 #include "../../Graphics_Engine/Physics/Physics.h"
 #include "../../Graphics_Engine/Objects/Object.h"
 
@@ -20,7 +20,6 @@ private:
 
 protected:
 	Physics ph;
-	
 
 	Movable() { Lastspace = space; }
 

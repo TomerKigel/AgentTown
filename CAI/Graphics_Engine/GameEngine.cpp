@@ -70,19 +70,11 @@ void GameEngine::game_loop()
 
 void GameEngine::clean_dead_objects()
 {
-	/*for (short i = 0; i < object_vector_->size(); i++)
-	{
-		bool ti = object_vector_->at(i)->isUpForDestruction();
-		if (ti) {
-			object_vector_->erase(object_vector_->begin() + i);
-			object_vector_->shrink_to_fit();
-		}
-	}*/
 	if(object_vector_->size() != 0)
 		std::erase_if(*object_vector_, [](std::shared_ptr<Object> a) {return a->isUpForDestruction(); });
-	if (agents_.size() != 0) {
+	/*if (agents_.size() != 0) {
 		std::erase_if(agents_, [](std::pair<int, std::shared_ptr<agent>> a) {return a.second->isUpForDestruction(); });
-	}
+	}*/
 }
 
 void GameEngine::activate_objects()
@@ -154,7 +146,7 @@ void GameEngine::handle_messages()
 {
 	message::ParsedMessage msg = incoming_messages.stop_until_pop();
 
-	if (msg.type == "new")
+	/*if (msg.type == "new")
 	{
 		create_new_agent(msg.new_id.value(), msg.connection_id);
 	}
@@ -162,20 +154,20 @@ void GameEngine::handle_messages()
 	{
 		if(msg.to)
 			agents_.at(msg.to.value())->push_message(msg);
-	}
+	}*/
 }
 
 
 
-void GameEngine::create_new_agent(int id,int connection_id)
-{
-	Factory::SetUpCar::new_SetUpCar(AABB(0, 0, 50, 115), 5, window_, id, connection_id);
-	if (agents_.count(id) == 0) {
-		agents_.emplace(std::pair(id, Factory::CreateCar()));
-		object_vector_->push_back(agents_.at(id));
-		agents_.at(id)->run();
-	}
-}
+//void GameEngine::create_new_agent(int id,int connection_id)
+//{
+//	Factory::SetUpCar::new_SetUpCar(AABB(0, 0, 50, 115), 5, window_, id, connection_id);
+//	if (agents_.count(id) == 0) {
+//		agents_.emplace(std::pair(id, Factory::CreateCar()));
+//		object_vector_->push_back(agents_.at(id));
+//		agents_.at(id)->run();
+//	}
+//}
 
 GameEngine::~GameEngine()
 {

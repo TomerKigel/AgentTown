@@ -9,6 +9,7 @@ class agent;
 
 class agent_parameters
 {
+	double location_x, location_y;
 	unsigned int id_,connection_id_;
 	std::vector<int> neighbours_;
 	int max_neighbour_capacity_;
@@ -18,22 +19,27 @@ public:
 
 	agent_parameters()
 	{
+		location_x = location_y = 0;
 		max_neighbour_capacity_ = 100;
 		changable_ = true;
 		id_ = -1;
 		connection_id_ = -1;
 	}
 
-	agent_parameters(int id)
+	agent_parameters(int id, double x = 0, double y = 0)
 	{
+		location_x = x;
+		location_y = y;
 		max_neighbour_capacity_ = 100;
 		changable_ = true;
 		id_ = id;
 		connection_id_ = -1;
 	}
 
-	agent_parameters(int id,int connection)
+	agent_parameters(int id, int connection, double x = 0, double y = 0)
 	{
+		location_x = x;
+		location_y = y;
 		max_neighbour_capacity_ = 100;
 		changable_ = true;
 		id_ = id;
@@ -43,21 +49,29 @@ public:
 
 	agent_parameters(agent_parameters &other_parameters)
 	{
+		location_x = other_parameters.location_x;
+		location_y = other_parameters.location_y;
 		changable_ = true;
 		max_neighbour_capacity_ = other_parameters.max_neighbour_capacity_;
 		id_ = other_parameters.id_;
+		connection_id_ = other_parameters.connection_id_;
 	}
 
 	agent_parameters(agent_parameters* other_parameters)
 	{
+		location_x = other_parameters->location_x;
+		location_y = other_parameters->location_y;
 		changable_ = other_parameters->changable_;
 		max_neighbour_capacity_ = other_parameters->max_neighbour_capacity_;
 		id_ = other_parameters->id_;
+		connection_id_ = other_parameters->connection_id_;
 	}
 
 
 	agent_parameters& operator=(agent_parameters& other_parameters)
 	{
+		location_x = other_parameters.location_x;
+		location_y = other_parameters.location_y;
 		changable_ = true;
 		max_neighbour_capacity_ = other_parameters.max_neighbour_capacity_;
 		id_ = other_parameters.id_;
@@ -76,7 +90,7 @@ public:
 		return false;
 	}
 
-	bool remove_neighbour(int id)
+	bool remove_neighbour(int id) 
 	{
 		if (!changable_)
 			throw std::runtime_error("agent not mutable");
@@ -95,13 +109,24 @@ public:
 		changable_ = false;
 	}
 
-	unsigned int get_id()
+	unsigned int get_id() const
 	{
 		return id_;
 	}
 
-	unsigned int get_connection_id()
+	unsigned int get_connection_id() const
 	{
 		return connection_id_;
+	}
+
+	std::pair<double, double> getLocation() const
+	{
+		return std::make_pair(location_x, location_y);
+	}
+
+	void setLocation(double x, double y)
+	{
+		location_x = x;
+		location_y = y;
 	}
 };

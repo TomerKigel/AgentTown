@@ -28,7 +28,7 @@ public:
 		return &space;
 	}
 
-	virtual std::shared_ptr<Point> getCenter()
+	virtual Point getCenter()
 	{
 		return space.getCenter();
 	}

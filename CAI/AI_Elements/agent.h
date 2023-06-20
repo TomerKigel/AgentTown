@@ -9,7 +9,7 @@
 #include "../Message_System/MessageParser.h"
 #include "../Graphics_Engine/Objects/Movable.h"
 
-class agent : public interface_runnable , public Movable
+class agent : public interface_runnable
 {
 private:
 	bool alive;
@@ -22,7 +22,10 @@ private:
 	void EventController();
 
 public:
-	virtual void destroy() { destruct = true; alive = false;}
+	virtual void destroy() { 
+		//destruct = true;
+		alive = false;
+	}
 
 	agent();
 
@@ -44,6 +47,6 @@ public:
 
 	void push_message(message::ParsedMessage& msg);
 
-	virtual void process_message(message::ParsedMessage& msg) = 0;
+	virtual void process_message(message::ParsedMessage& msg);
 
 };

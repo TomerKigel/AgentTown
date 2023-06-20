@@ -87,3 +87,14 @@ void agent::run()
 	agent_thread = std::thread([this]() { EventController(); });
 }
 
+
+void agent::process_message(message::ParsedMessage& msg)
+{
+	if (msg.x_position && msg.y_position)
+	{
+		getAABB()->SetTL(msg.x_position.value(), msg.y_position.value());
+		getAABB()->SetBR(msg.x_position.value() + getAABB()->GetLen(), msg.y_position.value() + getAABB()->GetWid());
+	}
+	if (msg.type == "disconnect")
+		destroy();
+}

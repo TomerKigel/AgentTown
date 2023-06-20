@@ -78,7 +78,7 @@ QuadTree::QuadTree(double Tlx, double Tly, double Brx, double Bry, QuadTree* r, 
 
 bool QuadTree::insert(Object* item)
 {
-	Point p = *item->getCenter().get();
+	Point p = (*item).getCenter();
 	if (Range.isContaining(p))
 	{
 		if (item->getAABB()->GetLen() <= LooseRange.GetLen() &&

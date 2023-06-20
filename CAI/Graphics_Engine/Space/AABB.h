@@ -21,7 +21,7 @@ public:
 
 	AABB(Point tl, Point br);
 
-	std::shared_ptr<Point>  getCenter();
+	Point getCenter();
 
 	int GetLen();
 
@@ -30,8 +30,6 @@ public:
 	Point GetTL();
 
 	Point GetBR();
-
-	AABB* getAABB();
 
 	bool operator==(const AABB& range);
 

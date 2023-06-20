@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Audio.hpp>
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 
 typedef struct
 {

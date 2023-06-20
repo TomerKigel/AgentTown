@@ -19,7 +19,7 @@ private:
 	sf::Event event_;
 	std::unique_ptr<QuadTree> Quadtree_;
 	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector_;
-	std::unordered_map<int,std::shared_ptr<agent>> agents_;
+	//std::unordered_map<int,std::shared_ptr<agent>> agents_;
 	QueueManager<message::ParsedMessage> incoming_messages;
 
 	void event_loop();
@@ -31,7 +31,8 @@ private:
 	void clean_dead_objects();
 	void game_loop();
 
-	void create_new_agent(int id, int connection_id);
+	//void create_new_agent(int id, int connection_id);
+	void establish_network();
 public:
 	GameEngine();
 	~GameEngine();

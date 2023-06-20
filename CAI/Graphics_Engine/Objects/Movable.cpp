@@ -19,8 +19,8 @@ void Movable::Accelerate(double x, double y)
 
 std::shared_ptr<Point> Movable::MovementVector()
 {
-	Point ls = *Lastspace.getCenter().get();
-	Point cs = *space.getCenter().get();
+	Point ls = Lastspace.getCenter();
+	Point cs = space.getCenter();
 	double x_diff = cs.GetX() - ls.GetX();
 	double y_diff = cs.GetY() - ls.GetY();
 	return std::make_shared<Point>(x_diff,y_diff);
