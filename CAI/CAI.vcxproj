@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI_Elements\agent.cpp" />
+    <ClCompile Include="AI_Elements\Interfaces\GraphicsObserver.h" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Graphics_Engine\Cooldown.cpp" />
     <ClCompile Include="Graphics_Engine\Factory.cpp" />

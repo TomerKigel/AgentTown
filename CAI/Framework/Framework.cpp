@@ -14,7 +14,7 @@ Framework::Framework()
 void Framework::start()
 {
 	context_thread = std::thread([this]() { io_context_.run(); });
-	interpreter_thread = std::thread([this]() { interpreter.ResponseLoop(); });
+	interpreter_thread = std::thread([this]() { interpreter.run(); });
 	engine.run();
 }
 

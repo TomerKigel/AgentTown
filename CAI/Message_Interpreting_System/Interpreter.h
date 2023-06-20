@@ -5,7 +5,7 @@
 #include "../Framework/ConcreteMediator.h"
 #include "../Message_System/MessageGenerator.h"
 
-class Interpreter : public Component<message::message>
+class Interpreter : public Component<message::message> , public interface_runnable
 {
 	bool alive;
 	std::mutex alive_mutex;
@@ -21,7 +21,7 @@ public:
 		kill();
 	}
 
-	void ResponseLoop()
+	void run()
 	{
 		std::unique_lock lock(alive_mutex);
 		
@@ -44,7 +44,7 @@ public:
 		}
 		if (alive) {
 			lock.unlock();
-			ResponseLoop();
+			run();
 		}
 		else
 			lock.unlock();

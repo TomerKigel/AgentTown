@@ -1,7 +1,7 @@
 #include "Car.h"
 #include "../Factory.h"
 
-Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id,int connection_id) : agent(id, connection_id)
+Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id,int connection_id)
 {
 	setAABB(range);
 	sf::Vector2f cor(range.GetTL().GetX(), range.GetTL().GetY());
@@ -51,6 +51,7 @@ void Car::intersection(Object* obj)
 
 void Car::Move(double xspd, double yspd)
 {
+	std::unique_lock<std::mutex> lock(car_mutex);
 	getAABB()->SetTL(getAABB()->GetTL().GetX() + xspd, getAABB()->GetTL().GetY() + yspd);
 	getAABB()->SetBR(getAABB()->GetBR().GetX() + xspd, getAABB()->GetBR().GetY() + yspd);
 }
@@ -58,6 +59,7 @@ void Car::Move(double xspd, double yspd)
 
 void Car::draw()
 {
+	std::unique_lock<std::mutex> lock(car_mutex);
 	refreshLastSpace();
 	sf::Vector2f cor(space.GetTL().GetX(), space.GetTL().GetY());
 	mdisp->refreshPosition(cor);
@@ -68,6 +70,29 @@ void Car::action()
 {
 	Controls();
 	PhysicsInit();
+}
+
+void Car::update_position(double x, double y)
+{
+	std::unique_lock<std::mutex> lock(car_mutex);
+	getAABB()->SetTL(x , y);
+	getAABB()->SetBR(getAABB()->GetLen() + x, getAABB()->GetWid() + y);
+}
+
+void Car::kill()
+{
+	std::unique_lock<std::mutex> lock(car_mutex);
+	destruct = true;
+}
+
+void Car::show(bool state)
+{
+
+}
+
+void Car::update_display_information(std::string)
+{
+
 }
 
 

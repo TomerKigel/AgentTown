@@ -8,7 +8,7 @@
 #include "../Message_System/message.h"
 #include "../Message_System/MessageParser.h"
 #include "../Graphics_Engine/Objects/Movable.h"
-
+#include "Interfaces/GraphicsObserver.h"
 class agent : public interface_runnable
 {
 private:
@@ -19,11 +19,12 @@ private:
 	std::condition_variable cv;
 	std::thread agent_thread;
 
+	std::shared_ptr<GraphicsObserver> observer;
+
 	void EventController();
 
 public:
 	virtual void destroy() { 
-		//destruct = true;
 		alive = false;
 	}
 
@@ -32,6 +33,8 @@ public:
 	agent(int id,int connection);
 
 	agent(agent &other_agent);
+
+	agent& operator=(agent& other);
 
 	virtual ~agent();
 

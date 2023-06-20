@@ -114,6 +114,9 @@
     <ClCompile Include="Network_Representation\Agent_Network.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AI_Elements\Interfaces\GraphicsObserver.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Message_System\message.h">

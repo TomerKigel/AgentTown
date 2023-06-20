@@ -48,6 +48,14 @@ agent::agent(agent& other_agent) : alive(other_agent.alive)
 	parameters_ = a;
 }
 
+agent& agent::operator=(agent& other)
+{
+	alive = other.alive;
+	agent_parameters a(other.parameters_);
+	parameters_ = a;
+	return *this;
+}
+
 agent::~agent()
 {
 	std::unique_lock<std::mutex>alock(alive_mutex);
@@ -69,7 +77,7 @@ bool agent::remove_neighbour(int id)
 	return parameters_.remove_neighbour(id);
 }
 
-unsigned int  agent::get_connection_id()
+unsigned int agent::get_connection_id()
 {
 	return parameters_.get_connection_id();
 }
@@ -92,9 +100,13 @@ void agent::process_message(message::ParsedMessage& msg)
 {
 	if (msg.x_position && msg.y_position)
 	{
-		getAABB()->SetTL(msg.x_position.value(), msg.y_position.value());
-		getAABB()->SetBR(msg.x_position.value() + getAABB()->GetLen(), msg.y_position.value() + getAABB()->GetWid());
+		observer->update_position(msg.x_position.value(), msg.y_position.value());
+		parameters_.setLocation(msg.x_position.value(), msg.y_position.value());
+		/*getAABB()->SetTL(msg.x_position.value(), msg.y_position.value());
+		getAABB()->SetBR(msg.x_position.value() + getAABB()->GetLen(), msg.y_position.value() + getAABB()->GetWid());*/
 	}
-	if (msg.type == "disconnect")
+	if (msg.type == "disconnect") {
 		destroy();
+		observer->kill();
+	}
 }
