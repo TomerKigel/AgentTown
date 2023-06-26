@@ -1,26 +1,26 @@
 <h1>Agent town</h1>
 
 <h2>The project</h2>
-The project is an attempt to create a modular network supporting distributed constraint optimization problems research and devleopment.
+The project is an attempt to create a modular network supporting distributed constraint optimization problems research and development.
 
 <h2>The Idea</h2>
-The world of computer science have gone through many iterations in the past. First Computers were big and expensive thus computing was centralizied,
-and it was done mainly in universites and large corporations.
-After that a new era of personal computers has begun as computers became cheaper and more viable. Then the birth of the Internet gave rise to 
-centralized servers. Finally we arive at today to the age of microservices and distributed computing. 
-The flactuation between centralized and distributed computing never stops. Each new iteration brings new challanges and advantages.
+The world of computer science has gone through many iterations in the past. First Computers were big and expensive thus computing was centralized,
+and it was done mainly in universities and large corporations.
+After that, a new era of personal computers has begun as computers became cheaper and more viable. Then the birth of the Internet gave rise to 
+centralized servers. Finally, we arrive at today to the age of microservices and distributed computing. 
+The fluctuation between centralized and distributed computing never stops. Each new iteration brings new challenges and advantages.
 
 ---
 
-In this project the focus is to create an infrastructure for solving distributed constraint optimization problems(DCOPs). 
+In this project, the focus is to create an infrastructure for solving distributed constraint optimization problems(DCOPs). 
 Both for research and for the development of a real-world application for that type of computation.
 More on the subject of DCOPs can be found on this [wikipedia page](https://en.wikipedia.org/wiki/Distributed_constraint_optimization)
 
 <h3>DSA</h3>
-To demonstrate the problems this project aims to solve and one approach to sloving them i've decided to record the following introduction
-that focuses on an algortihm called: 'Distributed stochastic algorithm' or DSA.
+To demonstrate the problems this project aims to solve and one approach to solving them I've decided to record the following introduction
+that focuses on an algorithm called: 'Distributed stochastic algorithm' or DSA.
 
-In the video below i am explaining DSA and concepts in distributed calculation.
+In the video below I am explaining DSA and concepts in distributed calculation.
 
 Youtube:
 
@@ -33,10 +33,18 @@ https://user-images.githubusercontent.com/88850793/233045187-52e70f97-3c1a-41af-
 
 <h2>The goal</h2>
 
-The goal is to create a central server that can be setup to monitor traffic within the network, collect data, display progress, and simulate an environment 
-that is as close to real life scenarios as possible.
+The goal is to create a central server that can be set up to monitor traffic within the network, collect data, display progress, and simulate an environment 
+that is as close to real-life scenarios as possible.
 
-Clients simulating a single or a collection of agents operating independantly must be implemented to allow them to run algorithms that can solve DCOPs.
+Clients simulating a single or a collection of agents operating independently must be implemented to allow them to run algorithms that can solve DCOPs.
+
+<h2></h2> How to</h2>
+
+To compile and run the project few things are required:
+Download and install Boost library. The explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
+c++20 is used, so the project settings should accommodate it.
+(currently, a mandatory step, in the future it should be optional) Download and dynamically link SFML for graphics. Tutorials can be found here: [tutorial](https://www.sfml-dev.org/tutorials/2.5/)
+version 2.5.1 should be installed via this link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/)
 
 <h2>Stay in touch</h2>
 
