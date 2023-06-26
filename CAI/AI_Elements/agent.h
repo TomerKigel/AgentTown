@@ -28,6 +28,8 @@ public:
 		alive = false;
 	}
 
+	std::pair<double,double> get_position();
+
 	agent();
 
 	agent(int id,int connection);
@@ -47,6 +49,8 @@ public:
 	unsigned int get_agent_id();
 
 	unsigned int get_connection_id();
+
+	void update_position(std::pair<double,double> x_y);
 
 	void push_message(message::ParsedMessage& msg);
 

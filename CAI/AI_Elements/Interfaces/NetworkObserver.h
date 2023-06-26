@@ -4,6 +4,7 @@
 #include "../agent.h"
 class NetworkObserver : public Observer
 {
-	virtual void agent_added(std::shared_ptr<agent> added_agent);
-	virtual void agent_removed(std::shared_ptr<agent> added_agent);
+public:
+	virtual void agent_added(std::shared_ptr<agent> added_agent) = 0;
+	virtual void agent_removed(std::shared_ptr<agent> added_agent) = 0;
 };

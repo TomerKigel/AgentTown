@@ -1,34 +1,47 @@
+#pragma once
 #include "Network.h"
 #include "../AI_Elements/agent.h"
 #include "../Framework/Interfaces/Component.h"
-#include "../AI_Elements/Interfaces/NetworkObserver.h"
 
-class Agent_Network : public Network<std::unique_ptr<agent>>, public Component<message::ParsedMessage>, public interface_runnable
+
+class Agent_Network : public Network<std::shared_ptr<agent>>, public Component<message::ParsedMessage>, public interface_runnable
 {
 	bool alive;
 	std::mutex alive_mutex;
 	QueueManager<message::ParsedMessage> incoming_messages;
-	std::vector<NetworkObserver&> network_observers;
 public:
 	void add_node(int id, int connection)
 	{
-		nodes.insert(std::make_pair(id, std::make_unique<agent>(id, connection)));
+		nodes.insert(std::make_pair(id, std::make_shared<agent>(id, connection)));
+		for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
+		{
+			std::shared_ptr<agent> a = nodes.at(id);
+			if(network_observers.size() > 0)
+				network_observers.at(0)->agent_added(a);
+			//(*iter)->agent_added(a);
+		}
 	}
 	void remove_node(int id)
 	{
-		std::erase_if(nodes, [id](const std::unique_ptr<agent> &a) {return a->get_agent_id() == id; });
+		if (nodes.count(id) != 0){
+			for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
+			{
+				(*iter)->agent_removed(nodes.at(id));
+			}
+			std::erase_if(nodes, [id](std::pair<int, std::shared_ptr<agent>> a) {return a.first == id; });
+		}
 	}
 
 	void add_neighbour_to_agent(int agent_id, int neighbour_id)
 	{
-		auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](const std::unique_ptr<agent>& a) {return a->get_agent_id() == agent_id; });
+		auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](std::pair<int, std::shared_ptr<agent>> a) {return a.first == agent_id; });
 		if ((*found_agent).second->get_agent_id() == agent_id)
 			(*found_agent).second->add_neighbour(neighbour_id);
 	}
 
 	void remove_neighbour_to_agent(int agent_id, int neighbour_id)
 	{
-		auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](const std::unique_ptr<agent>& a) {return a->get_agent_id() == agent_id; });
+		auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](std::pair<int, std::shared_ptr<agent>> a) {return a.first == agent_id; });
 		if ((*found_agent).second->get_agent_id() == agent_id)
 			(*found_agent).second->remove_neighbour(neighbour_id);
 	}
@@ -48,17 +61,7 @@ public:
 		nodes.at(agent_id)->unsubscribe(observer);
 	}
 
-	void subscribe_to_network(NetworkObserver &observer)
-	{
-		network_observers.push_back(observer);
-	}
-
-	void unsubscribe_from_network(NetworkObserver& observer)
-	{
-		std::remove_if(network_observers.begin(), network_observers.end(), [observer](NetworkObserver& a) {return a == observer; });
-	}
-
-
+	
 	void run()
 	{
 		std::unique_lock lock(alive_mutex);
@@ -71,9 +74,9 @@ public:
 		}
 		if (msg.new_id)
 		{
-			if (msg.connection_id) {
-				add_node(msg.new_id.value(), msg.connection_id);
-			}
+			add_node(msg.new_id.value(), msg.connection_id);
+			nodes.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
+
 		}
 	}
 };

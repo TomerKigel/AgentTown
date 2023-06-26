@@ -1,8 +1,9 @@
 #include "Car.h"
 #include "../Factory.h"
 
-Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id,int connection_id)
+Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id)
 {
+	set_id(id);
 	setAABB(range);
 	sf::Vector2f cor(range.GetTL().GetX(), range.GetTL().GetY());
 	if (txt == nullptr)

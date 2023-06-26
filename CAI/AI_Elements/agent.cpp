@@ -100,7 +100,7 @@ void agent::subscribe(std::shared_ptr<GraphicsObserver> obs)
 	observers.push_back(obs);
 }
 
-void agent::subscribe(std::shared_ptr<GraphicsObserver> obs)
+void agent::unsubscribe(std::shared_ptr<GraphicsObserver> obs)
 {
 	std::remove_if(observers.begin(), observers.end(), [obs](const std::shared_ptr<GraphicsObserver>& a) {return a == obs; });
 }
@@ -119,4 +119,16 @@ void agent::process_message(message::ParsedMessage& msg)
 			obs->kill();
 		destroy();
 	}
+}
+
+std::pair<double, double> agent::get_position()
+{
+	return parameters_.getLocation();
+}
+
+void agent::update_position(std::pair<double, double> x_y)
+{
+	parameters_.setLocation(x_y.first,x_y.second);
+	for (std::shared_ptr<GraphicsObserver> obs : observers)
+		obs->update_position(x_y.first, x_y.second);
 }

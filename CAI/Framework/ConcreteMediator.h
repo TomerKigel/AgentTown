@@ -15,7 +15,7 @@ private:
   
 
 public:
-    ConcreteMediator(GameEngine* c1, MainServer* c2, Interpreter* c3) : Graphics(c1), Server(c2), SystemInterpreter(c3) {
+    ConcreteMediator(GameEngine* c1, MainServer* c2, Interpreter* c3, Agent_Network* c4) : Graphics(c1), Server(c2), SystemInterpreter(c3) , AgentNetwork(c4){
         this->Graphics->set_mediator(this);
         this->Server->set_mediator(this);
         this->SystemInterpreter->set_mediator(this);

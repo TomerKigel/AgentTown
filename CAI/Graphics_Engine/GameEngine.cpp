@@ -1,8 +1,8 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine(Network<std::unique_ptr<agent>>* network)
+GameEngine::GameEngine(Agent_Network& network)
 {
-	agent_network = network;
+	//network.subscribe_to_network(this);
 	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
@@ -13,7 +13,6 @@ GameEngine::GameEngine(Network<std::unique_ptr<agent>>* network)
 
 GameEngine::GameEngine()
 {
-	agent_network = nullptr;
 	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
@@ -61,10 +60,7 @@ void GameEngine::run()
 	if (engine_state_ == RUNNING) {
 		window_->setActive(true);
 
-
 		object_vector_ = Factory::extract_object_list();
-
-
 
 		while (window_->isOpen() && engine_state_ != TERMINATED)
 		{
@@ -187,11 +183,25 @@ void GameEngine::handle_messages()
 //	}
 //}
 
-GameEngine::~GameEngine()
+void GameEngine::agent_added(std::shared_ptr<agent> added_agent)
 {
+	auto position = added_agent->get_position();
+	Factory::SetUpCar::new_SetUpCar(AABB(position.first, position.second, position.first +50, position.second+115), 5, window_, added_agent->get_agent_id());
+	auto new_car = Factory::CreateCar();
+	added_agent->subscribe(new_car);
+	object_vector_->push_back(new_car);
+}
+void GameEngine::agent_removed(std::shared_ptr<agent> removed_agent)
+{
+	//removed agent not object
+	auto found = std::find_if(object_vector_->begin(), object_vector_->end(), [removed_agent](std::shared_ptr<Object>& a) {return a->get_id() == removed_agent->get_agent_id(); });
+	(*found)->destroy();
 }
 
 
+GameEngine::~GameEngine()
+{
+}
 
 void GameEngine::provide_message(message::ParsedMessage &pmsg)
 {

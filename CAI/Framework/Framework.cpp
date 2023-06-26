@@ -7,8 +7,9 @@ Framework::Framework()
 	end_point = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host), port);
 	base_server = std::make_unique<MainServer>(io_context_, end_point);
 	base_server->start();
-	engine = GameEngine(&agent_network);
-	SystemMediator = std::make_unique<ConcreteMediator>(&engine, &*base_server, &interpreter);
+	engine = GameEngine(agent_network);
+	agent_network.subscribe_to_network(&engine);
+	SystemMediator = std::make_unique<ConcreteMediator>(&engine, &*base_server, &interpreter,&agent_network);
 }
 
 void Framework::start()

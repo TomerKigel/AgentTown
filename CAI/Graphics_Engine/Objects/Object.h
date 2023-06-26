@@ -12,15 +12,27 @@ enum directions { top = 1, bottom, left, right };
 class Object : public Interactable , public Drawable , public Actionable
 {
 protected:
+	int id;
+
 	AABB space;
 	AABB Lastspace;
 	Object() {}
 	bool destruct = false;
-	virtual void destroy() { destruct = true; }
 public:
+	virtual void destroy() { destruct = true; }
 	virtual short reType() { return Obj; }
 	bool isUpForDestruction() { return destruct; }
 	virtual void draw() {};
+
+	int get_id()
+	{
+		return id;
+	}
+
+	void set_id(int ID)
+	{
+		id = ID;
+	}
 	~Object() {}
 
 	virtual AABB* getAABB()

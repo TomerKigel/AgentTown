@@ -7,14 +7,12 @@
 #include "../Framework/Interfaces/interface_runnable.h"
 #include "../Framework/Interfaces/Component.h"
 #include "../AI_Elements/agent.h"
-#include "../Network_Representation/Network.h"
+#include "../Network_Representation/Agent_Network.h"
+#include "../AI_Elements/Interfaces/NetworkObserver.h"
 
-
-class GameEngine : public interface_runnable , public Component<message::ParsedMessage>
+class GameEngine : public interface_runnable , public Component<message::ParsedMessage> , public NetworkObserver
 {
 private:
-	Network<std::unique_ptr<agent>>* agent_network;
-
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
 	int engine_state_;
 
@@ -36,13 +34,18 @@ private:
 	//void create_new_agent(int id, int connection_id);
 	void establish_network();
 public:
-	GameEngine(Network<std::unique_ptr<agent>>* network);
+	GameEngine(Agent_Network& network);
 	GameEngine();
 	~GameEngine();
 	
 	void operator=(const GameEngine&& gm);
 
 	void provide_message(message::ParsedMessage &pmsg);
+
+
+	void agent_added(std::shared_ptr<agent> added_agent);
+	void agent_removed(std::shared_ptr<agent> added_agent);
+
 
 	void run();
 	void pause();

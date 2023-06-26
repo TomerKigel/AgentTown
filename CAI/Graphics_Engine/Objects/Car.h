@@ -15,7 +15,7 @@ private:
 	Cooldown attTimer,cd;
 	std::mutex car_mutex;
 public:
-	Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id,int connection_id);
+	Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std::shared_ptr<sf::Texture> txt,int id);
 	virtual void destroy() {destruct = true;}
 	void Controls();
 	void intersection(Object* obj);
