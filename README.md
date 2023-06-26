@@ -41,8 +41,11 @@ Clients simulating a single or a collection of agents operating independently mu
 <h2>How to</h2>
 
 To compile and run the project few things are required:
+
 Download and install Boost library. The explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
+
 c++20 is used, so the project settings should accommodate it.
+
 (currently, a mandatory step, in the future it should be optional) Download and dynamically link SFML for graphics. Tutorials can be found here: [tutorial](https://www.sfml-dev.org/tutorials/2.5/)
 version 2.5.1 should be installed via this link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/)
 
