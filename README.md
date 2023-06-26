@@ -38,7 +38,7 @@ that is as close to real-life scenarios as possible.
 
 Clients simulating a single or a collection of agents operating independently must be implemented to allow them to run algorithms that can solve DCOPs.
 
-<h2></h2> How to</h2>
+<h2>How to</h2>
 
 To compile and run the project few things are required:
 Download and install Boost library. The explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
