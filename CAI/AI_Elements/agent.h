@@ -19,7 +19,7 @@ private:
 	std::condition_variable cv;
 	std::thread agent_thread;
 
-	std::shared_ptr<GraphicsObserver> observer;
+	std::vector<std::shared_ptr<GraphicsObserver>> observers;
 
 	void EventController();
 
@@ -52,4 +52,7 @@ public:
 
 	virtual void process_message(message::ParsedMessage& msg);
 
+	void subscribe(std::shared_ptr<GraphicsObserver> obs);
+
+	void unsubscribe(std::shared_ptr<GraphicsObserver> obs);
 };

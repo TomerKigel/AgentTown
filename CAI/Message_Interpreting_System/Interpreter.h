@@ -38,7 +38,7 @@ public:
 			else
 			{
 				//TODO: add analysis of parsed message to determine where it should be pushed.
-				pmsg.destinations.emplace("engine");
+				pmsg.destinations.emplace("representational network");
 				mediator_->push_parsed_message(pmsg);
 			}
 		}

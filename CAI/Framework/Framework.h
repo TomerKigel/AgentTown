@@ -6,22 +6,23 @@
 #include "../Message_System/QueueManager.h"
 #include "../Framework/ConcreteMediator.h"
 #include "../Message_Interpreting_System/Interpreter.h"
-
+#include "../Network_Representation/Agent_Network.h"
 class Framework
 {
 private:
 	std::unique_ptr<MainServer> base_server;
+	GameEngine engine;
+	Interpreter interpreter;
+	Agent_Network agent_network;
 
 	boost::asio::io_context io_context_;
-	GameEngine engine;
-	std::thread context_thread, engine_thread, interpreter_thread;
 	boost::asio::ip::tcp::endpoint end_point;
-	Interpreter interpreter;
-	std::unique_ptr<ConcreteMediator> SystemMediator;
 	std::string host;
 	int port;
 
-	//std::shared_ptr<QueueManager<message::message>> message_pipeline_;
+	std::thread context_thread, engine_thread, interpreter_thread, representational_network_thread;
+	std::unique_ptr<ConcreteMediator> SystemMediator;
+	
 public:
 	Framework();
 

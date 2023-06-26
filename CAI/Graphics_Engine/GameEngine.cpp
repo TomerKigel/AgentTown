@@ -1,7 +1,8 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(Network<std::unique_ptr<agent>>* network)
 {
+	agent_network = network;
 	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
@@ -9,6 +10,18 @@ GameEngine::GameEngine()
 	Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
 	window_->setActive(false);
 }
+
+GameEngine::GameEngine()
+{
+	agent_network = nullptr;
+	engine_state_ = RUNNING;
+	window_ = std::make_shared<sf::RenderWindow>();
+	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
+	loading_screen();
+	Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
+	window_->setActive(false);
+}
+
 
 //GameEngine::GameEngine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
 //{
@@ -44,16 +57,19 @@ void GameEngine::loading_screen()
 
 void GameEngine::run()
 {
-	window_->setActive(true);
-	
-	
-	object_vector_ = Factory::extract_object_list();
+	while (engine_state_ ==  PAUSED);
+	if (engine_state_ == RUNNING) {
+		window_->setActive(true);
 
-	
-	
-	while (window_->isOpen())
-	{ 
-		game_loop();
+
+		object_vector_ = Factory::extract_object_list();
+
+
+
+		while (window_->isOpen() && engine_state_ != TERMINATED)
+		{
+			game_loop();
+		}
 	}
 }
 
@@ -66,6 +82,8 @@ void GameEngine::game_loop()
 		draw_objects();
 		event_loop();
 	}
+	while (engine_state_ == PAUSED);
+		//add wait on lock, and notify on state change
 }
 
 void GameEngine::clean_dead_objects()
@@ -180,19 +198,18 @@ void GameEngine::provide_message(message::ParsedMessage &pmsg)
 	incoming_messages.push(pmsg);
 }
 
+
+//add mutex lock to sync state change
 void  GameEngine::pause()
 {
+	this->engine_state_ = PAUSED;
+}
 
-}
-std::string GameEngine::statistics()
-{
-	return "";
-}
 void GameEngine::restart()
 {
 
 }
 void GameEngine::quit()
 {
-
+	this->engine_state_ = TERMINATED;
 }

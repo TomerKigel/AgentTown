@@ -95,18 +95,28 @@ void agent::run()
 	agent_thread = std::thread([this]() { EventController(); });
 }
 
+void agent::subscribe(std::shared_ptr<GraphicsObserver> obs)
+{
+	observers.push_back(obs);
+}
+
+void agent::subscribe(std::shared_ptr<GraphicsObserver> obs)
+{
+	std::remove_if(observers.begin(), observers.end(), [obs](const std::shared_ptr<GraphicsObserver>& a) {return a == obs; });
+}
+
 
 void agent::process_message(message::ParsedMessage& msg)
 {
 	if (msg.x_position && msg.y_position)
 	{
-		observer->update_position(msg.x_position.value(), msg.y_position.value());
+		for(std::shared_ptr<GraphicsObserver> obs : observers)
+				obs->update_position(msg.x_position.value(), msg.y_position.value());
 		parameters_.setLocation(msg.x_position.value(), msg.y_position.value());
-		/*getAABB()->SetTL(msg.x_position.value(), msg.y_position.value());
-		getAABB()->SetBR(msg.x_position.value() + getAABB()->GetLen(), msg.y_position.value() + getAABB()->GetWid());*/
 	}
 	if (msg.type == "disconnect") {
+		for (std::shared_ptr<GraphicsObserver> obs : observers)
+			obs->kill();
 		destroy();
-		observer->kill();
 	}
 }

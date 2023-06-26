@@ -117,6 +117,9 @@
     <ClCompile Include="AI_Elements\Interfaces\GraphicsObserver.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AI_Elements\Interfaces\NetworkObserver.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Message_System\message.h">
@@ -228,6 +231,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Network_Representation\Network.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements\Interfaces\Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

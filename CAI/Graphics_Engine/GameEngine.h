@@ -7,11 +7,14 @@
 #include "../Framework/Interfaces/interface_runnable.h"
 #include "../Framework/Interfaces/Component.h"
 #include "../AI_Elements/agent.h"
+#include "../Network_Representation/Network.h"
 
 
 class GameEngine : public interface_runnable , public Component<message::ParsedMessage>
 {
 private:
+	Network<std::unique_ptr<agent>>* agent_network;
+
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
 	int engine_state_;
 
@@ -19,7 +22,6 @@ private:
 	sf::Event event_;
 	std::unique_ptr<QuadTree> Quadtree_;
 	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector_;
-	//std::unordered_map<int,std::shared_ptr<agent>> agents_;
 	QueueManager<message::ParsedMessage> incoming_messages;
 
 	void event_loop();
@@ -34,6 +36,7 @@ private:
 	//void create_new_agent(int id, int connection_id);
 	void establish_network();
 public:
+	GameEngine(Network<std::unique_ptr<agent>>* network);
 	GameEngine();
 	~GameEngine();
 	
@@ -43,7 +46,6 @@ public:
 
 	void run();
 	void pause();
-	std::string statistics();
 	void restart();
 	void quit();
 };

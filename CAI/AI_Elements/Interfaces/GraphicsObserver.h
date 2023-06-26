@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-class GraphicsObserver
+#include "Observer.h"
+class GraphicsObserver : public Observer
 {
 public:
 	virtual void update_position(double x,double y) = 0;
