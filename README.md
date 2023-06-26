@@ -34,15 +34,15 @@ https://user-images.githubusercontent.com/88850793/233045187-52e70f97-3c1a-41af-
 <h2>The goal</h2>
 
 The goal is to create a central server that can be set up to monitor traffic within the network, collect data, display progress, and simulate an environment 
-that is as close to real-life scenarios as possible.
+that is as close to a real-life environment as possible.
 
-Clients simulating a single or a collection of agents operating independently must be implemented to allow them to run algorithms that can solve DCOPs.
+Simultaneously, clients simulating a single or a collection of agents operating independently must be implemented to allow them to run algorithms that can solve DCOPs.
 
 <h2>How to</h2>
 
 To compile and run the project few things are required:
 
-Download and install Boost library. The explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
+Download and install Boost library. An explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
 
 c++20 is used, so the project settings should accommodate it.
 
