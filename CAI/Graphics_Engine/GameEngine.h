@@ -31,10 +31,7 @@ private:
 	void clean_dead_objects();
 	void game_loop();
 
-	//void create_new_agent(int id, int connection_id);
-	void establish_network();
 public:
-	GameEngine(Agent_Network& network);
 	GameEngine();
 	~GameEngine();
 	

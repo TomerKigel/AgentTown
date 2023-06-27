@@ -1,16 +1,5 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine(Agent_Network& network)
-{
-	//network.subscribe_to_network(this);
-	engine_state_ = RUNNING;
-	window_ = std::make_shared<sf::RenderWindow>();
-	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
-	loading_screen();
-	Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
-	window_->setActive(false);
-}
-
 GameEngine::GameEngine()
 {
 	engine_state_ = RUNNING;

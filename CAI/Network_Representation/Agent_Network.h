@@ -10,15 +10,18 @@ class Agent_Network : public Network<std::shared_ptr<agent>>, public Component<m
 	std::mutex alive_mutex;
 	QueueManager<message::ParsedMessage> incoming_messages;
 public:
+
+	Agent_Network()
+	{
+		alive = true;
+	}
 	void add_node(int id, int connection)
 	{
 		nodes.insert(std::make_pair(id, std::make_shared<agent>(id, connection)));
+		nodes.at(id)->run();
 		for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
 		{
-			std::shared_ptr<agent> a = nodes.at(id);
-			if(network_observers.size() > 0)
-				network_observers.at(0)->agent_added(a);
-			//(*iter)->agent_added(a);
+			(*iter)->agent_added(nodes.at(id));
 		}
 	}
 	void remove_node(int id)
@@ -46,10 +49,7 @@ public:
 			(*found_agent).second->remove_neighbour(neighbour_id);
 	}
 
-	virtual void provide_message(message::ParsedMessage& msg)
-	{
-		incoming_messages.push(msg);
-	}
+	
 	
 	void subscribe_to_agent(int agent_id,std::shared_ptr<GraphicsObserver> observer)
 	{
@@ -61,7 +61,12 @@ public:
 		nodes.at(agent_id)->unsubscribe(observer);
 	}
 
-	
+
+	virtual void provide_message(message::ParsedMessage& msg)
+	{
+		incoming_messages.push(msg);
+	}
+
 	void run()
 	{
 		std::unique_lock lock(alive_mutex);
@@ -78,5 +83,12 @@ public:
 			nodes.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
 
 		}
+
+		if (alive) {
+			lock.unlock();
+			run();
+		}
+		else
+			lock.unlock();
 	}
 };

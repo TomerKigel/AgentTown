@@ -13,7 +13,7 @@ class Interpreter : public Component<message::message> , public interface_runnab
 public:
 	Interpreter()
 	{
-
+		alive = true;
 	}
 
 	~Interpreter()

@@ -4,19 +4,25 @@
 
 void agent::EventController()
 {
-	while (alive)
-	{
-		std::unique_lock<std::mutex> lock(param_mutex);
-		if(parameters_.message_queue_.size() <= 0)
-			cv.wait(lock, [this] {return parameters_.message_queue_.size() > 0; });
-		
-		if (!alive)
-			return;
+	std::unique_lock<std::mutex>alock(alive_mutex);
 
-		std::optional<message::ParsedMessage> msg = parameters_.message_queue_.pop();
-		if(msg)
-			process_message(msg.value());
+	std::unique_lock<std::mutex> lock(param_mutex);
+	while(parameters_.message_queue_.size() <= 0)
+		cv.wait(lock, [this] {return parameters_.message_queue_.size() > 0; });
+	
+	lock.unlock();
+
+	std::optional<message::ParsedMessage> msg = parameters_.message_queue_.pop();
+	if (msg)
+		process_message(msg.value());
+
+	if (alive) {
+		alock.unlock();
+		EventController();
 	}
+	else
+		alock.unlock();
+	
 }
 
 void agent::push_message(message::ParsedMessage& msg)

@@ -3,7 +3,6 @@
 #include "agent.h"
 #include "../Message_System/QueueManager.h"
 #include "../Message_System/MessageParser.h"
-#include <queue>
 
 class agent;
 
