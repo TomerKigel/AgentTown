@@ -9,11 +9,6 @@
 
 class ConcreteMediator : public Mediator {
 private:
-    GraphicsEngine* Graphics;
-    Interpreter* SystemInterpreter;
-    MainServer* Server;
-    Agent_Network* AgentNetwork;
-
     std::vector<Component<message::message>*> message_components;
     std::vector<Component<message::ParsedMessage>*> parsed_message_components;
     
