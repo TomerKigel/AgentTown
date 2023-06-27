@@ -108,7 +108,7 @@
     <ClCompile Include="Graphics_Engine\Factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Engine\GameEngine.cpp">
+    <ClCompile Include="Graphics_Engine\GraphicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Network_Representation\Agent_Network.h">
@@ -224,7 +224,7 @@
     <ClInclude Include="Graphics_Engine\Factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\GameEngine.h">
+    <ClInclude Include="Graphics_Engine\GraphicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics_Engine\Interfaces\Interactable.h">

@@ -27,13 +27,13 @@ public:
 		
 		message::message msg = incoming_messages.stop_until_pop();
 		if (msg.direction == message::message::Out) {
-			mediator_->push_message_out(msg);
+			mediator_->push_message(msg);
 		}
 		else {
 			message::ParsedMessage pmsg = message::parse_message(msg);
 			if (pmsg.type.find("Error") != -1) {
 				message::message error_message = MessageGenerator::generate_error_message(pmsg.type);
-				mediator_->push_message_out(error_message);
+				mediator_->push_message(error_message);
 			}
 			else
 			{
@@ -54,6 +54,12 @@ public:
 	{
 		incoming_messages.push(msg);
 	}
+	std::string service_name()
+	{
+		return "interpreter";
+	}
+
+
 
 	void kill()
 	{

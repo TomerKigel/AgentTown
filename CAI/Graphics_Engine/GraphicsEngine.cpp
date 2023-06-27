@@ -1,6 +1,6 @@
-#include "GameEngine.h"
+#include "GraphicsEngine.h"
 
-GameEngine::GameEngine()
+GraphicsEngine::GraphicsEngine()
 {
 	engine_state_ = RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
@@ -11,7 +11,7 @@ GameEngine::GameEngine()
 }
 
 
-//GameEngine::GameEngine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
+//GraphicsEngine::GraphicsEngine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
 //{
 //	this->message_pipeline_ = message_pipeline_;
 //	engine_state_ = RUNNING;
@@ -24,7 +24,7 @@ GameEngine::GameEngine()
 //	window_->setActive(false);
 //}
 
-void GameEngine::operator=(const GameEngine&& gm)
+void GraphicsEngine::operator=(const GraphicsEngine&& gm)
 {
 	engine_state_ = gm.engine_state_;
 	window_ = gm.window_;
@@ -33,7 +33,7 @@ void GameEngine::operator=(const GameEngine&& gm)
 	window_->setActive(false);
 }
 
-void GameEngine::loading_screen()
+void GraphicsEngine::loading_screen()
 {
 	std::shared_ptr<sf::Texture> loadingtxt = std::make_shared<sf::Texture>();
 	if (!loadingtxt->loadFromFile("loading.png"))
@@ -43,7 +43,7 @@ void GameEngine::loading_screen()
 	window_->display();
 }
 
-void GameEngine::run()
+void GraphicsEngine::run()
 {
 	while (engine_state_ ==  PAUSED);
 	if (engine_state_ == RUNNING) {
@@ -58,7 +58,7 @@ void GameEngine::run()
 	}
 }
 
-void GameEngine::game_loop()
+void GraphicsEngine::game_loop()
 {
 	if (engine_state_ == RUNNING) {
 		clean_dead_objects();
@@ -71,7 +71,7 @@ void GameEngine::game_loop()
 		//add wait on lock, and notify on state change
 }
 
-void GameEngine::clean_dead_objects()
+void GraphicsEngine::clean_dead_objects()
 {
 	if(object_vector_->size() != 0)
 		std::erase_if(*object_vector_, [](std::shared_ptr<Object> a) {return a->isUpForDestruction(); });
@@ -80,7 +80,7 @@ void GameEngine::clean_dead_objects()
 	}*/
 }
 
-void GameEngine::activate_objects()
+void GraphicsEngine::activate_objects()
 {
 	for (int i = 0; i < object_vector_->size(); i++)
 	{
@@ -88,7 +88,7 @@ void GameEngine::activate_objects()
 	}
 }
 
-void GameEngine::objects_to_quadtree()
+void GraphicsEngine::objects_to_quadtree()
 {
 	Quadtree_->CleanTree();
 	for (short i = 0; i < object_vector_->size(); i++)
@@ -98,7 +98,7 @@ void GameEngine::objects_to_quadtree()
 	Quadtree_->QueryNodes();
 }
 
-void GameEngine::draw_objects()
+void GraphicsEngine::draw_objects()
 {
 	window_->clear();
 	for (short i = 0; i < object_vector_->size(); i++)
@@ -108,7 +108,7 @@ void GameEngine::draw_objects()
 	window_->display();
 }
 
-void GameEngine::event_loop()
+void GraphicsEngine::event_loop()
 {
 	while (window_->pollEvent(event_))
 	{
@@ -145,7 +145,7 @@ void GameEngine::event_loop()
 	}
 }
 
-void GameEngine::handle_messages()
+void GraphicsEngine::handle_messages()
 {
 	message::ParsedMessage msg = incoming_messages.stop_until_pop();
 
@@ -162,7 +162,7 @@ void GameEngine::handle_messages()
 
 
 
-//void GameEngine::create_new_agent(int id,int connection_id)
+//void GraphicsEngine::create_new_agent(int id,int connection_id)
 //{
 //	Factory::SetUpCar::new_SetUpCar(AABB(0, 0, 50, 115), 5, window_, id, connection_id);
 //	if (agents_.count(id) == 0) {
@@ -172,7 +172,7 @@ void GameEngine::handle_messages()
 //	}
 //}
 
-void GameEngine::agent_added(std::shared_ptr<agent> added_agent)
+void GraphicsEngine::agent_added(std::shared_ptr<agent> added_agent)
 {
 	auto position = added_agent->get_position();
 	Factory::SetUpCar::new_SetUpCar(AABB(position.first, position.second, position.first +50, position.second+115), 5, window_, added_agent->get_agent_id());
@@ -180,7 +180,7 @@ void GameEngine::agent_added(std::shared_ptr<agent> added_agent)
 	added_agent->subscribe(new_car);
 	object_vector_->push_back(new_car);
 }
-void GameEngine::agent_removed(std::shared_ptr<agent> removed_agent)
+void GraphicsEngine::agent_removed(std::shared_ptr<agent> removed_agent)
 {
 	//removed agent not object
 	auto found = std::find_if(object_vector_->begin(), object_vector_->end(), [removed_agent](std::shared_ptr<Object>& a) {return a->get_id() == removed_agent->get_agent_id(); });
@@ -188,27 +188,32 @@ void GameEngine::agent_removed(std::shared_ptr<agent> removed_agent)
 }
 
 
-GameEngine::~GameEngine()
+GraphicsEngine::~GraphicsEngine()
 {
 }
 
-void GameEngine::provide_message(message::ParsedMessage &pmsg)
+void GraphicsEngine::provide_message(message::ParsedMessage &pmsg)
 {
 	incoming_messages.push(pmsg);
 }
 
+std::string GraphicsEngine::service_name()
+{
+	return "graphics engine";
+}
+
 
 //add mutex lock to sync state change
-void  GameEngine::pause()
+void  GraphicsEngine::pause()
 {
 	this->engine_state_ = PAUSED;
 }
 
-void GameEngine::restart()
+void GraphicsEngine::restart()
 {
 
 }
-void GameEngine::quit()
+void GraphicsEngine::quit()
 {
 	this->engine_state_ = TERMINATED;
 }

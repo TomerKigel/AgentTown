@@ -97,7 +97,6 @@ unsigned int agent::get_agent_id()
 void agent::run()
 {
 	parameters_.close_for_change();
-	std::cout << "" << "running"; 
 	agent_thread = std::thread([this]() { EventController(); });
 }
 

@@ -52,7 +52,7 @@ bool ClientThreadConnection::proccess_complete_message(const string &input,const
 	incoming_msg.header.connection_id = this->connection_id_;
 	incoming_msg.direction = message::message::In;
 
-	mediator_->push_message_in(incoming_msg);
+	mediator_->push_message(incoming_msg);
 	incoming_msg.reset();
 
 	if (end_message < input.length())
@@ -127,4 +127,9 @@ void ClientThreadConnection::disconnect() {
 void ClientThreadConnection::provide_message(message::message& msg)
 {
 	send(msg.to_string());
+}
+
+std::string ClientThreadConnection::service_name()
+{
+	return "client " + this->connection_id_;
 }

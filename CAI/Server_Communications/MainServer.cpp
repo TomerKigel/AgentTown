@@ -59,3 +59,8 @@ void MainServer::provide_message(message::message& msg)
 {
 	connections_.at(msg.header.connection_id)->send(msg.to_string());
 }
+
+std::string MainServer::service_name()
+{
+	return "main server";
+}

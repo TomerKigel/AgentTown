@@ -16,6 +16,7 @@ public:
 
 		}
 		message::message a;
+		a.direction = a.Out;
 		return a;
 	}
 

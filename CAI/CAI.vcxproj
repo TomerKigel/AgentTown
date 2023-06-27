@@ -164,7 +164,7 @@
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Graphics_Engine\Cooldown.cpp" />
     <ClCompile Include="Graphics_Engine\Factory.cpp" />
-    <ClCompile Include="Graphics_Engine\GameEngine.cpp" />
+    <ClCompile Include="Graphics_Engine\GraphicsEngine.cpp" />
     <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp" />
     <ClCompile Include="Graphics_Engine\Graphics\Textures.cpp" />
     <ClCompile Include="Graphics_Engine\Objects\Car.cpp" />
@@ -194,7 +194,7 @@
     <ClInclude Include="Framework\Interfaces\Mediator.h" />
     <ClInclude Include="Graphics_Engine\Cooldown.h" />
     <ClInclude Include="Graphics_Engine\Factory.h" />
-    <ClInclude Include="Graphics_Engine\GameEngine.h" />
+    <ClInclude Include="Graphics_Engine\GraphicsEngine.h" />
     <ClInclude Include="Graphics_Engine\Graphics\Graphics.h" />
     <ClInclude Include="Graphics_Engine\Graphics\Textures.h" />
     <ClInclude Include="Graphics_Engine\Interfaces\Actionable.h" />

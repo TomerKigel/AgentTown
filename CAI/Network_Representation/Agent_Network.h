@@ -3,7 +3,6 @@
 #include "../AI_Elements/agent.h"
 #include "../Framework/Interfaces/Component.h"
 
-
 class Agent_Network : public Network<std::shared_ptr<agent>>, public Component<message::ParsedMessage>, public interface_runnable
 {
 	bool alive;
@@ -65,6 +64,10 @@ public:
 	virtual void provide_message(message::ParsedMessage& msg)
 	{
 		incoming_messages.push(msg);
+	}
+	std::string service_name()
+	{
+		return "representational network";
 	}
 
 	void run()

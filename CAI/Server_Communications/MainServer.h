@@ -38,5 +38,7 @@ public:
 
 	void provide_message(message::message& msg);
 
+	std::string service_name();
+	
 	void close();
 }; 

@@ -1,18 +1,18 @@
 Framework primary functions:
 	1.) Network initilization
-		The framework should be able to initlize a network of agents.
-		It should be able to connect agents one to another.
+		The framework should be able to initlize a network of agents. (done)
+		It should be able to connect agents one to another.	(done)
 		It should be able to dictate and share environment parameters such as sync/async and more.
 	2.) Appending new agents to network
 		When an existing network is present the framework should be able to add a new agent
-		to the network and update all existing agents about the newly introduced agent.
-		Same goes for a agent removal.
+		to the network and update all existing agents about the newly introduced agent.	 (done)
+		Same goes for a agent removal. (done)
 	3.) Historical data collection, graphing, and analysis
 		The framework should be able to collect messages passed between agents given the agents are interested in shareing with the framework.
 		The framework should be able to later analyse the messages and deduce certain things about the traffic within the network.
 		The framework should be able to collect experiment data and scenario data and later graph it on demand and export it.
 	4.) Display and means to debug distributed networks
-		The framework should be able to visually display the network and agents in it. (GUI) 
+		The framework should be able to visually display the network and agents in it. (GUI) (partially done)
 		The framework should offer means of data extraction for debbuging.
 
 Secondary functionality:
@@ -25,9 +25,7 @@ Secondary functionality:
 
 To Do:
 1.) Network initilization:
-	An internal representation of a network should be established.
-	Currenly the closest thing to an internal representation exists via AI_Elements/agent class. And it is used in the GUI (GraphicsEngine/GameEngine) via the derived class car.
-	The network should exist outside of the GUI and should be decoupled from the GUI. The network representation is used for all other functionalities.
+	An internal representation of a network should be established. (done)
 		Required:
 		-network class containing agents (note agent class is abstract, should reconsider whether it should stay abstract or a derived class should take a responsibility of being a network node) | graph data structure
 		-agent class should have a network node interface and must have some ability to communicte with the real agent the instance represents via a socket connection using a connection-id or another identifier.

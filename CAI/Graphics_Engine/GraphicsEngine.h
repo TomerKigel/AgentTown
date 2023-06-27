@@ -10,7 +10,7 @@
 #include "../Network_Representation/Agent_Network.h"
 #include "../AI_Elements/Interfaces/NetworkObserver.h"
 
-class GameEngine : public interface_runnable , public Component<message::ParsedMessage> , public NetworkObserver
+class GraphicsEngine : public interface_runnable , public Component<message::ParsedMessage> , public NetworkObserver
 {
 private:
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
@@ -32,13 +32,13 @@ private:
 	void game_loop();
 
 public:
-	GameEngine();
-	~GameEngine();
+	GraphicsEngine();
+	~GraphicsEngine();
 	
-	void operator=(const GameEngine&& gm);
+	void operator=(const GraphicsEngine&& gm);
 
 	void provide_message(message::ParsedMessage &pmsg);
-
+	std::string service_name();
 
 	void agent_added(std::shared_ptr<agent> added_agent);
 	void agent_removed(std::shared_ptr<agent> added_agent);

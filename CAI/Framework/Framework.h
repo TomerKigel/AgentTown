@@ -2,7 +2,7 @@
 
 #include "../Server_Communications/MainServer.h"
 #include "../Message_System/message.h"
-#include "../Graphics_Engine/GameEngine.h"
+#include "../Graphics_Engine/GraphicsEngine.h"
 #include "../Message_System/QueueManager.h"
 #include "../Framework/ConcreteMediator.h"
 #include "../Message_Interpreting_System/Interpreter.h"
@@ -11,7 +11,7 @@ class Framework
 {
 private:
 	std::unique_ptr<MainServer> base_server;
-	GameEngine engine;
+	GraphicsEngine engine;
 	Interpreter interpreter;
 	Agent_Network agent_network;
 

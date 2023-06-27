@@ -15,4 +15,6 @@ public:
     }
 
     virtual void provide_message(T &msg) = 0;
+
+    virtual std::string service_name() = 0;
 };
