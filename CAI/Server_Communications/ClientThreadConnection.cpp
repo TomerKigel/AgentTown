@@ -1,7 +1,7 @@
 #include "ClientThreadConnection.h"
-#include "../Framework/ConcreteMediator.h"
+#include "../Framework/Concrete_Mediator.h"
 
-ClientThreadConnection::ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, Mediator *mediator_) : socket_(std::move(socket))
+ClientThreadConnection::ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, Interface_Mediator *mediator_) : socket_(std::move(socket))
 {
 	this->mediator_ = mediator_;
 	this->connections_ = &connections;

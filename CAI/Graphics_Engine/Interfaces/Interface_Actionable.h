@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Actionable
+class Interface_Actionable
 {
 public:
 	virtual void action() = 0;

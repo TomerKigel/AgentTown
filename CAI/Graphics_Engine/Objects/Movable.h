@@ -16,16 +16,16 @@ private:
 	//\param xspd   pixels to move on the x axis		
 	//\param yspd   pixels to move on the y axis	
 	////////////////////////////////////////////////////////////////////////////////////////
-	void setToMove(PhysicsStats ph);
+	void setToMove(PhysicsStats _ph_);
 
 protected:
-	Physics ph;
+	Physics _ph_;
 
 	Movable() { Lastspace = space; }
 
 public:
 	
-	virtual void Move(double xspd, double yspd) = 0;
+	virtual void move(double xspd, double yspd) = 0;
 
 	virtual short reType();
 

@@ -2,24 +2,24 @@
 
 Framework::Framework()
 {
-    host = "127.0.0.1";
-	port = 7777;
-	end_point = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host), port);
-	base_server = std::make_unique<MainServer>(io_context_, end_point);
-	base_server->start();
-	engine = GraphicsEngine();
-	agent_network.subscribe_to_network(&engine);
-	std::initializer_list<Component<message::message>*> msg_based = { &*base_server, &interpreter } ;
-	std::initializer_list<Component<message::ParsedMessage>*> pmsg_based = { &agent_network, &engine };
-	SystemMediator = std::make_unique<ConcreteMediator>(msg_based, pmsg_based);
+    host_ = "127.0.0.1";
+	port_ = 7777;
+	end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);
+	base_server_ = std::make_unique<MainServer>(io_context_, end_point_);
+	base_server_->start();
+	engine_ = Graphics_Engine();
+	agent_network_.subscribe_to_network(&engine_);
+	std::initializer_list<Component<message::message>*> msg_based = { &*base_server_, &interpreter_ } ;
+	std::initializer_list<Component<message::ParsedMessage>*> pmsg_based = { &agent_network_, &engine_ };
+	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
 }
 
 void Framework::start()
 {
-	context_thread = std::thread([this]() { io_context_.run(); });
-	interpreter_thread = std::thread([this]() { interpreter.run(); });
-	representational_network_thread = std::thread([this]() { agent_network.run(); });
-	engine.run();
+	context_thread_ = std::thread([this]() { io_context_.run(); });
+	interpreter_thread_ = std::thread([this]() { interpreter_.run(); });
+	representational_network_thread_ = std::thread([this]() { agent_network_.run(); });
+	engine_.run();
 }
 
 void Framework::halt()
@@ -29,14 +29,14 @@ void Framework::halt()
 
 void Framework::close()
 {
-	interpreter.kill();
-	engine.quit();
-	base_server->close();
+	interpreter_.kill();
+	engine_.quit();
+	base_server_->close();
 }
 
 Framework::~Framework()
 {
-	context_thread.join();
-	interpreter.kill();
-	interpreter_thread.join();
+	context_thread_.join();
+	interpreter_.kill();
+	interpreter_thread_.join();
 }

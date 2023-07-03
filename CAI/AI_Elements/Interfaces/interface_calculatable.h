@@ -2,59 +2,59 @@
 
 #include <iostream>
 
-class interface_calculatable
+class Interface_Calculatable
 {
 public:
 	virtual double calculate() = 0;
 
-	virtual bool operator<(interface_calculatable& rhs)
+	virtual bool operator<(Interface_Calculatable& rhs)
 	{
 		return this->calculate() < rhs.calculate();
 	}
 
-	virtual bool operator<(std::shared_ptr<interface_calculatable> rhs)
+	virtual bool operator<(std::shared_ptr<Interface_Calculatable> rhs)
 	{
 		return this->calculate() < rhs->calculate();
 	}
 	
 
 
-	virtual bool operator<=(interface_calculatable& rhs)
+	virtual bool operator<=(Interface_Calculatable& rhs)
 	{
 		return this->calculate() <= rhs.calculate();
 	}
-	virtual bool operator<=(std::shared_ptr<interface_calculatable> rhs)
+	virtual bool operator<=(std::shared_ptr<Interface_Calculatable> rhs)
 	{
 		return this->calculate() <= rhs->calculate();
 	}
 
 
-	virtual bool operator>=(interface_calculatable& rhs)
+	virtual bool operator>=(Interface_Calculatable& rhs)
 	{
 		return this->calculate() >= rhs.calculate();
 	}
-	virtual bool operator>=(std::shared_ptr<interface_calculatable> rhs)
+	virtual bool operator>=(std::shared_ptr<Interface_Calculatable> rhs)
 	{
 		return this->calculate() >= rhs->calculate();
 	}
 
 
 
-	virtual bool operator==(interface_calculatable& rhs)
+	virtual bool operator==(Interface_Calculatable& rhs)
 	{
 		return this->calculate() == rhs.calculate();
 	}
-	virtual bool operator==(std::shared_ptr<interface_calculatable> rhs)
+	virtual bool operator==(std::shared_ptr<Interface_Calculatable> rhs)
 	{
 		return this->calculate() == rhs->calculate();
 	}
 
 
-	virtual bool operator>(interface_calculatable& rhs)
+	virtual bool operator>(Interface_Calculatable& rhs)
 	{
 		return this->calculate() > rhs.calculate();
 	}
-	virtual bool operator >(std::shared_ptr<interface_calculatable> rhs)
+	virtual bool operator >(std::shared_ptr<Interface_Calculatable> rhs)
 	{
 		return this->calculate() > rhs->calculate();
 	}

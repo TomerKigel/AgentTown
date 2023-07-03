@@ -6,13 +6,13 @@
 #include <queue>
 
 template <class T>
-class QueueManager
+class Queue_Manager
 {
 	std::queue<T> message_queue;
 	std::condition_variable condition;
 	std::mutex mutex;
 public:
-	QueueManager(){}
+	Queue_Manager(){}
 
 	void push(T element)
 	{

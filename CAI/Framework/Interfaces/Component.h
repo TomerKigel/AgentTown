@@ -1,15 +1,15 @@
 #pragma once
-#include "Mediator.h"
+#include "Interface_Mediator.h"
 
 template <class T>
 class Component{
 protected:
-    Mediator* mediator_;
+    Interface_Mediator* mediator_;
 
 public:
-    Component(Mediator* mediator = nullptr) : mediator_(mediator) {}
+    Component(Interface_Mediator* mediator = nullptr) : mediator_(mediator) {}
 
-    void set_mediator(Mediator* mediator) 
+    void set_mediator(Interface_Mediator* mediator) 
     {
         this->mediator_ = mediator;
     }

@@ -1,6 +1,6 @@
 #pragma once
 
-class interface_runnable
+class Interface_Runnable
 {
 	virtual void run() = 0;
 };

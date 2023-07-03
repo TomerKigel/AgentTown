@@ -2,7 +2,7 @@
 #include "../Space/Point.h"
 #include "../Cooldown.h"
 
-// Global engine values
+// Global engine_ values
 static double GForce = 0;
 static double E_TopSpeed = 100;
 static double E_TopAcceleration = 10;

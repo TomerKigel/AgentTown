@@ -9,11 +9,11 @@ Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std
 	if (txt == nullptr)
 	{
 		sf::Vector2f siz(range.GetLen(), range.GetWid());
-		mdisp = std::make_shared<Graphics>(cor, siz, window_);
+		mdisp_ = std::make_shared<Graphics>(cor, siz, window_);
 	}
 	else
 	{
-		mdisp = std::make_shared<Graphics>(cor, txt, window_, getAABB());
+		mdisp_ = std::make_shared<Graphics>(cor, txt, window_, getAABB());
 	}
 	PhysicsStats pps;
 	pps.topspeed = tspd;
@@ -22,23 +22,23 @@ Car::Car(double tspd, AABB range, std::shared_ptr<sf::RenderWindow> window_, std
 	pps.topacc = 100;
 	pps.xspeed = 0;
 	pps.yspeed = 0;
-	ph.setObjectsParameters(pps);
+	_ph_.setObjectsParameters(pps);
 	refreshLastSpace();
-	focus = nullptr;
-	cd.SetTimerMaxAsSeconds(0.1);
+	focus_ = nullptr;
+	cd_.SetTimerMaxAsSeconds(0.1);
 }
 
-void Car::Controls()
+void Car::controls()
 {
-	if (cd.IsTimeUp()) {
-		if (focus == nullptr) {
-			ph;
+	if (cd_.IsTimeUp()) {
+		if (focus_ == nullptr) {
+			_ph_;
 		}
 		else
 		{
-			ph;
+			_ph_;
 		}
-		cd.resetTimer();
+		cd_.resetTimer();
 	}
 }
 
@@ -50,9 +50,9 @@ void Car::intersection(Object* obj)
 	}
 }
 
-void Car::Move(double xspd, double yspd)
+void Car::move(double xspd, double yspd)
 {
-	std::unique_lock<std::mutex> lock(car_mutex);
+	std::unique_lock<std::mutex> lock(car_mutex_);
 	getAABB()->SetTL(getAABB()->GetTL().GetX() + xspd, getAABB()->GetTL().GetY() + yspd);
 	getAABB()->SetBR(getAABB()->GetBR().GetX() + xspd, getAABB()->GetBR().GetY() + yspd);
 }
@@ -60,29 +60,29 @@ void Car::Move(double xspd, double yspd)
 
 void Car::draw()
 {
-	std::unique_lock<std::mutex> lock(car_mutex);
+	std::unique_lock<std::mutex> lock(car_mutex_);
 	refreshLastSpace();
 	sf::Vector2f cor(space.GetTL().GetX(), space.GetTL().GetY());
-	mdisp->refreshPosition(cor);
-	mdisp->Draw();
+	mdisp_->refreshPosition(cor);
+	mdisp_->Draw();
 }
 
 void Car::action()
 {
-	Controls();
+	controls();
 	PhysicsInit();
 }
 
 void Car::update_position(double x, double y)
 {
-	std::unique_lock<std::mutex> lock(car_mutex);
+	std::unique_lock<std::mutex> lock(car_mutex_);
 	getAABB()->SetTL(x , y);
 	getAABB()->SetBR(getAABB()->GetLen() + x, getAABB()->GetWid() + y);
 }
 
 void Car::kill()
 {
-	std::unique_lock<std::mutex> lock(car_mutex);
+	std::unique_lock<std::mutex> lock(car_mutex_);
 	destruct = true;
 }
 

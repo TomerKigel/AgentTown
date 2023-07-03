@@ -8,13 +8,13 @@ short Movable::reType()
 
 void Movable::PhysicsInit()
 {
-	setToMove(ph.calcSpeed());
+	setToMove(_ph_.calcSpeed());
 }
 
 void Movable::Accelerate(double x, double y)
 {
-	ph.AccelerateX(x);
-	ph.AccelerateY(y);
+	_ph_.AccelerateX(x);
+	_ph_.AccelerateY(y);
 }
 
 std::shared_ptr<Point> Movable::MovementVector()
@@ -26,31 +26,31 @@ std::shared_ptr<Point> Movable::MovementVector()
 	return std::make_shared<Point>(x_diff,y_diff);
 }
 
-void Movable::setToMove(PhysicsStats ph)
+void Movable::setToMove(PhysicsStats _ph_)
 {
-	Move(ph.xspeed, ph.yspeed);
+	move(_ph_.xspeed, _ph_.yspeed);
 }
 
 void Movable::PhysicsIntersection(double overlap ,short direction)
 {
 	if (direction == top)
 	{
-		Move(0, -overlap);
-		ph.intersection(0, 1, top);
+		move(0, -overlap);
+		_ph_.intersection(0, 1, top);
 	}
 	if (direction == bottom)
 	{
-		Move(0, overlap);
-		ph.intersection(0, 1, bottom);
+		move(0, overlap);
+		_ph_.intersection(0, 1, bottom);
 	}
 	if (direction == left)
 	{
-		Move(-overlap-2, 0);
-		ph.intersection(1, 0, left);
+		move(-overlap-2, 0);
+		_ph_.intersection(1, 0, left);
 	}
 	if (direction == right)
 	{
-		Move(overlap+2, 0);
-		ph.intersection(1, 0, right);
+		move(overlap+2, 0);
+		_ph_.intersection(1, 0, right);
 	}
 }

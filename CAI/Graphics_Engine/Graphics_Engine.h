@@ -3,14 +3,14 @@
 #include <iterator>
 #include "../Header_Files/APH.h"
 #include <boost/lexical_cast.hpp>
-#include "../Message_System/QueueManager.h"
-#include "../Framework/Interfaces/interface_runnable.h"
+#include "../Message_System/Queue_Manager.h"
+#include "../Framework/Interfaces/Interface_Runnable.h"
 #include "../Framework/Interfaces/Component.h"
-#include "../AI_Elements/agent.h"
+#include "../AI_Elements/Agent.h"
 #include "../Network_Representation/Agent_Network.h"
-#include "../AI_Elements/Interfaces/NetworkObserver.h"
+#include "../AI_Elements/Interfaces/Interface_Network_Observer.h"
 
-class GraphicsEngine : public interface_runnable , public Component<message::ParsedMessage> , public NetworkObserver
+class Graphics_Engine : public Interface_Runnable , public Component<message::ParsedMessage> , public Interface_Network_Observer
 {
 private:
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
@@ -20,7 +20,7 @@ private:
 	sf::Event event_;
 	std::unique_ptr<QuadTree> Quadtree_;
 	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector_;
-	QueueManager<message::ParsedMessage> incoming_messages;
+	Queue_Manager<message::ParsedMessage> incoming_messages_;
 
 	void event_loop();
 	void handle_messages();
@@ -32,16 +32,16 @@ private:
 	void game_loop();
 
 public:
-	GraphicsEngine();
-	~GraphicsEngine();
+	Graphics_Engine();
+	~Graphics_Engine();
 	
-	void operator=(const GraphicsEngine&& gm);
+	void operator=(const Graphics_Engine&& gm);
 
 	void provide_message(message::ParsedMessage &pmsg);
 	std::string service_name();
 
-	void agent_added(std::shared_ptr<agent> added_agent);
-	void agent_removed(std::shared_ptr<agent> added_agent);
+	void agent_added(std::shared_ptr<Agent> added_agent);
+	void agent_removed(std::shared_ptr<Agent> added_agent);
 
 
 	void run();

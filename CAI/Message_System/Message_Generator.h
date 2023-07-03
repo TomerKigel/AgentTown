@@ -2,7 +2,7 @@
 #include <string>
 #include "message.h"
 
-class MessageGenerator
+class Message_Generator
 {
 public:
 	static message::message generate_error_message(std::string type)

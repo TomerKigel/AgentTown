@@ -69,7 +69,7 @@
     <ClCompile Include="Framework\Framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Elements\agent.cpp">
+    <ClCompile Include="AI_Elements\Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp">
@@ -108,16 +108,16 @@
     <ClCompile Include="Graphics_Engine\Factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Engine\GraphicsEngine.cpp">
+    <ClCompile Include="Graphics_Engine\Graphics_Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Network_Representation\Agent_Network.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Elements\Interfaces\GraphicsObserver.h">
+    <ClCompile Include="AI_Elements\Interfaces\Interface_Graphics_Observer.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Elements\Interfaces\NetworkObserver.h">
+    <ClCompile Include="AI_Elements\Interfaces\Interface_Network_Observer.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,13 +125,13 @@
     <ClInclude Include="Message_System\message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Message_System\MessageGenerator.h">
+    <ClInclude Include="Message_System\Message_Generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Message_System\MessageParser.h">
+    <ClInclude Include="Message_System\Message_Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Message_System\QueueManager.h">
+    <ClInclude Include="Message_System\Queue_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Server_Communications\ClientThreadConnection.h">
@@ -149,31 +149,31 @@
     <ClInclude Include="Header_Files\APH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\ConcreteMediator.h">
+    <ClInclude Include="Framework\Concrete_Mediator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\agent.h">
+    <ClInclude Include="AI_Elements\Agent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\agent_parameters.h">
+    <ClInclude Include="AI_Elements\Agent_Parameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\interface_calculatable.h">
+    <ClInclude Include="AI_Elements\Interfaces\Interface_Calculatable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\distanceCalculatable.h">
+    <ClInclude Include="AI_Elements\Interfaces\Interface_Distance_Calculatable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Interfaces\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Interfaces\interface_runnable.h">
+    <ClInclude Include="Framework\Interfaces\Interface_Runnable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Interfaces\Mediator.h">
+    <ClInclude Include="Framework\Interfaces\Interface_Mediator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Server_Communications\Interfaces\Connection.h">
@@ -185,10 +185,10 @@
     <ClInclude Include="Graphics_Engine\Graphics\Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Actionable.h">
+    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Actionable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Drawable.h">
+    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics_Engine\Objects\Car.h">
@@ -224,16 +224,16 @@
     <ClInclude Include="Graphics_Engine\Factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\GraphicsEngine.h">
+    <ClInclude Include="Graphics_Engine\Graphics_Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Interactable.h">
+    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Interactable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Network_Representation\Network.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\Observer.h">
+    <ClInclude Include="AI_Elements\Interfaces\Interface_Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

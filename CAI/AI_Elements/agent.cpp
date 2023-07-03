@@ -1,14 +1,14 @@
-#include "agent.h"
+#include "Agent.h"
 #include <thread>
 #include <mutex>
 
-void agent::EventController()
+void Agent::event_controller_()
 {
-	std::unique_lock<std::mutex>alock(alive_mutex);
+	std::unique_lock<std::mutex>alock(alive_mutex_);
 
-	std::unique_lock<std::mutex> lock(param_mutex);
+	std::unique_lock<std::mutex> lock(param_mutex_);
 	while(parameters_.message_queue_.size() <= 0)
-		cv.wait(lock, [this] {return parameters_.message_queue_.size() > 0; });
+		cv_.wait(lock, [this] {return parameters_.message_queue_.size() > 0; });
 	
 	lock.unlock();
 
@@ -16,124 +16,124 @@ void agent::EventController()
 	if (msg)
 		process_message(msg.value());
 
-	if (alive) {
+	if (alive_) {
 		alock.unlock();
-		EventController();
+		event_controller_();
 	}
 	else
 		alock.unlock();
 	
 }
 
-void agent::push_message(message::ParsedMessage& msg)
+void Agent::push_message(message::ParsedMessage& msg)
 {
-	std::unique_lock<std::mutex>lock(param_mutex);
+	std::unique_lock<std::mutex>lock(param_mutex_);
 	parameters_.message_queue_.push(msg);
 	lock.unlock();
-	cv.notify_all();
+	cv_.notify_all();
 }
 
 
-agent::agent(int id,int connection_id)
+Agent::Agent(int id,int connection_id)
 {
-	alive = true;
-	agent_parameters a(id, connection_id);
+	alive_ = true;
+	Agent_Parameters a(id, connection_id);
 	parameters_ = a;
 }
 
-agent::agent()
+Agent::Agent()
 {
-	alive = true;
-	agent_parameters a;
+	alive_ = true;
+	Agent_Parameters a;
 	parameters_ = a;
 }
 
-agent::agent(agent& other_agent) : alive(other_agent.alive) 
+Agent::Agent(Agent& other_agent) : alive_(other_agent.alive_) 
 {
-	agent_parameters a(other_agent.parameters_);
+	Agent_Parameters a(other_agent.parameters_);
 	parameters_ = a;
 }
 
-agent& agent::operator=(agent& other)
+Agent& Agent::operator=(Agent& other)
 {
-	alive = other.alive;
-	agent_parameters a(other.parameters_);
+	alive_ = other.alive_;
+	Agent_Parameters a(other.parameters_);
 	parameters_ = a;
 	return *this;
 }
 
-agent::~agent()
+Agent::~Agent()
 {
-	std::unique_lock<std::mutex>alock(alive_mutex);
-	this->alive = false;
+	std::unique_lock<std::mutex>alock(alive_mutex_);
+	this->alive_ = false;
 	alock.unlock();
-	cv.notify_all();
-	agent_thread.join();
+	cv_.notify_all();
+	agent_thread_.join();
 }
 
-bool agent::add_neighbour(int id)
+bool Agent::add_neighbour(int id)
 {
-	std::lock_guard<std::mutex>lock(param_mutex);
+	std::lock_guard<std::mutex>lock(param_mutex_);
 	return parameters_.add_neighbour(id);
 }
 
-bool agent::remove_neighbour(int id)
+bool Agent::remove_neighbour(int id)
 {
-	std::lock_guard<std::mutex>lock(param_mutex);
+	std::lock_guard<std::mutex>lock(param_mutex_);
 	return parameters_.remove_neighbour(id);
 }
 
-unsigned int agent::get_connection_id()
+unsigned int Agent::get_connection_id()
 {
 	return parameters_.get_connection_id();
 }
 
-unsigned int agent::get_agent_id()
+unsigned int Agent::get_agent_id()
 {
-	std::lock_guard<std::mutex>lock(param_mutex);
+	std::lock_guard<std::mutex>lock(param_mutex_);
 	return parameters_.get_id();
 }
 
-void agent::run()
+void Agent::run()
 {
 	parameters_.close_for_change();
-	agent_thread = std::thread([this]() { EventController(); });
+	agent_thread_ = std::thread([this]() { event_controller_(); });
 }
 
-void agent::subscribe(std::shared_ptr<GraphicsObserver> obs)
+void Agent::subscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 {
 	observers.push_back(obs);
 }
 
-void agent::unsubscribe(std::shared_ptr<GraphicsObserver> obs)
+void Agent::unsubscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 {
-	std::remove_if(observers.begin(), observers.end(), [obs](const std::shared_ptr<GraphicsObserver>& a) {return a == obs; });
+	std::remove_if(observers.begin(), observers.end(), [obs](const std::shared_ptr<Interface_Graphics_Observer>& a) {return a == obs; });
 }
 
 
-void agent::process_message(message::ParsedMessage& msg)
+void Agent::process_message(message::ParsedMessage& msg)
 {
 	if (msg.x_position && msg.y_position)
 	{
-		for(std::shared_ptr<GraphicsObserver> obs : observers)
+		for(std::shared_ptr<Interface_Graphics_Observer> obs : observers)
 				obs->update_position(msg.x_position.value(), msg.y_position.value());
 		parameters_.setLocation(msg.x_position.value(), msg.y_position.value());
 	}
 	if (msg.type == "disconnect") {
-		for (std::shared_ptr<GraphicsObserver> obs : observers)
+		for (std::shared_ptr<Interface_Graphics_Observer> obs : observers)
 			obs->kill();
 		destroy();
 	}
 }
 
-std::pair<double, double> agent::get_position()
+std::pair<double, double> Agent::get_position()
 {
 	return parameters_.getLocation();
 }
 
-void agent::update_position(std::pair<double, double> x_y)
+void Agent::update_position(std::pair<double, double> x_y)
 {
 	parameters_.setLocation(x_y.first,x_y.second);
-	for (std::shared_ptr<GraphicsObserver> obs : observers)
+	for (std::shared_ptr<Interface_Graphics_Observer> obs : observers)
 		obs->update_position(x_y.first, x_y.second);
 }

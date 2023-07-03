@@ -3,7 +3,7 @@
 #include "../Message_System/message.h"
 #include <boost/asio.hpp>
 #include <iostream>
-#include "../Message_System/QueueManager.h"
+#include "../Message_System/Queue_Manager.h"
 #include "../Framework/Interfaces/Component.h"
 
 #define MAX_MESSAGE_SIZE 10240
@@ -30,7 +30,7 @@ private:
 	std::mutex send_mutex;
 	
 public:
-	ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, Mediator *mediator_);
+	ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, Interface_Mediator *mediator_);
 
 	~ClientThreadConnection();
 

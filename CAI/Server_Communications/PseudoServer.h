@@ -19,7 +19,7 @@ private:
 	std::mutex connectionHandlerMutex;
 
 public:
-	PseudoServer(std::string host, short port);
+	PseudoServer(std::string host_, short port_);
 
 	virtual ~PseudoServer();
 
@@ -46,7 +46,7 @@ public:
 	// Returns false in case connection closed before null can be read.
 	bool getFrameAscii(std::string& frame, char delimiter);
 
-	// Send a message to the remote host.
+	// Send a message to the remote host_.
 	// Returns false in case connection is closed before all the data is sent.
 	bool sendFrameAscii(const std::string& frame, char delimiter);
 

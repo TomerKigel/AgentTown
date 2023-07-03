@@ -1,15 +1,15 @@
 #pragma once
 #include "../../Graphics_Engine/Space/AABB.h"
-#include "../../Graphics_Engine/Interfaces/Actionable.h"
-#include "../../Graphics_Engine/Interfaces/Drawable.h"
-#include "../../Graphics_Engine/Interfaces/Interactable.h"
+#include "../../Graphics_Engine/Interfaces/Interface_Actionable.h"
+#include "../../Graphics_Engine/Interfaces/Interface_Drawable.h"
+#include "../../Graphics_Engine/Interfaces/Interface_Interactable.h"
 
 
 enum types { Obj = 100, mveble, sttc, cartype };
 enum directions { top = 1, bottom, left, right };
 
 
-class Object : public Interactable , public Drawable , public Actionable
+class Object : public Interface_Interactable , public Interface_Drawable , public Interface_Actionable
 {
 protected:
 	int id;
