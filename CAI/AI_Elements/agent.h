@@ -7,7 +7,6 @@
 #include "../AI_Elements/Interfaces/interface_calculatable.h"
 #include "../Message_System/message.h"
 #include "../Message_System/MessageParser.h"
-#include "../Graphics_Engine/Objects/Movable.h"
 #include "Interfaces/GraphicsObserver.h"
 class agent : public interface_runnable
 {

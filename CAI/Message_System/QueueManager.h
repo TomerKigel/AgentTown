@@ -12,9 +12,7 @@ class QueueManager
 	std::condition_variable condition;
 	std::mutex mutex;
 public:
-	QueueManager()
-	{
-	}
+	QueueManager(){}
 
 	void push(T element)
 	{

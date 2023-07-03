@@ -260,5 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Readme.txt" />
+    <Text Include="Standards.txt" />
   </ItemGroup>
 </Project>

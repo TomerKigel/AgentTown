@@ -23,6 +23,7 @@ public:
 			(*iter)->agent_added(nodes.at(id));
 		}
 	}
+
 	void remove_node(int id)
 	{
 		if (nodes.count(id) != 0){
@@ -48,8 +49,6 @@ public:
 			(*found_agent).second->remove_neighbour(neighbour_id);
 	}
 
-	
-	
 	void subscribe_to_agent(int agent_id,std::shared_ptr<GraphicsObserver> observer)
 	{
 		nodes.at(agent_id)->subscribe(observer);
@@ -60,11 +59,11 @@ public:
 		nodes.at(agent_id)->unsubscribe(observer);
 	}
 
-
 	virtual void provide_message(message::ParsedMessage& msg)
 	{
 		incoming_messages.push(msg);
 	}
+
 	std::string service_name()
 	{
 		return "representational network";
