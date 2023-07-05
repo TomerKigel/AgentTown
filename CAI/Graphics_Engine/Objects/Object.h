@@ -16,7 +16,7 @@ protected:
 
 	AABB space;
 	AABB Lastspace;
-	Object() {}
+	Object() { id = -1; }
 	bool destruct = false;
 public:
 	virtual void destroy() { destruct = true; }

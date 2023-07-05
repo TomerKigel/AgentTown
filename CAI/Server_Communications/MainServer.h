@@ -17,7 +17,7 @@ using std::string;
 using namespace boost::asio;
 using ip::tcp;
 
-class MainServer : public Component<message::message>
+class MainServer : public Component<message::Message>
 {
 private:
 	tcp::acceptor acceptor_;
@@ -36,7 +36,7 @@ public:
 
 	bool start();
 
-	void provide_message(message::message& msg);
+	void provide_message(message::Message& msg);
 
 	std::string service_name();
 	

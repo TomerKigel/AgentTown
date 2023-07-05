@@ -7,7 +7,7 @@
 
 namespace message
 {
-	struct ParsedMessage
+	struct Parsed_Message
 	{
 	public:
 		std::string type;
@@ -21,9 +21,9 @@ namespace message
 	};
 
 
-	inline ParsedMessage parse_message(message& msg)
+	inline Parsed_Message parse_message(Message& msg)
 	{
-		ParsedMessage pmsg;
+		Parsed_Message pmsg;
 		pmsg.type = msg.header.type;
 		pmsg.connection_id = msg.header.connection_id;
 

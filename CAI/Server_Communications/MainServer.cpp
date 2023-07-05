@@ -55,7 +55,7 @@ void MainServer::close() {
 }
 
 
-void MainServer::provide_message(message::message& msg)
+void MainServer::provide_message(message::Message& msg)
 {
 	connections_.at(msg.header.connection_id)->send(msg.to_string());
 }

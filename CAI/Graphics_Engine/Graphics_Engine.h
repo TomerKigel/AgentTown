@@ -10,7 +10,7 @@
 #include "../Network_Representation/Agent_Network.h"
 #include "../AI_Elements/Interfaces/Interface_Network_Observer.h"
 
-class Graphics_Engine : public Interface_Runnable , public Component<message::ParsedMessage> , public Interface_Network_Observer
+class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer
 {
 private:
 	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
@@ -20,7 +20,7 @@ private:
 	sf::Event event_;
 	std::unique_ptr<QuadTree> Quadtree_;
 	std::unique_ptr<std::vector<std::shared_ptr<Object>>> object_vector_;
-	Queue_Manager<message::ParsedMessage> incoming_messages_;
+	Queue_Manager<message::Parsed_Message> incoming_messages_;
 
 	void event_loop();
 	void handle_messages();
@@ -35,9 +35,9 @@ public:
 	Graphics_Engine();
 	~Graphics_Engine();
 	
-	void operator=(const Graphics_Engine&& gm);
+	void operator=(const Graphics_Engine&& gm) noexcept;
 
-	void provide_message(message::ParsedMessage &pmsg);
+	void provide_message(message::Parsed_Message &pmsg);
 	std::string service_name();
 
 	void agent_added(std::shared_ptr<Agent> added_agent);

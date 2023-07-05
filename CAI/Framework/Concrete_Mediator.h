@@ -8,11 +8,11 @@
 
 class Concrete_Mediator : public Interface_Mediator {
 private:
-    std::vector<Component<message::message>*> message_components_;
-    std::vector<Component<message::ParsedMessage>*> parsed_message_components_;
+    std::vector<Component<message::Message>*> message_components_;
+    std::vector<Component<message::Parsed_Message>*> parsed_message_components_;
     
 public:
-    Concrete_Mediator(std::initializer_list<Component<message::message>*> init_message_components, std::initializer_list<Component<message::ParsedMessage>*> init_parsed_message_components){
+    Concrete_Mediator(std::initializer_list<Component<message::Message>*> init_message_components, std::initializer_list<Component<message::Parsed_Message>*> init_parsed_message_components){
         for (auto component : init_message_components)
         {
             component->set_mediator(this);
@@ -25,7 +25,7 @@ public:
         }
     } 
    
-    Concrete_Mediator& operator=(Concrete_Mediator&& cm)
+    Concrete_Mediator& operator=(Concrete_Mediator&& cm) noexcept
     {
         parsed_message_components_.clear();
         parsed_message_components_.insert(parsed_message_components_.end(), cm.parsed_message_components_.begin(), cm.parsed_message_components_.end());
@@ -34,7 +34,7 @@ public:
         return *this;
     }
 
-    void push_parsed_message(message::ParsedMessage pmsg)
+    void push_parsed_message(message::Parsed_Message pmsg)
     {
         auto dest = pmsg.destinations.front();
         for (auto component : parsed_message_components_)
@@ -44,7 +44,7 @@ public:
         }
     }
 
-    void push_message(message::message msg)
+    void push_message(message::Message msg)
     {
         for (auto component : message_components_)
         {

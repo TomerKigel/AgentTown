@@ -18,13 +18,13 @@ using namespace boost::asio;
 using ip::tcp;
 
 
-class ClientThreadConnection : virtual public Connection , public std::enable_shared_from_this<ClientThreadConnection>,public Component<message::message>
+class ClientThreadConnection : virtual public Connection , public std::enable_shared_from_this<ClientThreadConnection>,public Component<message::Message>
 {
 private: 
 	int connection_id_;
 	tcp::socket socket_;
 	std::unordered_map<int, std::shared_ptr<Connection>> *connections_;
-	message::message incoming_msg;
+	message::Message incoming_msg;
 	std::vector<char> message_buffer;
 
 	std::mutex send_mutex;
@@ -48,7 +48,7 @@ public:
 
 	void read();
 
-	void provide_message(message::message& msg);
+	void provide_message(message::Message& msg);
 
 	std::string service_name();
 

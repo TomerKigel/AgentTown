@@ -9,8 +9,8 @@ Framework::Framework()
 	base_server_->start();
 	engine_ = Graphics_Engine();
 	agent_network_.subscribe_to_network(&engine_);
-	std::initializer_list<Component<message::message>*> msg_based = { &*base_server_, &interpreter_ } ;
-	std::initializer_list<Component<message::ParsedMessage>*> pmsg_based = { &agent_network_, &engine_ };
+	std::initializer_list<Component<message::Message>*> msg_based = { &*base_server_, &interpreter_ } ;
+	std::initializer_list<Component<message::Parsed_Message>*> pmsg_based = { &agent_network_, &engine_ };
 	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
 }
 

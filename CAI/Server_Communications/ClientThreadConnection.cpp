@@ -50,7 +50,7 @@ bool ClientThreadConnection::proccess_complete_message(const string &input,const
 	std::vector<char> incoming_data(input.begin()+ start_message + message::open_message.length(), input.begin() + end_message);
 	incoming_msg << incoming_data;
 	incoming_msg.header.connection_id = this->connection_id_;
-	incoming_msg.direction = message::message::In;
+	incoming_msg.direction = message::Message::In;
 
 	mediator_->push_message(incoming_msg);
 	incoming_msg.reset();
@@ -124,7 +124,7 @@ void ClientThreadConnection::disconnect() {
 }
 
 
-void ClientThreadConnection::provide_message(message::message& msg)
+void ClientThreadConnection::provide_message(message::Message& msg)
 {
 	send(msg.to_string());
 }

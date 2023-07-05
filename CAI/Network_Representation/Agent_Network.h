@@ -3,11 +3,11 @@
 #include "../AI_Elements/Agent.h"
 #include "../Framework/Interfaces/Component.h"
 
-class Agent_Network : public Network<std::shared_ptr<Agent>>, public Component<message::ParsedMessage>, public Interface_Runnable
+class Agent_Network : public Network<std::shared_ptr<Agent>>, public Component<message::Parsed_Message>, public Interface_Runnable
 {
 	bool alive_;
 	std::mutex alive_mutex_;
-	Queue_Manager<message::ParsedMessage> incoming_messages_;
+	Queue_Manager<message::Parsed_Message> incoming_messages_;
 public:
 
 	Agent_Network()
@@ -59,7 +59,7 @@ public:
 		nodes.at(agent_id)->unsubscribe(observer);
 	}
 
-	virtual void provide_message(message::ParsedMessage& msg)
+	virtual void provide_message(message::Parsed_Message& msg)
 	{
 		incoming_messages_.push(msg);
 	}
@@ -73,7 +73,7 @@ public:
 	{
 		std::unique_lock lock(alive_mutex_);
 
-		message::ParsedMessage msg = incoming_messages_.stop_until_pop();
+		message::Parsed_Message msg = incoming_messages_.stop_until_pop();
 		if (msg.to) {
 			for (auto iter = nodes.begin(); iter != nodes.end(); iter++)
 				if (iter->second->get_agent_id() == msg.to.value())

@@ -14,7 +14,7 @@ class Agent_Parameters
 	int max_neighbour_capacity_;
 	bool changable_;
 public:
-	Queue_Manager<message::ParsedMessage> message_queue_;
+	Queue_Manager<message::Parsed_Message> message_queue_;
 
 	Agent_Parameters()
 	{

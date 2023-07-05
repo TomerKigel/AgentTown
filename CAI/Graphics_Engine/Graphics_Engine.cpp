@@ -24,7 +24,7 @@ Graphics_Engine::Graphics_Engine()
 //	window_->setActive(false);
 //}
 
-void Graphics_Engine::operator=(const Graphics_Engine&& gm)
+void Graphics_Engine::operator=(const Graphics_Engine&& gm) noexcept
 {
 	engine_state_ = gm.engine_state_;
 	window_ = gm.window_;
@@ -147,7 +147,7 @@ void Graphics_Engine::event_loop()
 
 void Graphics_Engine::handle_messages()
 {
-	message::ParsedMessage msg = incoming_messages_.stop_until_pop();
+	message::Parsed_Message msg = incoming_messages_.stop_until_pop();
 
 	/*if (msg.type == "new")
 	{
@@ -192,7 +192,7 @@ Graphics_Engine::~Graphics_Engine()
 {
 }
 
-void Graphics_Engine::provide_message(message::ParsedMessage &pmsg)
+void Graphics_Engine::provide_message(message::Parsed_Message &pmsg)
 {
 	incoming_messages_.push(pmsg);
 }

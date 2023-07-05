@@ -12,7 +12,7 @@ void Agent::event_controller_()
 	
 	lock.unlock();
 
-	std::optional<message::ParsedMessage> msg = parameters_.message_queue_.pop();
+	std::optional<message::Parsed_Message> msg = parameters_.message_queue_.pop();
 	if (msg)
 		process_message(msg.value());
 
@@ -25,7 +25,7 @@ void Agent::event_controller_()
 	
 }
 
-void Agent::push_message(message::ParsedMessage& msg)
+void Agent::push_message(message::Parsed_Message& msg)
 {
 	std::unique_lock<std::mutex>lock(param_mutex_);
 	parameters_.message_queue_.push(msg);
@@ -111,7 +111,7 @@ void Agent::unsubscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 }
 
 
-void Agent::process_message(message::ParsedMessage& msg)
+void Agent::process_message(message::Parsed_Message& msg)
 {
 	if (msg.x_position && msg.y_position)
 	{

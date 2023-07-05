@@ -60,9 +60,9 @@ public:
 
 
 	//Message passing
-	void push_message(message::ParsedMessage& msg);
+	void push_message(message::Parsed_Message& msg);
 
-	virtual void process_message(message::ParsedMessage& msg);
+	virtual void process_message(message::Parsed_Message& msg);
 
 	//Observer interface
 	void subscribe(std::shared_ptr<Interface_Graphics_Observer> obs);

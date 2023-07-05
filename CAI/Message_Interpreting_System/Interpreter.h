@@ -5,11 +5,11 @@
 #include "../Framework/Concrete_Mediator.h"
 #include "../Message_System/Message_Generator.h"
 
-class Interpreter : public Component<message::message> , public Interface_Runnable
+class Interpreter : public Component<message::Message> , public Interface_Runnable
 {
 	bool alive_;
 	std::mutex alive_mutex_;
-	Queue_Manager<message::message> incoming_messages_;
+	Queue_Manager<message::Message> incoming_messages_;
 public:
 	Interpreter()
 	{
@@ -25,14 +25,14 @@ public:
 	{
 		std::unique_lock lock(alive_mutex_);
 		
-		message::message msg = incoming_messages_.stop_until_pop();
-		if (msg.direction == message::message::Out) {
+		message::Message msg = incoming_messages_.stop_until_pop();
+		if (msg.direction == message::Message::Out) {
 			mediator_->push_message(msg);
 		}
 		else {
-			message::ParsedMessage pmsg = message::parse_message(msg);
+			message::Parsed_Message pmsg = message::parse_message(msg);
 			if (pmsg.type.find("Error") != -1) {
-				message::message error_message = Message_Generator::generate_error_message(pmsg.type);
+				message::Message error_message = Message_Generator::generate_error_message(pmsg.type);
 				mediator_->push_message(error_message);
 			}
 			else
@@ -50,7 +50,7 @@ public:
 			lock.unlock();
 	}
 
-	virtual void provide_message(message::message& msg)
+	virtual void provide_message(message::Message& msg)
 	{
 		incoming_messages_.push(msg);
 	}

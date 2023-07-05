@@ -19,7 +19,7 @@ struct CarParameters
 	std::shared_ptr<sf::RenderWindow> window_;
 	std::shared_ptr<sf::Texture> texture;
 	double speed = 1;
-	int id;
+	int id = -1;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////

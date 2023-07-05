@@ -5,7 +5,7 @@
 class Message_Generator
 {
 public:
-	static message::message generate_error_message(std::string type)
+	static message::Message generate_error_message(std::string type)
 	{
 		if (type == "new no id")
 		{
@@ -15,7 +15,7 @@ public:
 		{
 
 		}
-		message::message a;
+		message::Message a;
 		a.direction = a.Out;
 		return a;
 	}

@@ -18,7 +18,7 @@ namespace message
 		uint32_t connection_id = 0;
 	};
 
-	class message
+	class Message
 	{
 	public:
 
@@ -26,7 +26,7 @@ namespace message
 		message_header header;
 		std::vector<char> body;
 		enum message_directions{In,Out};
-		bool direction;
+		bool direction = In;
 
 		size_t size() const
 		{
@@ -47,14 +47,14 @@ namespace message
 		}
 
 		// Override for std::cout compatibility - produces friendly description of message
-		friend std::ostream& operator << (std::ostream& os, const message& msg)
+		friend std::ostream& operator << (std::ostream& os, const Message& msg)
 		{
 			os << "Type:" << msg.header.type << " Size:" << msg.header.body_size << std::endl;
 			os << "Message:" << msg.body.data();
 			return os;
 		}
 
-		friend message& operator << (message& msg, const std::vector<char>& data)
+		friend Message& operator << (Message& msg, const std::vector<char>& data)
 		{
 			// Cache current size of vector, as this will be the point we insert the data
 			size_t i = msg.body.size();
@@ -73,7 +73,7 @@ namespace message
 		}
 
 
-		friend message& operator >> (message& msg, std::vector<char>& data)
+		friend Message& operator >> (Message& msg, std::vector<char>& data)
 		{
 			std::memcpy(&data, msg.body.data(), msg.body.size());
 
