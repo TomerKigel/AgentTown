@@ -38,6 +38,8 @@ that is as close to a real-life environment as possible.
 
 Simultaneously, clients simulating a single or a collection of agents operating independently must be implemented to allow them to run algorithms that can solve DCOPs.
 
+Ideally in the future, virtual and simulated should become physical and real.
+
 <h2>How to</h2>
 
 To compile and run the project few things are required:
