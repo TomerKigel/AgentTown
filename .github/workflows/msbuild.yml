@@ -3,10 +3,10 @@ name: Build with Boost
 on:
   push:
     branches:
-      - master 
+      - master  # Adjust branch name as needed
   pull_request:
     branches:
-      - master
+      - master  # Adjust branch name as needed
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Visual Studio 2019 Build Tools
         run: |
@@ -41,7 +41,16 @@ jobs:
           # Build and install Boost
           cd 'boost_1_81_0'
           .\bootstrap.bat
-          .\b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
+
+          # Adjust b2 command based on MSVC version
+          if (Test-Path 'C:\BuildTools\VC\Auxiliary\Build\vcvars64.bat') {
+            . 'C:\BuildTools\VC\Auxiliary\Build\vcvars64.bat'
+          }
+          else {
+            . 'C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat' x64
+          }
+
+          .\b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --address-model=64 --build-type=complete --with-system --with-date_time --with-filesystem --with-iostreams --with-program_options install
 
       - name: Build project
         run: |
