@@ -3,10 +3,10 @@ name: MSBuild
 on:
   push:
     branches:
-      - main  # Adjust branch name as needed
+      - master
   pull_request:
     branches:
-      - main  # Adjust branch name as needed
+      - master
 
 jobs:
   build:
