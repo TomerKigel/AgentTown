@@ -40,7 +40,7 @@ jobs:
 
           # Build and install Boost
           cd 'boost_1_81_0'
-          .\b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
+          & 'C:\boost_1_81_0\b2.exe' -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
 
       - name: Build project
         run: |
