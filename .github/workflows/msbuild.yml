@@ -3,10 +3,10 @@ name: Build with Boost
 on:
   push:
     branches:
-      - master
+      - master  # Adjust branch name as needed
   pull_request:
     branches:
-      - master
+      - master  # Adjust branch name as needed
 
 jobs:
   build:
@@ -19,14 +19,16 @@ jobs:
       - name: Install Visual Studio 2019 Build Tools
         run: |
           # Download Visual Studio 2019 Build Tools installer
-          curl -L -o vs_buildtools.exe https://aka.ms/vs/16/release/vs_buildtools.exe
+          wget https://aka.ms/vs/16/release/vs_buildtools.exe -OutFile vs_buildtools.exe
 
           # Install Visual Studio 2019 Build Tools
-          start /wait vs_buildtools.exe --quiet --wait --norestart --nocache `
-            --add Microsoft.VisualStudio.Workload.MSBuildTools `
-            --add Microsoft.VisualStudio.Workload.VCTools `
-            --includeRecommended `
-            --includeOptional
+          Start-Process -Wait -FilePath .\vs_buildtools.exe -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
+
+      - name: Set up MSBuild environment
+        run: |
+          echo '##[set-env name=PATH;]C:\BuildTools\MSBuild\Current\Bin;$env:PATH'
+          echo '##[set-env name=VS140COMNTOOLS;]C:\BuildTools\Common7\Tools'
+          echo '##[set-env name=VS160COMNTOOLS;]C:\BuildTools\Common7\Tools'
 
       - name: Install Boost
         run: |
@@ -41,5 +43,4 @@ jobs:
 
       - name: Build project
         run: |
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" `
-            /m /p:Configuration=Release CAI.sln
+          msbuild /m /p:Configuration=Release CAI.sln
