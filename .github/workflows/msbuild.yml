@@ -3,7 +3,7 @@ name: Build with Boost
 on:
   push:
     branches:
-      - master
+      - master 
   pull_request:
     branches:
       - master
@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install Visual Studio 2019 Build Tools
         run: |
@@ -25,10 +25,10 @@ jobs:
           Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
 
       - name: Set up MSBuild environment
-        env:
-          PATH: 'C:\BuildTools\MSBuild\Current\Bin'
-          VS140COMNTOOLS: 'C:\BuildTools\Common7\Tools'
-          VS160COMNTOOLS: 'C:\BuildTools\Common7\Tools'
+        run: |
+          echo "PATH=C:\BuildTools\MSBuild\Current\Bin;%PATH%" >> $GITHUB_ENV
+          echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
+          echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
 
       - name: Install Boost
         run: |
