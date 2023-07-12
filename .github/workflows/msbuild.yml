@@ -3,6 +3,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+
+    
+      
 name: MSBuild
 
 on:
@@ -28,6 +31,21 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.1
+      id: install-boost
+      with:
+        # REQUIRED: Specify the required boost version
+        # A list of supported versions can be found here:
+        # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+        boost_version: 1.82.0
+        # OPTIONAL: Specify a custon install location
+        boost_install_dir: C:\Program Files\boost
+        # OPTIONAL: Specify a platform version
+        platform_version: 2019
+        # OPTIONAL: Specify a toolset
+        toolset: msvc
+    
     - uses: actions/checkout@v3
 
     - name: Add MSBuild to PATH
@@ -42,3 +60,5 @@ jobs:
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+
+
