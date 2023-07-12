@@ -46,7 +46,7 @@ void Car::intersection(Object* obj)
 {
 	switch (obj->reType())
 	{
-	
+		;
 	}
 }
 

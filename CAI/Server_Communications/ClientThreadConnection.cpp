@@ -1,5 +1,6 @@
 #include "ClientThreadConnection.h"
 #include "../Framework/Concrete_Mediator.h"
+#include "spdlog/spdlog.h"
 
 ClientThreadConnection::ClientThreadConnection(tcp::socket &&socket, std::unordered_map<int, std::shared_ptr<Connection>> &connections,int connection_id_, Interface_Mediator *mediator_) : socket_(std::move(socket))
 {
@@ -53,11 +54,12 @@ bool ClientThreadConnection::proccess_complete_message(const string &input,const
 	incoming_msg.direction = message::Message::In;
 
 	mediator_->push_message(incoming_msg);
-	incoming_msg.reset();
+	message::reset(incoming_msg);
 
 	if (end_message < input.length())
 		proccess_complete_message(input.substr(end_message+1), size - (end_message+1));
 
+	spdlog::info("message proccessed on connection id:{}", get_id());
 	return true;
 }
 
@@ -71,6 +73,7 @@ void ClientThreadConnection::read() {
 		{
 			if (!ec)
 			{
+				spdlog::info("message received on connection id:{}",this->get_id());
 				if (!proccess_complete_message(message_buffer.data(), length))
 				{
 					std::cout << "client serial number (" << connection_id_ << ") rejected" << endl;
@@ -116,6 +119,7 @@ void ClientThreadConnection::disconnect() {
 	try {
 		socket_.close();
 		connections_->erase(connection_id_);
+		spdlog::info("connection id:{} disconnected", get_id());
 		std::cout << "client serial number (" << connection_id_ << ") disconnected" << endl;
 	}
 	catch (...) {
@@ -126,10 +130,10 @@ void ClientThreadConnection::disconnect() {
 
 void ClientThreadConnection::provide_message(message::Message& msg)
 {
-	send(msg.to_string());
+	send(message::to_string(msg));
 }
 
 std::string ClientThreadConnection::service_name()
 {
-	return "client " + this->connection_id_;
+	return "connection id:" + this->connection_id_;
 }

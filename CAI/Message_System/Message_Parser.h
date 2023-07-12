@@ -11,7 +11,7 @@ namespace message
 	{
 	public:
 		std::string type;
-		int connection_id;
+		int connection_id = -1;
 		std::optional<int> new_id;
 		std::optional<int> to;
 		std::optional<int> from;
@@ -28,7 +28,6 @@ namespace message
 		pmsg.connection_id = msg.header.connection_id;
 
 		if(const auto new_id = message::get_part_of_message(msg,"new_id:", "\n"))
-		if (new_id)
 			pmsg.new_id = boost::lexical_cast<int>(new_id.value());
 
 		if (const auto to = message::get_part_of_message(msg, "to:", "\n"))

@@ -2,12 +2,14 @@
 #include "Agent_Parameters.h"
 #include <mutex>
 #include <vector>
+#include <memory>
 
 #include "../Framework/Interfaces/Interface_Runnable.h"
 #include "../AI_Elements/Interfaces/interface_calculatable.h"
 #include "../Message_System/message.h"
 #include "../Message_System/Message_Parser.h"
 #include "Interfaces/Interface_Graphics_Observer.h"
+
 class Agent : public Interface_Runnable
 {
 private:
@@ -17,10 +19,11 @@ private:
 	//concurrency variables
 	std::mutex alive_mutex_;
 	std::mutex param_mutex_;
+	std::mutex observers_mutex_;
 	std::condition_variable cv_;
 	std::thread agent_thread_;
 
-	std::vector<std::shared_ptr<Interface_Graphics_Observer>> observers;
+	std::vector<std::weak_ptr<Interface_Graphics_Observer>> observers;
 
 	// main loop
 	void event_controller_();
@@ -32,6 +35,8 @@ public:
 
 	Agent(Agent &other_agent);
 
+	//Agent(Agent&& other_agent) = default;
+
 	Agent& operator=(Agent& other);
 
 	virtual ~Agent();
@@ -41,7 +46,7 @@ public:
 	void run();
 
 	//Mutators
-	virtual void destroy() {
+	virtual void destroy(){
 		alive_ = false;
 	}
 
@@ -51,6 +56,9 @@ public:
 
 	void update_position(std::pair<double, double> x_y);
 
+	void set_connection_id(int id);
+
+	void set_id(int id);
 	//accessors
 	unsigned int get_agent_id();
 

@@ -122,7 +122,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Message_System\message.h">
+    <ClInclude Include="Message_System\Message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Message_System\Message_Generator.h">
@@ -236,6 +236,9 @@
     <ClInclude Include="AI_Elements\Interfaces\Interface_Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="car.png">
@@ -259,7 +262,12 @@
     <None Include="I:\SFML-2.5.1\bin\openal32.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Readme.txt" />
-    <Text Include="Standards.txt" />
+    <Text Include="Readme.md" />
+    <Text Include="Standards.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CAI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
