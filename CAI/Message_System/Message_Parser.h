@@ -27,13 +27,14 @@ namespace message
 		pmsg.type = msg.header.type;
 		pmsg.connection_id = msg.header.connection_id;
 
-		if(const auto new_id = message::get_part_of_message(msg,"new_id:", "\n"))
+		
+		if(const auto new_id = message::get_part_of_message(msg, "new_id:", "\n"))
 			pmsg.new_id = boost::lexical_cast<int>(new_id.value());
 
-		if (const auto to = message::get_part_of_message(msg, "to:", "\n"))
+		if(const auto to = message::get_part_of_message(msg, "to:", "\n"))
 			pmsg.to = boost::lexical_cast<int>(to.value());
 		
-		if (const auto from = message::get_part_of_message(msg, "from:", "\n"))
+		if(const auto from = message::get_part_of_message(msg, "from:", "\n"))
 			pmsg.from = boost::lexical_cast<int>(from.value());
 
 		if (const auto x = message::get_part_of_message(msg, "x:", "\n"))

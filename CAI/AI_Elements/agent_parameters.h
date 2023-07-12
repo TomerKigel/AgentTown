@@ -3,7 +3,7 @@
 #include "Agent.h"
 #include "../Message_System/Queue_Manager.h"
 #include "../Message_System/Message_Parser.h"
-#include "spdlog/spdlog.h"
+//#include "spdlog/spdlog.h"
 
 class Agent;
 
@@ -24,7 +24,7 @@ public:
 		changeable_ = true;
 		id_ = -1;
 		connection_id_ = -1;
-		spdlog::warn("agent created with invalid id and connection id");
+		//spdlog::info("agent created with invalid id and connection id");
 	}
 
 	Agent_Parameters(int id, double x = 0, double y = 0)
@@ -35,7 +35,7 @@ public:
 		changeable_ = true;
 		id_ = id;
 		connection_id_ = -1;
-		spdlog::warn("agent created with invalid connection id");
+		//spdlog::warn("agent created with invalid connection id");
 	}
 
 	Agent_Parameters(int id, int connection, double x = 0, double y = 0)
@@ -78,27 +78,6 @@ public:
 		max_neighbour_capacity_ = other_parameters.max_neighbour_capacity_;
 		id_ = other_parameters.id_;
 		return *this;
-	}
-
-	void set_id(int id) noexcept
-	{
-		if(id > 0)
-			id_ = id;
-		else
-		{
-			std::cerr << "set_id: attempt to set id to a negative, operation canceled";
-			spdlog::warn("set_id: attempt to set id to a negative, operation canceled");
-		}
-	}
-	void set_connection_id(int id) noexcept
-	{
-		if (id > 0)
-			connection_id_ = id;
-		else
-		{
-			std::cerr << "set_id: attempt to set connection id to a negative, operation canceled";
-			spdlog::warn("set_id: attempt to set connection id to a negative, operation canceled");
-		}
 	}
 
 	bool add_neighbour(int id)

@@ -1,0 +1,6 @@
+[2023-07-12 16:03:55.711] [main_logger] [info] Framework initializing
+[2023-07-12 16:03:55.895] [main_logger] [info] Framework initialized successfully
+[2023-07-12 16:03:55.895] [main_logger] [info] Framework running
+[2023-07-12 16:04:28.175] [main_logger] [info] Framework initializing
+[2023-07-12 16:04:28.418] [main_logger] [info] Framework initialized successfully
+[2023-07-12 16:04:28.419] [main_logger] [info] Framework running

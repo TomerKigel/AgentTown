@@ -26,7 +26,7 @@ public:
 
 	void remove_node(int id)
 	{
-		if (nodes.count(id) != 0){
+		if (nodes.count(id) != 0) {
 			for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
 			{
 				(*iter)->agent_removed(nodes.at(id));
@@ -49,7 +49,7 @@ public:
 			(*found_agent).second->remove_neighbour(neighbour_id);
 	}
 
-	void subscribe_to_agent(int agent_id,std::shared_ptr<Interface_Graphics_Observer> observer)
+	void subscribe_to_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 	{
 		nodes.at(agent_id)->subscribe(observer);
 	}

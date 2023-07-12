@@ -84,7 +84,7 @@ bool Agent::add_neighbour(int id)
 	}
 	catch (std::exception e)
 	{
-		spdlog::warn(e.what());
+		//spdlog::warn(e.what());
 		return false;
 	}
 }
@@ -97,7 +97,7 @@ bool Agent::remove_neighbour(int id)
 	}
 	catch (std::exception e)
 	{
-		spdlog::warn(e.what());
+		//spdlog::warn(e.what());
 		return false;
 	}
 }
@@ -120,7 +120,7 @@ unsigned int Agent::get_connection_id()
 	}
 	catch (std::exception e)
 	{
-		spdlog::warn(e.what());
+		//spdlog::warn(e.what());
 		throw e;
 	}
 }
@@ -133,7 +133,7 @@ unsigned int Agent::get_agent_id()
 	}
 	catch (std::exception e)
 	{
-		spdlog::warn(e.what());
+		//spdlog::warn(e.what());
 		throw e;
 	}
 }
