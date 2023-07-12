@@ -1,64 +1,39 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-
-    
-      
-name: MSBuild
+name: Build with Boost
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main  # Adjust branch name as needed
   pull_request:
-    branches: [ "master" ]
-
-env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
-
-permissions:
-  contents: read
+    branches:
+      - main  # Adjust branch name as needed
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.4.1
-      id: install-boost
-      with:
-        # REQUIRED: Specify the required boost version
-        # A list of supported versions can be found here:
-        # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-        boost_version: 1.81.0
-        # OPTIONAL: Specify a custon install location
-        boost_install_dir: C:\Program Files
-        # OPTIONAL: Specify a platform version
-        platform_version: 2019
-        # OPTIONAL: Specify a toolset
-        toolset: msvc
-    
-    - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      - name: Install Boost
+        run: |
+          # Download Boost 1.81.0
+          wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.zip
+          unzip boost_1_81_0.zip
+          cd boost_1_81_0
 
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+          # Build and install Boost
+          bootstrap.bat
+          b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc-14.29 address-model=64 install
 
-    - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      - name: Set up MSVC
+        uses: mstf/Setup-MSVC@v1
+        with:
+          msvc-version: 14.29
+
+      - name: Build project
+        run: |
+          msbuild /m /p:Configuration=Release CAI.sln
 
 
