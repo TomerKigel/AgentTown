@@ -27,11 +27,11 @@ jobs:
           bootstrap.bat
           b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc-14.29 address-model=64 install
 
-      - name: Set up MSVC
-        uses: mstf/Setup-MSVC@v1
+      - name: Set up MSBuild
+        uses: actions/setup-msbuild@v1
         with:
-          msvc-version: 14.29
-
+          vs-version: 'latest'
+        
       - name: Build project
         run: |
           msbuild /m /p:Configuration=Release CAI.sln
