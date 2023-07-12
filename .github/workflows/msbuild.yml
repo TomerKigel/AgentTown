@@ -25,10 +25,10 @@ jobs:
           Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
 
       - name: Set up MSBuild environment
-        run: |
-          echo '##[set-env name=PATH;]C:\BuildTools\MSBuild\Current\Bin;$env:PATH'
-          echo '##[set-env name=VS140COMNTOOLS;]C:\BuildTools\Common7\Tools'
-          echo '##[set-env name=VS160COMNTOOLS;]C:\BuildTools\Common7\Tools'
+        env:
+          PATH: 'C:\BuildTools\MSBuild\Current\Bin'
+          VS140COMNTOOLS: 'C:\BuildTools\Common7\Tools'
+          VS160COMNTOOLS: 'C:\BuildTools\Common7\Tools'
 
       - name: Install Boost
         run: |
