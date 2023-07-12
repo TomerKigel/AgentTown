@@ -1,4 +1,4 @@
-name: MSBuild
+name: Build with Boost
 
 on:
   push:
@@ -16,6 +16,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Visual Studio 2019 Build Tools
+        run: |
+          # Download Visual Studio 2019 Build Tools installer
+          curl -L -o vs_buildtools.exe https://aka.ms/vs/16/release/vs_buildtools.exe
+
+          # Install Visual Studio 2019 Build Tools
+          start /wait vs_buildtools.exe --quiet --wait --norestart --nocache `
+            --add Microsoft.VisualStudio.Workload.MSBuildTools `
+            --add Microsoft.VisualStudio.Workload.VCTools `
+            --includeRecommended `
+            --includeOptional
+
       - name: Install Boost
         run: |
           # Download Boost 1.81.0
@@ -25,15 +37,9 @@ jobs:
 
           # Build and install Boost
           bootstrap.bat
-          b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc-14.29 address-model=64 install
+          b2.exe -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
 
-      - name: Set up MSBuild
-        uses: actions/setup-msbuild@v1
-        with:
-          vs-version: 'latest'
-        
       - name: Build project
         run: |
-          msbuild /m /p:Configuration=Release CAI.sln
-
-
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\MSBuild.exe" `
+            /m /p:Configuration=Release CAI.sln
