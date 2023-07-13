@@ -39,9 +39,9 @@ jobs:
           Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'boost_1_81_0'
 
           # Build and install Boost
-          cd 'boost_1_81_0'
-          cmd /c '.\bootstrap.bat'
-          cmd /c '.\b2.exe' -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
+          $boostDir = Join-Path -Path $PWD.Path -ChildPath 'boost_1_81_0'
+          Invoke-Expression -Command "& '$boostDir\bootstrap.bat'"
+          Invoke-Expression -Command "& '$boostDir\b2.exe' -j$env:NUMBER_OF_PROCESSORS --build-dir=build64 --toolset=msvc address-model=64 install"
 
       - name: Build project
         run: |
