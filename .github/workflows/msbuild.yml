@@ -40,9 +40,8 @@ jobs:
 
           # Build and install Boost
           cd 'boost_1_81_0'
-          $b2Path = Join-Path -Path $PWD.Path -ChildPath 'b2.exe'
-          $b2Args = "-j$env:NUMBER_OF_PROCESSORS --build-dir=build64 --toolset=msvc address-model=64 install"
-          Invoke-Expression -Command "& `"$b2Path`" $b2Args"
+          cmd /c '.\bootstrap.bat'
+          cmd /c '.\b2.exe' -j%NUMBER_OF_PROCESSORS% --build-dir=build64 --toolset=msvc address-model=64 install
 
       - name: Build project
         run: |
