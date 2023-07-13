@@ -16,19 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Cache MSVC tools
-        uses: actions/cache@v2
-        with:
-          path: C:\BuildTools
-          key: msvc-tools
+     # - name: Cache MSVC tools
+     #   uses: actions/cache@v2
+     #   with:
+     #     path: C:\BuildTools
+     #     key: msvc-tools
 
-      - name: Install Visual Studio 2019 Build Tools
-        run: |
-          # Download Visual Studio 2019 Build Tools installer
-          Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
+     # - name: Install Visual Studio 2019 Build Tools
+     #   run: |
+     #     # Download Visual Studio 2019 Build Tools installer
+     #     Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
 
           # Install Visual Studio 2019 Build Tools
-          Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
+      #    Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
 
       - name: Set up MSBuild environment
         run: |
@@ -50,8 +50,8 @@ jobs:
           # Bootstrap Boost using cmd.exe
           cmd.exe /C ".\bootstrap.bat"
 
-          # Build Boost using explicit path to b2.exe
-          .\b2.exe -j$env:NUMBER_OF_PROCESSORS --build-dir=build64 --toolset=msvc address-model=64 install
+          # Build Boost
+          cmd.exe /C "b2.exe"
 
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
