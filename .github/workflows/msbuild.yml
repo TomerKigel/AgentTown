@@ -36,25 +36,23 @@ jobs:
           echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
           echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
 
-      - name: Install Boost
-        run: |
-          # Download Boost 1.81.0
-          Invoke-WebRequest -Uri 'https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.zip' -OutFile 'boost_1_81_0.zip'
+      - name: Install boost
+        uses: MarkusJx/install-boost@v2.4.1
+        id: install-boost
+        with:
+            # REQUIRED: Specify the required boost version
+            # A list of supported versions can be found here:
+            # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
+            boost_version: 1.81.0
+            # OPTIONAL: Specify a custon install location
+            boost_install_dir: C:\Program Files\boost
+            # OPTIONAL: Specify a platform version
+            platform_version: 2019
+            # OPTIONAL: Specify a toolset
+            toolset: msvc
 
-          # Extract Boost
-          Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'boost_1_81_0'
-
-          # Change to the Boost directory
-          Set-Location -Path 'boost_1_81_0'
-
-          # Bootstrap Boost using cmd.exe
-          cmd.exe /C "./bootstrap.bat"
-
-          # Build Boost
-          cmd.exe /C "&b2.exe"
-
-          # Return to the project directory
-          Set-Location -Path $env:GITHUB_WORKSPACE
+            # NOTE: If a boost version matching all requirements cannot be found,
+            # this build step will fail
 
 
 
