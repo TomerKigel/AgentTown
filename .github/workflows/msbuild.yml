@@ -35,7 +35,13 @@ jobs:
           echo "PATH=C:\BuildTools\MSBuild\Current\Bin;%PATH%" >> $GITHUB_ENV
           echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
           echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
+          
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v1
 
+      - name: Build
+        run: msbuild /m /p:Configuration=Release .
+  
       - name: Install boost
         uses: MarkusJx/install-boost@v2.4.1
         id: install-boost
