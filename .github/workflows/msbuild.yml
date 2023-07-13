@@ -42,23 +42,27 @@ jobs:
       - name: Build
         run: msbuild /m /p:Configuration=Release .
   
-      - name: Install boost
-        uses: MarkusJx/install-boost@v2.4.1
-        id: install-boost
-        with:
-            # REQUIRED: Specify the required boost version
-            # A list of supported versions can be found here:
-            # https://github.com/MarkusJx/prebuilt-boost/blob/main/versions-manifest.json
-            boost_version: 1.81.0
-            # OPTIONAL: Specify a custon install location
-            boost_install_dir: C:\Program Files\boost
-            # OPTIONAL: Specify a platform version
-            platform_version: 2019
-            # OPTIONAL: Specify a toolset
-            toolset: msvc
-
-            # NOTE: If a boost version matching all requirements cannot be found,
-            # this build step will fail
+      - name: Setup Boost
+        shell: cmd
+        run: |
+            echo GITHUB_REPOSITORY: %GITHUB_REPOSITORY%
+            for /f %%i in ("%GITHUB_REPOSITORY%") do set LIBRARY=%%~nxi
+            echo LIBRARY: %LIBRARY%
+            echo LIBRARY=%LIBRARY%>>%GITHUB_ENV%
+            echo GITHUB_BASE_REF: %GITHUB_BASE_REF%
+            echo GITHUB_REF: %GITHUB_REF%
+            if "%GITHUB_BASE_REF%" == "" set GITHUB_BASE_REF=%GITHUB_REF%
+            set BOOST_BRANCH=develop
+            for /f %%i in ("%GITHUB_BASE_REF%") do if "%%~nxi" == "master" set BOOST_BRANCH=master
+            echo BOOST_BRANCH: %BOOST_BRANCH%
+            cd ..
+            git clone -b %BOOST_BRANCH% --depth 10 https://github.com/boostorg/boost.git boost-root
+            cd boost-root
+            xcopy /s /e /q %GITHUB_WORKSPACE% libs\%LIBRARY%\
+            git submodule update --init tools/boostdep
+            python tools/boostdep/depinst/depinst.py --include benchmark --include example --include examples --include tools --git_args "--jobs 3" %LIBRARY%
+            cmd /c bootstrap
+            b2 -d0 headers
 
 
 
