@@ -38,10 +38,7 @@ jobs:
           
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1
-
-      - name: Build
-        run: msbuild /m /p:Configuration=Release .
-  
+        
       - name: Install Boost
         run: |
           # Download Boost 1.81.0
@@ -59,8 +56,6 @@ jobs:
           cmd.exe dir
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
-
-
 
       - name: Build project
         run: |
