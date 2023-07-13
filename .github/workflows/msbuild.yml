@@ -50,7 +50,7 @@ jobs:
    
       - name: run bootstrap
         run: |
-          bootstrap.bat
+          ./bootstrap.bat
       - name: runb2
         run: |
           b2.exe
