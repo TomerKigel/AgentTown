@@ -50,7 +50,7 @@ jobs:
    
       - name: run bootstrap
         run: |
-          cmd.exe "dir"
+          cmd.exe "cd boost_1_81_0"
           ./bootstrap.bat
       - name: runb2
         run: |
