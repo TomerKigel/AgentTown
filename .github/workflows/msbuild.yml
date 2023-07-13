@@ -42,27 +42,22 @@ jobs:
       - name: Build
         run: msbuild /m /p:Configuration=Release .
   
-      - name: Setup Boost
-        shell: cmd
+      - name: Install Boost
         run: |
-            echo GITHUB_REPOSITORY: %GITHUB_REPOSITORY%
-            for /f %%i in ("%GITHUB_REPOSITORY%") do set LIBRARY=%%~nxi
-            echo LIBRARY: %LIBRARY%
-            echo LIBRARY=%LIBRARY%>>%GITHUB_ENV%
-            echo GITHUB_BASE_REF: %GITHUB_BASE_REF%
-            echo GITHUB_REF: %GITHUB_REF%
-            if "%GITHUB_BASE_REF%" == "" set GITHUB_BASE_REF=%GITHUB_REF%
-            set BOOST_BRANCH=develop
-            for /f %%i in ("%GITHUB_BASE_REF%") do if "%%~nxi" == "master" set BOOST_BRANCH=master
-            echo BOOST_BRANCH: %BOOST_BRANCH%
-            cd ..
-            git clone -b %BOOST_BRANCH% --depth 10 https://github.com/boostorg/boost.git boost-root
-            cd boost-root
-            xcopy /s /e /q %GITHUB_WORKSPACE% libs\%LIBRARY%\
-            git submodule update --init tools/boostdep
-            python tools/boostdep/depinst/depinst.py --include benchmark --include example --include examples --include tools --git_args "--jobs 3" %LIBRARY%
-            cmd /c bootstrap
-            b2 -d0 headers
+          # Download Boost 1.81.0
+          Invoke-WebRequest -Uri 'https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.zip' -OutFile 'boost_1_81_0.zip'
+          # Extract Boost
+          Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'boost_1_81_0'
+          # Change to the Boost directory
+          Set-Location -Path 'boost_1_81_0'
+          # Bootstrap Boost using cmd.exe
+          cmd.exe /C "./bootstrap.bat"
+          # Build Boost
+      - name: runb2
+        run: |
+          b2.exe
+          # Return to the project directory
+          Set-Location -Path $env:GITHUB_WORKSPACE
 
 
 
