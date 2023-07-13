@@ -51,7 +51,7 @@ jobs:
           cmd.exe /C "./bootstrap.bat"
 
           # Build Boost
-          cmd.exe /C "&./b2.exe"
+          cmd.exe /C "&b2.exe"
 
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
