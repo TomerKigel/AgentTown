@@ -41,6 +41,13 @@ jobs:
         
       - name: Build Boost
         uses: egor-tensin/build-boost@v1.4
+        id: boost
+        with:
+          version: 1.81.0
+          libraries: filesystem program_options system
+          platform: x64
+          toolset: msvc142
+          configuration: Release
 
       - name: Build project
         run: |
