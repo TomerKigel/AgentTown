@@ -47,7 +47,7 @@ jobs:
           libraries: filesystem program_options system
           platform: x64
           toolset: msvc142
-          configuration: Release
+          configuration: Debug
 
       - name: Build project
         run: |
