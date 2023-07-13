@@ -56,6 +56,7 @@ jobs:
       - name: runb2
         run: |
           b2.exe
+          cmd.exe dir
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
 
