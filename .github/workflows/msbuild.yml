@@ -47,13 +47,13 @@ jobs:
           Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'boost_1_81_0'
           # Change to the Boost directory
           Set-Location -Path 'boost_1_81_0'
-          # Bootstrap Boost using cmd.exe
-          cmd.exe /C "bootstrap.bat"
-          # Build Boost
+   
+      - name: run bootstrap
+        run: |
+          bootstrap.bat
       - name: runb2
         run: |
           b2.exe
-          cmd.exe dir
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
 
