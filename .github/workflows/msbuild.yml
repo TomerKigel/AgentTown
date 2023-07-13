@@ -48,7 +48,7 @@ jobs:
           # Change to the Boost directory
           Set-Location -Path 'boost_1_81_0'
           # Bootstrap Boost using cmd.exe
-          cmd.exe /C "./bootstrap.bat"
+          cmd.exe /C "bootstrap.bat"
           # Build Boost
       - name: runb2
         run: |
