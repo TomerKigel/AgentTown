@@ -48,10 +48,10 @@ jobs:
           Set-Location -Path 'boost_1_81_0'
 
           # Bootstrap Boost using cmd.exe
-          cmd.exe /C ".\bootstrap.bat"
+          cmd.exe /C "./bootstrap.bat"
 
           # Build Boost
-          cmd.exe /C "b2.exe"
+          cmd.exe /C "./b2.exe"
 
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
