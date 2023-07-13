@@ -47,13 +47,11 @@ jobs:
           # Change to the Boost directory
           Set-Location -Path 'boost_1_81_0'
 
-          # Bootstrap and build Boost using cmd.exe
-          cmd.exe /C ".\tools\build\bootstrap.bat"
-          cmd.exe /C ".\b2.exe" -j$env:NUMBER_OF_PROCESSORS --build-dir=build64 --toolset=msvc address-model=64 install
+          # Bootstrap Boost using cmd.exe
+          cmd.exe /C ".\bootstrap.bat"
 
-          # Return to the project directory
-          Set-Location -Path $env:GITHUB_WORKSPACE
-
+          # Build Boost using explicit path to b2.exe
+          .\b2.exe -j$env:NUMBER_OF_PROCESSORS --build-dir=build64 --toolset=msvc address-model=64 install
 
           # Return to the project directory
           Set-Location -Path $env:GITHUB_WORKSPACE
