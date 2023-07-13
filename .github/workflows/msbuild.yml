@@ -16,6 +16,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Cache MSVC tools
+        uses: actions/cache@v2
+        with:
+          path: C:\BuildTools
+          key: msvc-tools
+
       - name: Install Visual Studio 2019 Build Tools
         run: |
           # Download Visual Studio 2019 Build Tools installer
