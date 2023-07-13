@@ -44,12 +44,13 @@ jobs:
           # Download Boost 1.81.0
           Invoke-WebRequest -Uri 'https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.zip' -OutFile 'boost_1_81_0.zip'
           # Extract Boost
-          Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'D:\a\AgentTown\AgentTown>Microsoft Windows'
+          Expand-Archive -Path 'boost_1_81_0.zip' -DestinationPath 'D:\a\AgentTown\AgentTown'
           # Change to the Boost directory
           Set-Location -Path 'boost_1_81_0'
    
       - name: run bootstrap
         run: |
+          cmd.exe "cd AgentTown"
           cmd.exe "cd boost_1_81_0"
           cmd.exe "dir"
           ./bootstrap.bat
