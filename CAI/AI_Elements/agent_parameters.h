@@ -80,6 +80,27 @@ public:
 		return *this;
 	}
 
+	void set_id(int id) noexcept
+	{
+		if (id > 0)
+			id_ = id;
+		else
+		{
+			std::cerr << "set_id: attempt to set id to a negative, operation canceled";
+			//spdlog::warn("set_id: attempt to set id to a negative, operation canceled");
+		}
+	}
+	void set_connection_id(int id) noexcept
+	{
+		if (id > 0)
+			connection_id_ = id;
+		else
+		{
+			std::cerr << "set_id: attempt to set connection id to a negative, operation canceled";
+			//spdlog::warn("set_id: attempt to set connection id to a negative, operation canceled");
+		}
+	}
+
 	bool add_neighbour(int id)
 	{
 		if (!changeable_)
