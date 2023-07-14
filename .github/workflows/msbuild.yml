@@ -48,6 +48,7 @@ jobs:
           platform: x64
           toolset: msvc142
           configuration: Debug
+          directory: C:\Program Files\boost
 
       - name: Build project
         run: |
