@@ -11,8 +11,11 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
+    
     steps:
+      - name: Install SFML
+        uses: oprypin/install-sfml@v1
+        
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -30,11 +33,11 @@ jobs:
           # Install Visual Studio 2019 Build Tools
           Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
 
-      - name: Set up MSBuild environment
-        run: |
-          echo "PATH=C:\BuildTools\MSBuild\Current\Bin;%PATH%" >> $GITHUB_ENV
-          echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
-          echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
+    #  - name: Set up MSBuild environment
+    #    run: |
+    #      echo "PATH=C:\BuildTools\MSBuild\Current\Bin;%PATH%" >> $GITHUB_ENV
+    #      echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
+    #      echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
           
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1
@@ -48,7 +51,7 @@ jobs:
           platform: x64
           toolset: msvc142
           configuration: Debug
-
+        
       - name: Build project
         run: |
           msbuild /m /p:Configuration=Release CAI.sln
