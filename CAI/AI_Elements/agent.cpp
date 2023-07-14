@@ -1,7 +1,7 @@
 #include "Agent.h"
 #include <thread>
 #include <mutex>
-#include "spdlog/spdlog.h"
+//#include "spdlog/spdlog.h"
 
 void Agent::event_controller_()
 {
