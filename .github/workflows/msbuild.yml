@@ -40,8 +40,7 @@ jobs:
     #      echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
           
       - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@v1
-        
+        uses: microsoft/setup-msbuild@v1.1        
       - name: Build Boost
         uses: egor-tensin/build-boost@v1.4
         id: boost
