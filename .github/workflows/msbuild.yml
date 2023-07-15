@@ -19,11 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-     # - name: Cache MSVC tools
-     #   uses: actions/cache@v2
-     #   with:
-     #     path: C:\BuildTools
-     #     key: msvc-tools
+     
 
       - name: Install Visual Studio 2019 Build Tools
         run: |
@@ -32,12 +28,12 @@ jobs:
 
           # Install Visual Studio 2019 Build Tools
           Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
-
-    #  - name: Set up MSBuild environment
-    #    run: |
-    #      echo "PATH=C:\BuildTools\MSBuild\Current\Bin;%PATH%" >> $GITHUB_ENV
-    #      echo "VS140COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
-    #      echo "VS160COMNTOOLS=C:\BuildTools\Common7\Tools" >> $GITHUB_ENV
+          id: vs-2019-tools
+      - name: Cache MSVC tools
+        uses: actions/cache@v2
+        with:
+            path: C:\BuildTools
+            key: vs-2019-tools
           
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1.1        
@@ -53,4 +49,7 @@ jobs:
         
       - name: Build project
         run: |
-          msbuild /m /p:Configuration=Release CAI.sln
+          msbuild /m /p:Configuration=Release CAI_UnitTest.sln
+      - name: run tests
+        run: |
+          CAI_UnitTest.exe
