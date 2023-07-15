@@ -53,4 +53,4 @@ jobs:
       - name: Run VSTest
         id: run_vstest
         #working-directory: bin\x64\Debug\
-        run: vstest.console.exe /Platform:x64 \x64\Release\CAI_UnitTest.dll
+        run: vstest.console.exe /Platform:x64 CAI_UnitTest.dll
