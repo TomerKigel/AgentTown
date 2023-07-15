@@ -28,12 +28,7 @@ jobs:
 
           # Install Visual Studio 2019 Build Tools
           Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
-          id: vs-2019-tools
-      - name: Cache MSVC tools
-        uses: actions/cache@v2
-        with:
-            path: C:\BuildTools
-            key: vs-2019-tools
+
           
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1.1        
@@ -50,6 +45,12 @@ jobs:
       - name: Build project
         run: |
           msbuild /m /p:Configuration=Release CAI_UnitTest.sln
-      - name: run tests
-        run: |
-          CAI_UnitTest.exe
+          
+      - name: Setup VSTest and add to PATH
+        uses: darenm/Setup-VSTest@v1
+        id: setup_vstest
+
+      - name: Run VSTest
+        id: run_vstest
+        working-directory: $\x64\Debug\
+        run: vstest.console.exe /Platform:x64 .\CAI_UnitTest.exe
