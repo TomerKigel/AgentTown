@@ -7,6 +7,10 @@
 #ifndef PCH_H
 #define PCH_H
 
-// add headers that you want to pre-compile here
+//// add headers that you want to pre-compile here
+#include "../CAI/Message_System/Message.h"
+#include "../CAI/Message_System/Message_Generator.h"
+#include "../CAI/Message_System/Message_Parser.h"
+#include "../CAI/Message_System/Queue_Manager.h"
 
 #endif //PCH_H
