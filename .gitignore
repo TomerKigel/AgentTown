@@ -362,4 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /CAI/CAI.vcxproj
+<<<<<<< HEAD
 /CAI/CAI.vcxproj
+=======
+>>>>>>> fix project settings and push unit tests
