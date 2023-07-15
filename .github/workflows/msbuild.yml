@@ -44,7 +44,7 @@ jobs:
         
       - name: Build project
         run: |
-          msbuild /m /p:Configuration=Release CAI_UnitTest.sln
+          msbuild /m /p:Configuration=Release CAI.sln
           
       - name: Setup VSTest and add to PATH
         uses: darenm/Setup-VSTest@v1
