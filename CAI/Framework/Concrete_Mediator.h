@@ -48,9 +48,9 @@ public:
     {
         for (auto component : message_components_)
         {
-            if (msg.In == msg.direction && component->service_name().compare("interpreter") == 0)
+            if (message::Message::message_direction::In == msg.direction && component->service_name().compare("interpreter") == 0)
                 component->provide_message(msg);
-            if (msg.Out == msg.direction && component->service_name().compare("main server") == 0)
+            if (message::Message::message_direction::Out == msg.direction && component->service_name().compare("main server") == 0)
                 component->provide_message(msg);
         }
     }

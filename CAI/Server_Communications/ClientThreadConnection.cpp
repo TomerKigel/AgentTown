@@ -51,7 +51,7 @@ bool ClientThreadConnection::proccess_complete_message(const string &input,const
 	std::vector<char> incoming_data(input.begin()+ start_message + message::open_message.length(), input.begin() + end_message);
 	incoming_msg << incoming_data;
 	incoming_msg.header.connection_id = this->connection_id_;
-	incoming_msg.direction = message::Message::In;
+	incoming_msg.direction = message::Message::message_direction::In;
 
 	mediator_->push_message(incoming_msg);
 	message::reset(incoming_msg);

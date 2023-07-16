@@ -24,8 +24,8 @@ namespace message
 		// Header & Body vector
 		message_header header;
 		std::vector<char> body;
-		enum message_directions{In,Out};
-		bool direction = In;
+		enum class message_direction{In,Out};
+		message_direction direction = message_direction::In;
 	};
 
 	// Override for std::cout compatibility - produces friendly description of message

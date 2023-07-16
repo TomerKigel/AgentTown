@@ -16,7 +16,7 @@ public:
 
 		}
 		message::Message a;
-		a.direction = a.Out;
+		a.direction = message::Message::message_direction::Out;
 		return a;
 	}
 

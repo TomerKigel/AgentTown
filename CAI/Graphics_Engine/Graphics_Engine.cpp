@@ -2,7 +2,7 @@
 
 Graphics_Engine::Graphics_Engine()
 {
-	engine_state_ = RUNNING;
+	engine_state_ = Graphics_Engine::engine_state_enum::RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
 	loading_screen();
@@ -45,13 +45,13 @@ void Graphics_Engine::loading_screen()
 
 void Graphics_Engine::run()
 {
-	while (engine_state_ ==  PAUSED);
-	if (engine_state_ == RUNNING) {
+	while (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED);
+	if (engine_state_ == Graphics_Engine::engine_state_enum::RUNNING) {
 		window_->setActive(true);
 
 		object_vector_ = Factory::extract_object_list();
 
-		while (window_->isOpen() && engine_state_ != TERMINATED)
+		while (window_->isOpen() && engine_state_ != Graphics_Engine::engine_state_enum::TERMINATED)
 		{
 			game_loop();
 		}
@@ -60,14 +60,14 @@ void Graphics_Engine::run()
 
 void Graphics_Engine::game_loop()
 {
-	if (engine_state_ == RUNNING) {
+	if (engine_state_ == Graphics_Engine::engine_state_enum::RUNNING) {
 		clean_dead_objects();
 		activate_objects();
 		objects_to_quadtree();
 		draw_objects();
 		event_loop();
 	}
-	while (engine_state_ == PAUSED);
+	while (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED);
 		//add wait on lock, and notify on state change
 }
 
@@ -135,11 +135,11 @@ void Graphics_Engine::event_loop()
 		handle_messages();
 	}
 
-	if (engine_state_ == TERMINATED)
+	if (engine_state_ == Graphics_Engine::engine_state_enum::TERMINATED)
 	{
 	
 	}
-	else if (engine_state_ == PAUSED)
+	else if (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED)
 	{
 	
 	}
@@ -206,7 +206,7 @@ std::string Graphics_Engine::service_name()
 //add mutex lock to sync state change
 void  Graphics_Engine::pause()
 {
-	this->engine_state_ = PAUSED;
+	this->engine_state_ = Graphics_Engine::engine_state_enum::PAUSED;
 }
 
 void Graphics_Engine::restart()
@@ -215,5 +215,5 @@ void Graphics_Engine::restart()
 }
 void Graphics_Engine::quit()
 {
-	this->engine_state_ = TERMINATED;
+	this->engine_state_ = Graphics_Engine::engine_state_enum::TERMINATED;
 }

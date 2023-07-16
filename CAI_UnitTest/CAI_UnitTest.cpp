@@ -12,7 +12,7 @@ namespace CAIUnitTest
 		TEST_METHOD(Message__Creation)
 		{
 			message::Message msg;
-			Assert::AreEqual(true,msg.direction == msg.In);
+			Assert::AreEqual(true,msg.direction == message::Message::message_direction::In);
 			Assert::AreEqual(true,msg.body.size() == 0);
 			Assert::AreEqual(true, msg.header.body_size == 0);
 			Assert::AreEqual(true, msg.header.connection_id == 0);
@@ -61,7 +61,7 @@ namespace CAIUnitTest
 			std::string g_data = "lets try \n more text";
 			msg << g_data;
 			reset(msg);
-			Assert::AreEqual(true, msg.direction == msg.In);
+			Assert::AreEqual(true, msg.direction == message::Message::message_direction::In);
 			Assert::AreEqual(true, msg.body.size() == 0);
 			Assert::AreEqual(true, msg.header.body_size == 0);
 			Assert::AreEqual(true, msg.header.connection_id == 0);

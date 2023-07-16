@@ -13,8 +13,8 @@
 class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer
 {
 private:
-	enum engine_state_enum{RUNNING,PAUSED,TERMINATED};
-	int engine_state_;
+	enum class engine_state_enum{RUNNING,PAUSED,TERMINATED};
+	engine_state_enum engine_state_;
 
 	std::shared_ptr<sf::RenderWindow> window_;
 	sf::Event event_;

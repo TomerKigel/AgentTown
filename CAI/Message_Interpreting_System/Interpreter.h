@@ -26,7 +26,7 @@ public:
 		std::unique_lock lock(alive_mutex_);
 		
 		message::Message msg = incoming_messages_.stop_until_pop();
-		if (msg.direction == message::Message::Out) {
+		if (msg.direction == message::Message::message_direction::Out) {
 			mediator_->push_message(msg);
 		}
 		else {
