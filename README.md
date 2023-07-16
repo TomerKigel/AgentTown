@@ -46,11 +46,8 @@ To compile and run the project few things are required:
 
 Download and install Boost library. An explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
 
-c++20 is used, so the project settings should accommodate it.
-
 (currently, a mandatory step, in the future it should be optional) Download SFML
 version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/)
-
 
 all settings are already set up properly in the .vcxproj files accordingly. After cloning You only need to change the path to sfml and boost
 to the directories, you have installed them in.
