@@ -54,6 +54,24 @@ namespace message
 		return msg;
 	}
 
+	inline Message& operator << (Message& msg, const std::string& data)
+	{
+		// Cache current size of vector, as this will be the point we insert the data
+		size_t i = msg.body.size();
+
+		// Resize the vector by the size of the data being pushed
+		msg.body.resize(msg.body.size() + data.size() + 1);
+
+		// Physically copy the data into the newly allocated vector space
+		std::memcpy(msg.body.data() + i, data.data(), data.size());
+
+		// Recalculate the message size
+		msg.header.body_size = data.size();
+
+		// Return the target message so it can be "chained"
+		return msg;
+	}
+
 
 	inline Message& operator >> (Message& msg, std::vector<char>& data)
 	{
@@ -86,7 +104,8 @@ namespace message
 		int strt = raw_data.find(start);
 		if (strt != -1) {
 			auto new_data = raw_data.substr(strt, std::string::npos);
-			return new_data.substr(new_data.find(start) + start.length(), new_data.find(end) - (new_data.find(start) + start.length()));
+			int after_start = new_data.find(start) + start.length();
+			return new_data.substr(after_start, new_data.substr(after_start, std::string::npos).find(end));
 		}
 		return std::nullopt;
 	}
