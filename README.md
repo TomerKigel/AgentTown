@@ -50,8 +50,9 @@ c++20 is used, so the project settings should accommodate it.
 
 (currently, a mandatory step, in the future it should be optional) Download and dynamically link SFML for graphics. Tutorials can be found here: [tutorial](https://www.sfml-dev.org/tutorials/2.5/)
 version 2.5.1 should be installed via this link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/)
-
-Finally, spdlog should be linked as well. it can be found here: [spdlog](https://github.com/gabime/spdlog)
+all setting are already setup 
+properly in the .vcxproj files accordingly. You only need to change the path to sfml and boost
+to the directories you have installed them in.
 
 <h2>Stay in touch</h2>
 
