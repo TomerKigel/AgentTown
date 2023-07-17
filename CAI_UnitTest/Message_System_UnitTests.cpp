@@ -93,13 +93,14 @@ namespace CAIUnitTest
 
 
 
-		TEST_METHOD(y)
-		{
+		//TODO: keep testing all message namespace
+		//TEST_METHOD(y)
+		//{
 			/*message::Message msg;
 			Message_Generator message_generator;
 			message::Parsed_Message pmsg;
 			Queue_Manager<message::Message> queue_manager;*/
 			//Assert::AreEqual(x, 2);
-		}
+		//}
 	};
 }
