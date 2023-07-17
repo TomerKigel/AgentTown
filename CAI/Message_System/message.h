@@ -86,7 +86,6 @@ namespace message
 
 	inline Message& operator >> (Message& msg, std::string& data)
 	{
-		//std::memcpy(&data, msg.body.data(), msg.body.size());
 		data = msg.body.data();
 
 		msg.body.resize(0);
