@@ -27,13 +27,24 @@ namespace CAIUnitTest
 			Assert::AreEqual(true, msg.header.body_size == 5);
 		}
 
+		TEST_METHOD(Message__operator_ror)
+		{
+			message::Message msg;
+			std::string g_data = "lets try \n more text";
+			msg << g_data;
+			std::string msg_data;
+			msg >> msg_data;
+			Assert::AreEqual(true, msg_data.compare("lets try \n more text") == 0);
+		}
+
 		TEST_METHOD(Message__to_string)
 		{
 			message::Message msg;
 			std::string data = "hello";
 			msg << data;
-			
-			Assert::AreEqual(true,to_string(msg) == "[]{hello}");
+			msg.header.type = "new agent";
+			msg.header.connection_id = 1;
+			Assert::AreEqual(true,to_string(msg) == "[new agent]{hello}");
 		}
 
 		TEST_METHOD(Message__get_part_of_message)
@@ -53,6 +64,15 @@ namespace CAIUnitTest
 			std::string g_data = "lets try \n more text";
 			n_msg << g_data;
 			Assert::AreEqual(true, get_part_of_message(n_msg, "r", "r") == "y \n mo");
+
+			message::Message u_msg;
+			std::string u_data = "from: x to \n";
+			u_msg << u_data;
+			Assert::AreEqual(true, get_part_of_message(u_msg, "from:", "\n") == " x to ");
+
+			message::Message header_msg;
+			header_msg.header.type = "move";
+			Assert::AreEqual(true, get_part_of_message(header_msg, "m", "e") == std::nullopt);
 		}
 
 		TEST_METHOD(Message__reset)
@@ -60,13 +80,20 @@ namespace CAIUnitTest
 			message::Message msg;
 			std::string g_data = "lets try \n more text";
 			msg << g_data;
+			msg.header.type = "hello";
+			msg.header.connection_id = 12;
+			msg.direction == message::Message::message_direction::Out;
 			reset(msg);
+
 			Assert::AreEqual(true, msg.direction == message::Message::message_direction::In);
 			Assert::AreEqual(true, msg.body.size() == 0);
 			Assert::AreEqual(true, msg.header.body_size == 0);
 			Assert::AreEqual(true, msg.header.connection_id == 0);
 			Assert::AreEqual(true, msg.header.type.size() == 0);
 		}
+
+		
+
 		TEST_METHOD(y)
 		{
 			/*message::Message msg;

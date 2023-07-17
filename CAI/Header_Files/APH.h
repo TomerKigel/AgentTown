@@ -17,7 +17,3 @@
 #include "../Graphics_Engine/Space/AABB.h"
 #include "../Graphics_Engine/Space/Point.h"
 #include "../Graphics_Engine/Space/QuadTree.h"
-
-#include <iostream>
-#include <memory>
-#include <optional>

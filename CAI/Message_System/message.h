@@ -84,12 +84,26 @@ namespace message
 		return msg;
 	}
 
+	inline Message& operator >> (Message& msg, std::string& data)
+	{
+		//std::memcpy(&data, msg.body.data(), msg.body.size());
+		data = msg.body.data();
+
+		msg.body.resize(0);
+
+		msg.header.body_size = 0;
+
+		return msg;
+	}
+
 	inline void reset(Message& msg)
 	{
 		msg.header.body_size = 0;
 		msg.header.type = "";
 		msg.body.clear();
 		msg.body.shrink_to_fit();
+		msg.direction = Message::message_direction::In;
+		msg.header.connection_id = 0;
 	}
 
 	inline std::string to_string(Message& msg)
@@ -99,6 +113,9 @@ namespace message
 
 	inline std::optional<std::string> get_part_of_message(Message& msg,std::string start, std::string end)
 	{
+		if(msg.body.size() == 0)
+			return std::nullopt;
+
 		std::string raw_data = msg.body.data();
 
 		int strt = raw_data.find(start);
