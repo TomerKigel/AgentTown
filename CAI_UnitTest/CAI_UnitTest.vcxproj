@@ -89,13 +89,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -139,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -147,7 +148,8 @@
       <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -158,16 +160,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CAI_UnitTest.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="AI_Elements_UnitTests.cpp" />
+    <ClCompile Include="Framework_Tests.cpp" />
+    <ClCompile Include="Graphics_engine_UnitTests.cpp" />
+    <ClCompile Include="Interpreter_UnitTests.cpp" />
+    <ClCompile Include="Message_System_UnitTests.cpp" />
+    <ClCompile Include="Network_Represenation_UnitTests.cpp" />
+    <ClCompile Include="Server_Communications_UnitTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="AI_Elements_Depedencies.h" />
+    <ClInclude Include="Framework_Depedencies.h" />
+    <ClInclude Include="Graphics_Engine_Depedencies.h" />
+    <ClInclude Include="Message_Interpreting_Depedencies.h" />
+    <ClInclude Include="Message_Dependencies.h" />
+    <ClInclude Include="Netwrok_Representation_Depedencies.h" />
+    <ClInclude Include="Server_Communications_Depedencies.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAI\CAI.vcxproj">

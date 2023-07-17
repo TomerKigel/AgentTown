@@ -15,15 +15,48 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CAI_UnitTest.cpp">
+    <ClCompile Include="Interpreter_UnitTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Message_System_UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI_Elements_UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework_Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_engine_UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Network_Represenation_UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Server_Communications_UnitTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Message_Dependencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Message_Interpreting_Depedencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI_Elements_Depedencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework_Depedencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Engine_Depedencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Netwrok_Representation_Depedencies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Server_Communications_Depedencies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

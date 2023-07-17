@@ -1,19 +1,18 @@
-#include "pch.h"
+#include "Message_Dependencies.h"
 #include "CppUnitTest.h"
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace CAIUnitTest
 {
-	TEST_CLASS(classtest)
+	TEST_CLASS(message_test)
 	{
 	public:
-		
+
 		TEST_METHOD(Message__Creation)
 		{
 			message::Message msg;
-			Assert::AreEqual(true,msg.direction == message::Message::message_direction::In);
-			Assert::AreEqual(true,msg.body.size() == 0);
+			Assert::AreEqual(true, msg.direction == message::Message::message_direction::In);
+			Assert::AreEqual(true, msg.body.size() == 0);
 			Assert::AreEqual(true, msg.header.body_size == 0);
 			Assert::AreEqual(true, msg.header.connection_id == 0);
 			Assert::AreEqual(true, msg.header.type.size() == 0);
@@ -23,7 +22,7 @@ namespace CAIUnitTest
 		{
 			message::Message msg;
 			std::string data = "hello";
-			msg << data; 
+			msg << data;
 			Assert::AreEqual(true, msg.header.body_size == 5);
 		}
 
@@ -44,7 +43,7 @@ namespace CAIUnitTest
 			msg << data;
 			msg.header.type = "new agent";
 			msg.header.connection_id = 1;
-			Assert::AreEqual(true,to_string(msg) == "[new agent]{hello}");
+			Assert::AreEqual(true, to_string(msg) == "[new agent]{hello}");
 		}
 
 		TEST_METHOD(Message__get_part_of_message)
@@ -92,7 +91,7 @@ namespace CAIUnitTest
 			Assert::AreEqual(true, msg.header.type.size() == 0);
 		}
 
-		
+
 
 		TEST_METHOD(y)
 		{
