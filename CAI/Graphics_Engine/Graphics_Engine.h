@@ -13,9 +13,6 @@
 class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer
 {
 private:
-	enum class engine_state_enum{RUNNING,PAUSED,TERMINATED};
-	engine_state_enum engine_state_;
-
 	std::shared_ptr<sf::RenderWindow> window_;
 	sf::Event event_;
 	std::unique_ptr<QuadTree> Quadtree_;
@@ -32,6 +29,7 @@ private:
 	void game_loop();
 
 public:
+
 	Graphics_Engine();
 	~Graphics_Engine();
 	
@@ -48,4 +46,5 @@ public:
 	void pause();
 	void restart();
 	void quit();
+
 };

@@ -8,11 +8,13 @@ class Agent_Network : public Network<std::shared_ptr<Agent>>, public Component<m
 	bool alive_;
 	std::mutex alive_mutex_;
 	Queue_Manager<message::Parsed_Message> incoming_messages_;
+	
 public:
 
 	Agent_Network()
 	{
 		alive_ = true;
+		system_state_ = system_state::RUNNING;
 	}
 	void add_node(int id, int connection)
 	{
@@ -96,5 +98,6 @@ public:
 
 	void pause()
 	{
+		system_state_ = system_state::PAUSED;
 	}
 };

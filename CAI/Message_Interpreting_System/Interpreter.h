@@ -10,10 +10,12 @@ class Interpreter : public Component<message::Message> , public Interface_Runnab
 	bool alive_;
 	std::mutex alive_mutex_;
 	Queue_Manager<message::Message> incoming_messages_;
+
 public:
 	Interpreter()
 	{
 		alive_ = true;
+		system_state_ = system_state::RUNNING;
 	}
 
 	~Interpreter()
@@ -62,6 +64,7 @@ public:
 
 	void pause()
 	{
+		system_state_ = system_state::PAUSED;
 	}
 
 	void kill()

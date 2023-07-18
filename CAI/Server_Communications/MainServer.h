@@ -26,7 +26,6 @@ private:
 	int running_connection_id_;
 	std::vector<std::thread> threads_;
 
-
 public:
 	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint);
 
@@ -34,7 +33,7 @@ public:
 
 	void wait_for_connection();
 
-	bool start();
+	bool run();
 
 	void pause();
 

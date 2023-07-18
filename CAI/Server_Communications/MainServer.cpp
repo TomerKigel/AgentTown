@@ -5,6 +5,7 @@
 MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint) : acceptor_(io_context, endpoint)
 {
 	running_connection_id_ = 0;
+	system_state_ = system_state::RUNNING;
 }
 
 
@@ -12,9 +13,10 @@ MainServer::~MainServer() {
 	close();
 }
 
-bool MainServer::start() {
+bool MainServer::run() {
 	std::cout << "Main-Server starting" << std::endl;
 	try {
+		system_state_ = system_state::RUNNING;
 		wait_for_connection();
 	}
 	catch (std::exception& e) {
@@ -26,7 +28,7 @@ bool MainServer::start() {
 
 void MainServer::pause()
 {
-
+	system_state_ = system_state::PAUSED;
 }
 
 
@@ -53,6 +55,7 @@ void MainServer::close() {
 	try {
 		for (auto &connection : connections_)
 			connection.second->disconnect();
+		system_state_ = system_state::TERMINATED;
 	}
 	catch (...) {
 		std::cout << "closing failed: connection already closed" << std::endl;

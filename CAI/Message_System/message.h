@@ -110,17 +110,17 @@ namespace message
 		return "[" + msg.header.type + "]" + "{" + msg.body.data() + "}";
 	}
 
-	inline std::optional<std::string> get_part_of_message(Message& msg,std::string start, std::string end)
+	inline std::optional<std::string> get_part_of_message(Message& msg,std::string run, std::string end)
 	{
 		if(msg.body.size() == 0)
 			return std::nullopt;
 
 		std::string raw_data = msg.body.data();
 
-		int strt = raw_data.find(start);
+		int strt = raw_data.find(run);
 		if (strt != -1) {
 			auto new_data = raw_data.substr(strt, std::string::npos);
-			int after_start = new_data.find(start) + start.length();
+			int after_start = new_data.find(run) + run.length();
 			return new_data.substr(after_start, new_data.substr(after_start, std::string::npos).find(end));
 		}
 		return std::nullopt;

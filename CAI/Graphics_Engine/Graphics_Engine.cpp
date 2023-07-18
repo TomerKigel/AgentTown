@@ -2,7 +2,7 @@
 
 Graphics_Engine::Graphics_Engine()
 {
-	engine_state_ = Graphics_Engine::engine_state_enum::RUNNING;
+	system_state_ = Graphics_Engine::system_state::RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
 	loading_screen();
@@ -14,7 +14,7 @@ Graphics_Engine::Graphics_Engine()
 //Graphics_Engine::Graphics_Engine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
 //{
 //	this->message_pipeline_ = message_pipeline_;
-//	engine_state_ = RUNNING;
+//	system_state_ = RUNNING;
 //	window_ = std::make_shared<sf::RenderWindow>();
 //	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 5/*sf::Style::Resize*/);
 //	loading_screen();
@@ -26,7 +26,7 @@ Graphics_Engine::Graphics_Engine()
 
 void Graphics_Engine::operator=(const Graphics_Engine&& gm) noexcept
 {
-	engine_state_ = gm.engine_state_;
+	system_state_ = gm.system_state_;
 	window_ = gm.window_;
 	loading_screen();
 	Quadtree_ = std::make_unique<QuadTree>( -1980, -1080, 1980, 1080);
@@ -45,13 +45,13 @@ void Graphics_Engine::loading_screen()
 
 void Graphics_Engine::run()
 {
-	while (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED);
-	if (engine_state_ == Graphics_Engine::engine_state_enum::RUNNING) {
+	while (system_state_ == Graphics_Engine::system_state::PAUSED);
+	if (system_state_ == Graphics_Engine::system_state::RUNNING) {
 		window_->setActive(true);
 
 		object_vector_ = Factory::extract_object_list();
 
-		while (window_->isOpen() && engine_state_ != Graphics_Engine::engine_state_enum::TERMINATED)
+		while (window_->isOpen() && system_state_ != Graphics_Engine::system_state::TERMINATED)
 		{
 			game_loop();
 		}
@@ -60,14 +60,14 @@ void Graphics_Engine::run()
 
 void Graphics_Engine::game_loop()
 {
-	if (engine_state_ == Graphics_Engine::engine_state_enum::RUNNING) {
+	if (system_state_ == Graphics_Engine::system_state::RUNNING) {
 		clean_dead_objects();
 		activate_objects();
 		objects_to_quadtree();
 		draw_objects();
 		event_loop();
 	}
-	while (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED);
+	while (system_state_ == Graphics_Engine::system_state::PAUSED);
 		//add wait on lock, and notify on state change
 }
 
@@ -135,11 +135,11 @@ void Graphics_Engine::event_loop()
 		handle_messages();
 	}
 
-	if (engine_state_ == Graphics_Engine::engine_state_enum::TERMINATED)
+	if (system_state_ == Graphics_Engine::system_state::TERMINATED)
 	{
 	
 	}
-	else if (engine_state_ == Graphics_Engine::engine_state_enum::PAUSED)
+	else if (system_state_ == Graphics_Engine::system_state::PAUSED)
 	{
 	
 	}
@@ -206,7 +206,7 @@ std::string Graphics_Engine::service_name()
 //add mutex lock to sync state change
 void  Graphics_Engine::pause()
 {
-	this->engine_state_ = Graphics_Engine::engine_state_enum::PAUSED;
+	system_state_ = Graphics_Engine::system_state::PAUSED;
 }
 
 void Graphics_Engine::restart()
@@ -215,5 +215,5 @@ void Graphics_Engine::restart()
 }
 void Graphics_Engine::quit()
 {
-	this->engine_state_ = Graphics_Engine::engine_state_enum::TERMINATED;
+	this->system_state_ = Graphics_Engine::system_state::TERMINATED;
 }

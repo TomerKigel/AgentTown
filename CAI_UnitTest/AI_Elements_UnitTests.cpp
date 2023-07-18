@@ -8,7 +8,7 @@ namespace CAIUnitTest
 	{
 	public:
 
-		TEST_METHOD(interpreter_tests)
+		TEST_METHOD(ai_element_tests)
 		{
 			//TODO:: add ai elements unit tests here
 		}

@@ -1,4 +1,5 @@
 #include "Framework.h"
+#include "Interfaces/Component.h"
 using namespace cai;
 
 Framework::Framework()
@@ -7,31 +8,88 @@ Framework::Framework()
 	port_ = 7777;
 	end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);
 	base_server_ = std::make_unique<MainServer>(io_context_, end_point_);
-	base_server_->start();
+	base_server_->run();
 	engine_ = Graphics_Engine();
 	agent_network_.subscribe_to_network(&engine_);
 	std::initializer_list<Component<message::Message>*> msg_based = { &*base_server_, &interpreter_ } ;
 	std::initializer_list<Component<message::Parsed_Message>*> pmsg_based = { &agent_network_, &engine_ };
 	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
+	start_all();
 }
 
-void Framework::start()
+void Framework::start_all()
 {
 	context_thread_ = std::thread([this]() { io_context_.run(); });
 	interpreter_thread_ = std::thread([this]() { interpreter_.run(); });
 	representational_network_thread_ = std::thread([this]() { agent_network_.run(); });
 	engine_.run();
-	
 }
 
-void Framework::halt()
+void Framework::run(systems system)
 {
-	io_context_.stop();
+	switch (system) {
+	case systems::Communications:
+		if (base_server_.get()->state() == system_state::PAUSED) {
+			base_server_.get()->run();
+		}
+		break;
+	case systems::Interpreter:
+		if (interpreter_.state() == system_state::PAUSED) {
+			interpreter_.run();
+		}
+		break;
+	case systems::Representational_Network:
+		if (agent_network_.state() == system_state::PAUSED) {
+			agent_network_.run();
+		}
+		break;
+	case systems::Graphics:
+		if (engine_.state() == system_state::PAUSED) {
+			engine_.run();
+		}
+		break;
+	default:
+		throw "Error: attempt to start a system that doesn't exist";
+	}
+}
+
+void Framework::halt_all()
+{
 	interpreter_.pause();
 	agent_network_.pause();
 	engine_.pause();
 	base_server_.get()->pause();
 }
+
+void cai::Framework::halt(systems system)
+{
+	switch (system) {
+	case systems::Communications:
+		if (base_server_.get()->state() == system_state::RUNNING ) {
+			base_server_.get()->pause();
+		}
+		break;
+	case systems::Interpreter:
+		if (interpreter_.state() == system_state::RUNNING) {
+			interpreter_.pause();
+		}
+		break;
+	case systems::Representational_Network:
+		if (agent_network_.state() == system_state::RUNNING) {
+			agent_network_.pause();
+		}
+		break;
+	case systems::Graphics:
+		if (engine_.state() == system_state::RUNNING) {
+			engine_.pause();
+		}
+		break;
+	default:
+		throw "Error: attempt to start a system that doesn't exist";
+	}
+}
+
+
 
 void Framework::close()
 {

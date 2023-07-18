@@ -26,16 +26,22 @@ namespace cai
 		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
 		std::unique_ptr<Concrete_Mediator> SystemMediator_;
 
+		void start_all();
+
 	public:
 		Framework();
 
 		Framework(const Framework&) = delete;
 
-		void start();
+		enum class systems {Graphics , Interpreter , Communications , Representational_Network};
 
-		void halt();
+		void run(systems system);
 
-		void close();
+		void halt_all();
+
+		void halt(systems system);
+
+		void close() noexcept;
 
 		~Framework();
 	};

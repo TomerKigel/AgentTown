@@ -8,6 +8,6 @@ int main()
 	ShowWindow(GetConsoleWindow(), SW_RESTORE); //SW_HIDE or SW_RESTORE
 	cai::Framework fw;
 	//cai::Framework fw;
-	fw.start();
+	fw.run();
 }
 
