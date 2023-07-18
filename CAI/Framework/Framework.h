@@ -29,9 +29,7 @@ namespace cai
 	public:
 		Framework();
 
-		Framework(const Framework&) = default;
-
-		Framework(const Framework&&) = default;
+		Framework(const Framework&) = delete;
 
 		void start();
 
