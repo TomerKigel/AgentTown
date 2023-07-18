@@ -24,7 +24,7 @@ bool MainServer::start() {
 	return true;
 }
 
-void pause()
+void MainServer::pause()
 {
 
 }
