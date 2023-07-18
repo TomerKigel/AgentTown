@@ -36,6 +36,8 @@ public:
 
 	bool start();
 
+	void pause();
+
 	void provide_message(message::Message& msg);
 
 	std::string service_name();

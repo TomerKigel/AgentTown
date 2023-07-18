@@ -144,6 +144,11 @@ void Agent::run()
 	agent_thread_ = std::thread([this]() { event_controller_(); });
 }
 
+void Agent::pause()
+{
+
+}
+
 void Agent::subscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 {
 	std::lock_guard<std::mutex>lock(observers_mutex_);

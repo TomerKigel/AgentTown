@@ -24,6 +24,11 @@ bool MainServer::start() {
 	return true;
 }
 
+void pause()
+{
+
+}
+
 
 void MainServer::wait_for_connection()
 {

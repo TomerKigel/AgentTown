@@ -60,6 +60,9 @@ public:
 	}
 
 
+	void pause()
+	{
+	}
 
 	void kill()
 	{

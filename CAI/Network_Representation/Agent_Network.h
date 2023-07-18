@@ -93,4 +93,8 @@ public:
 		else
 			lock.unlock();
 	}
+
+	void pause()
+	{
+	}
 };

@@ -45,6 +45,8 @@ public:
 
 	void run();
 
+	void pause();
+
 	//Mutators
 	virtual void destroy(){
 		alive_ = false;
