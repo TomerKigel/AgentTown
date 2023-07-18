@@ -91,10 +91,11 @@ void cai::Framework::halt(systems system)
 
 
 
-void Framework::close()
+void Framework::close() noexcept
 {
-	interpreter_.kill();
-	engine_.quit();
+	agent_network_.close();
+	interpreter_.close();
+	engine_.close();
 	base_server_->close();
 }
 

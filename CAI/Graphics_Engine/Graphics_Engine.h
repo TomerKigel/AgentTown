@@ -45,6 +45,6 @@ public:
 	void run();
 	void pause();
 	void restart();
-	void quit();
+	void close();
 
 };

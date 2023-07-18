@@ -20,7 +20,7 @@ public:
 
 	~Interpreter()
 	{
-		kill();
+		close();
 	}
 
 	void run()
@@ -67,7 +67,7 @@ public:
 		system_state_ = system_state::PAUSED;
 	}
 
-	void kill()
+	void close()
 	{
 		std::scoped_lock lock(alive_mutex_);
 		alive_ = false;

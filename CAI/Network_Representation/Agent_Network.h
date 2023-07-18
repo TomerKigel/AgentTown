@@ -100,4 +100,9 @@ public:
 	{
 		system_state_ = system_state::PAUSED;
 	}
+
+	void close()
+	{
+		system_state_ = system_state::TERMINATED;
+	}
 };

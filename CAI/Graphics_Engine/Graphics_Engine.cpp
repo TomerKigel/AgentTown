@@ -2,7 +2,7 @@
 
 Graphics_Engine::Graphics_Engine()
 {
-	system_state_ = Graphics_Engine::system_state::RUNNING;
+	system_state_ = system_state::RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
 	loading_screen();
@@ -45,13 +45,13 @@ void Graphics_Engine::loading_screen()
 
 void Graphics_Engine::run()
 {
-	while (system_state_ == Graphics_Engine::system_state::PAUSED);
-	if (system_state_ == Graphics_Engine::system_state::RUNNING) {
+	while (system_state_ == system_state::PAUSED);
+	if (system_state_ == system_state::RUNNING) {
 		window_->setActive(true);
 
 		object_vector_ = Factory::extract_object_list();
 
-		while (window_->isOpen() && system_state_ != Graphics_Engine::system_state::TERMINATED)
+		while (window_->isOpen() && system_state_ != system_state::TERMINATED)
 		{
 			game_loop();
 		}
@@ -60,14 +60,14 @@ void Graphics_Engine::run()
 
 void Graphics_Engine::game_loop()
 {
-	if (system_state_ == Graphics_Engine::system_state::RUNNING) {
+	if (system_state_ == system_state::RUNNING) {
 		clean_dead_objects();
 		activate_objects();
 		objects_to_quadtree();
 		draw_objects();
 		event_loop();
 	}
-	while (system_state_ == Graphics_Engine::system_state::PAUSED);
+	while (system_state_ == system_state::PAUSED);
 		//add wait on lock, and notify on state change
 }
 
@@ -135,11 +135,11 @@ void Graphics_Engine::event_loop()
 		handle_messages();
 	}
 
-	if (system_state_ == Graphics_Engine::system_state::TERMINATED)
+	if (system_state_ == system_state::TERMINATED)
 	{
 	
 	}
-	else if (system_state_ == Graphics_Engine::system_state::PAUSED)
+	else if (system_state_ == system_state::PAUSED)
 	{
 	
 	}
@@ -206,14 +206,14 @@ std::string Graphics_Engine::service_name()
 //add mutex lock to sync state change
 void  Graphics_Engine::pause()
 {
-	system_state_ = Graphics_Engine::system_state::PAUSED;
+	system_state_ = system_state::PAUSED;
 }
 
 void Graphics_Engine::restart()
 {
 
 }
-void Graphics_Engine::quit()
+void Graphics_Engine::close()
 {
-	this->system_state_ = Graphics_Engine::system_state::TERMINATED;
+	this->system_state_ = system_state::TERMINATED;
 }
