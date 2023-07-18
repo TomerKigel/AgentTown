@@ -13,6 +13,12 @@ jobs:
     runs-on: windows-latest
     
     steps:
+      - name: Cache Visual Studio Build Tools installer
+        uses: actions/cache@v2
+        with:
+            path: vs_buildtools.exe
+            key: ${{ runner.os }}-buildtools-${{ hashFiles('vs_buildtools.exe') }}
+      
       - name: Install SFML
         uses: oprypin/install-sfml@v1
         
