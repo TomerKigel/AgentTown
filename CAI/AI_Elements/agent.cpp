@@ -1,79 +1,55 @@
 #include "Agent.h"
 #include <thread>
 #include <mutex>
-//#include "spdlog/spdlog.h"
 
-void Agent::event_controller_()
-{
-	std::unique_lock<std::mutex>alock(alive_mutex_);
-
-	std::unique_lock<std::mutex> lock(param_mutex_);
-	while(parameters_.message_queue_.size() <= 0)
-		cv_.wait(lock, [this] {return parameters_.message_queue_.size() > 0; });
-	
-	lock.unlock();
-
-	std::optional<message::Parsed_Message> msg = parameters_.message_queue_.pop();
-	if (msg)
-		process_message(msg.value());
-
-	if (alive_) {
-		alock.unlock();
-		event_controller_();
-	}
-	else
-		alock.unlock();
-	
-}
 
 void Agent::push_message(message::Parsed_Message& msg)
 {
-	std::unique_lock<std::mutex>lock(param_mutex_);
-	parameters_.message_queue_.push(msg);
-	lock.unlock();
-	cv_.notify_all();
-}
-
-
-Agent::Agent(int id,int connection_id)
-{
-	alive_ = true;
-	if (id < 0)
-		throw std::exception("Negative id in agent creation");
-	if(connection_id < 0)
-		throw std::exception("Negative connection_id in agent creation");
-	Agent_Parameters a(id, connection_id);
-	parameters_ = a;
+	processor->push_message(msg);
 }
 
 Agent::Agent()
 {
-	alive_ = true;
-	Agent_Parameters a;
-	parameters_ = a;
+	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	parameters_.revive();
+	info.set_connection_id(0);
+	info.set_id(0);
+	processor->run();
 }
 
-Agent::Agent(Agent& other_agent) : alive_(other_agent.alive_) 
+Agent::Agent(int id,int connection_id)
 {
+	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	parameters_.revive();
+	if (id < 0)
+		throw std::exception("Negative id in agent creation");
+	if(connection_id < 0)
+		throw std::exception("Negative connection_id in agent creation");
+	info.set_connection_id(connection_id);
+	info.set_id(id);
+	processor->run();
+}
+
+Agent::Agent(Agent& other_agent)
+{
+	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
 	Agent_Parameters a(other_agent.parameters_);
 	parameters_ = a;
+	processor->run();
 }
 
 Agent& Agent::operator=(Agent& other)
 {
-	alive_ = other.alive_;
+	parameters_.revive();
 	Agent_Parameters a(other.parameters_);
 	parameters_ = a;
+	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
 	return *this;
 }
 
 Agent::~Agent()
 {
-	std::unique_lock<std::mutex>alock(alive_mutex_);
-	this->alive_ = false;
-	alock.unlock();
-	cv_.notify_all();
-	agent_thread_.join();
+	this->parameters_.kill();
 }
 
 bool Agent::add_neighbour(int id) 
@@ -84,7 +60,7 @@ bool Agent::add_neighbour(int id)
 	}
 	catch (std::exception e)
 	{
-		//spdlog::warn(e.what());
+		std::cerr<<e.what();
 		return false;
 	}
 }
@@ -97,30 +73,30 @@ bool Agent::remove_neighbour(int id)
 	}
 	catch (std::exception e)
 	{
-		//spdlog::warn(e.what());
+		std::cerr<<e.what();
 		return false;
 	}
 }
 
 void Agent::set_connection_id(int id)
 {
-	parameters_.set_connection_id(id);
+	info.set_connection_id(id);
 }
 
 void Agent::set_id(int id)
 {
-	parameters_.set_id(id);
+	info.set_id(id);
 }
 
 unsigned int Agent::get_connection_id()
 {
 	std::lock_guard<std::mutex>lock(param_mutex_);
 	try {
-		return parameters_.get_connection_id();
+		return info.get_connection_id();
 	}
 	catch (std::exception e)
 	{
-		//spdlog::warn(e.what());
+		std::cerr<<e.what();
 		throw e;
 	}
 }
@@ -129,20 +105,15 @@ unsigned int Agent::get_agent_id()
 {
 	std::lock_guard<std::mutex>lock(param_mutex_);
 	try {
-		return parameters_.get_id();
+		return info.get_id();
 	}
 	catch (std::exception e)
 	{
-		//spdlog::warn(e.what());
+		std::cerr<<e.what();
 		throw e;
 	}
 }
 
-void Agent::run()
-{
-	parameters_.close_for_change();
-	agent_thread_ = std::thread([this]() { event_controller_(); });
-}
 
 void Agent::pause()
 {
@@ -161,21 +132,6 @@ void Agent::unsubscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 	std::remove_if(observers.begin(), observers.end(), [obs](const std::weak_ptr<Interface_Graphics_Observer>& a) {return a.lock() == obs; });
 }
 
-void Agent::process_message(message::Parsed_Message& msg)
-{
-	std::lock_guard<std::mutex>lock(observers_mutex_);
-	if (msg.x_position && msg.y_position)
-	{
-		for(std::weak_ptr<Interface_Graphics_Observer> obs : observers)
-				obs.lock()->update_position(msg.x_position.value(), msg.y_position.value());
-		parameters_.setLocation(msg.x_position.value(), msg.y_position.value());
-	}
-	if (msg.type == "disconnect") {
-		for (std::weak_ptr<Interface_Graphics_Observer> obs : observers)
-			obs.lock()->kill();
-		destroy();
-	}
-}
 
 std::pair<double, double> Agent::get_position()
 {

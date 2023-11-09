@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <VCToolsVersion>
@@ -124,6 +124,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\spdlog\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <AdditionalModuleDependencies>C:\Users\Tomer7\source\repos\AgentTown_continued\CAI\AI_Elements\Message_Processor.hpp;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -185,9 +186,11 @@
   <ItemGroup>
     <ClInclude Include="AI_Elements\Agent.h" />
     <ClInclude Include="AI_Elements\Agent_Parameters.h" />
+    <ClInclude Include="AI_Elements\Identification_Details.h" />
     <ClInclude Include="AI_Elements\Interfaces\Interface_Distance_Calculatable.h" />
     <ClInclude Include="AI_Elements\Interfaces\Interface_Calculatable.h" />
     <ClInclude Include="AI_Elements\Interfaces\Interface_Observer.h" />
+    <ClInclude Include="AI_Elements\Message_Processor.h" />
     <ClInclude Include="Framework\Concrete_Mediator.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\Interfaces\Component.h" />
