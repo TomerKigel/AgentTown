@@ -19,7 +19,6 @@ public:
 	void add_node(int id, int connection)
 	{
 		nodes.insert(std::make_pair(id, std::make_shared<Agent>(id, connection)));
-		//nodes.at(id)->run();
 		for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
 		{
 			(*iter)->agent_added(nodes.at(id));

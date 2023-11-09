@@ -4,7 +4,7 @@
 
 MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint) : acceptor_(io_context, endpoint)
 {
-	running_connection_id_ = 0;
+	running_connection_id_ = 1;
 	system_state_ = system_state::RUNNING;
 }
 

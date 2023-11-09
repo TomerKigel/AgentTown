@@ -59,7 +59,6 @@ bool ClientThreadConnection::proccess_complete_message(const string &input,const
 	if (end_message < input.length())
 		proccess_complete_message(input.substr(end_message+1), size - (end_message+1));
 
-	//spdlog::info("message proccessed on connection id:{}", get_id());
 	return true;
 }
 
@@ -73,7 +72,6 @@ void ClientThreadConnection::read() {
 		{
 			if (!ec)
 			{
-				//spdlog::info("message received on connection id:{}",this->get_id());
 				if (!proccess_complete_message(message_buffer.data(), length))
 				{
 					std::cout << "client serial number (" << connection_id_ << ") rejected" << endl;
@@ -119,7 +117,6 @@ void ClientThreadConnection::disconnect() {
 	try {
 		socket_.close();
 		connections_->erase(connection_id_);
-		//spdlog::info("connection id:{} disconnected", get_id());
 		std::cout << "client serial number (" << connection_id_ << ") disconnected" << endl;
 	}
 	catch (...) {

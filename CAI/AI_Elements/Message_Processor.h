@@ -8,8 +8,6 @@
 #include <thread>
 #include <mutex>
 
-//export module Message_Processor;
-
 class Message_Processor : public Interface_Runnable
 {
 public:

@@ -33,6 +33,8 @@ public:
 
 	virtual ~Agent();
 
+	void pause();
+
 	//Mutators
 
 	bool add_neighbour(int id);
