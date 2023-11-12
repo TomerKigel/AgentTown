@@ -3,8 +3,8 @@
 #include <boost/asio.hpp>
 #include <iostream>
 #include <unordered_map>
-#include "../CAI/Message_System/Queue_Manager.h"
-#include "../CAI/Message_System/message.h"
+#include "Queue_Manager.h"
+#include "message.h"
 #include "Component.h"
 #include <mutex>
 

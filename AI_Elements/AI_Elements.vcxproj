@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -114,7 +114,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -133,7 +133,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -155,6 +156,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.vcxproj">
       <Project>{7f47513e-9ef3-4738-b7f0-0afa769692f6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Message_System\Message_System.vcxproj">
+      <Project>{67e02d96-c8cf-409f-9fe5-6f1a706e04ce}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

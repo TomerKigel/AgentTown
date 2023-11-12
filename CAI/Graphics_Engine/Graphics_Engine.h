@@ -3,7 +3,7 @@
 #include <iterator>
 #include "../Header_Files/APH.h"
 #include <boost/lexical_cast.hpp>
-#include "../Message_System/Queue_Manager.h"
+#include "Queue_Manager.h"
 #include "Interface_Runnable.h"
 #include "Component.h"
 #include "Agent.h"

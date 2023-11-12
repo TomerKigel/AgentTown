@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../CAI/Message_System/message.h"
+#include "message.h"
 //#include "../CAI/Framework/Interfaces/Interface_Runnable.h"
 #include "Interface_Runnable.h"
 #include "Interface_Graphics_Observer.h"
-#include "../CAI/Message_System/Message_Parser.h"
-#include "../CAI/Message_System/Queue_Manager.h"
+#include "Message_Parser.h"
+#include "Queue_Manager.h"
 #include "Agent_Parameters.h"
 
 #include <thread>

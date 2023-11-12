@@ -1,9 +1,9 @@
 #pragma once
-#include "../Message_System/message.h"
+#include "message.h"
 #include "boost/lexical_cast.hpp"
-#include "../Framework/Interfaces/Component.h"
+#include "Component.h"
 #include "../Framework/Concrete_Mediator.h"
-#include "../Message_System/Message_Generator.h"
+#include "Message_Generator.h"
 
 class Interpreter : public Component<message::Message> , public Interface_Runnable
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "Agent.h"
-#include "../CAI/Message_System/Queue_Manager.h"
-#include "../CAI/Message_System/Message_Parser.h"
+#include "Queue_Manager.h"
+#include "Message_Parser.h"
 
 #include <algorithm>
 class Agent;
