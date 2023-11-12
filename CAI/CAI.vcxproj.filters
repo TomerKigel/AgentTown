@@ -57,19 +57,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Server_Communications\ClientThreadConnection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Server_Communications\MainServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Server_Communications\PseudoServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_Elements\Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp">
@@ -114,12 +102,6 @@
     <ClCompile Include="Network_Representation\Agent_Network.h">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI_Elements\Interfaces\Interface_Graphics_Observer.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AI_Elements\Interfaces\Interface_Network_Observer.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Message_System\Message.h">
@@ -134,15 +116,6 @@
     <ClInclude Include="Message_System\Queue_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Server_Communications\ClientThreadConnection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Server_Communications\MainServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Server_Communications\PseudoServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Message_Interpreting_System\Interpreter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -155,40 +128,10 @@
     <ClInclude Include="Framework\Framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\Agent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_Elements\Agent_Parameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Calculatable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Distance_Calculatable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Interfaces\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Interfaces\Interface_Runnable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Interfaces\Interface_Mediator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Server_Communications\Interfaces\Connection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics_Engine\Graphics\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics_Engine\Graphics\Textures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Actionable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics_Engine\Objects\Car.h">
@@ -227,22 +170,10 @@
     <ClInclude Include="Graphics_Engine\Graphics_Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Interactable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Network_Representation\Network.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Observer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_Elements\Message_Processor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI_Elements\Identification_Details.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

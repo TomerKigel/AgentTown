@@ -122,9 +122,10 @@
       <PreprocessorDefinitions>SFML_DYNAMIC;WIN32_;DEBUG;_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\spdlog\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\spdlog\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
-      <AdditionalModuleDependencies>C:\Users\Tomer7\source\repos\AgentTown_continued\CAI\AI_Elements\Message_Processor.hpp;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <AdditionalModuleDependencies>
+      </AdditionalModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,7 +143,7 @@
       <PreprocessorDefinitions>SFML_DYNAMIC;WIN32_;RELEASE;_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\spdlog\include;(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
@@ -160,9 +161,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AI_Elements\Agent.cpp" />
-    <ClCompile Include="AI_Elements\Interfaces\Interface_Graphics_Observer.h" />
-    <ClCompile Include="AI_Elements\Interfaces\Interface_Network_Observer.h" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Graphics_Engine\Cooldown.cpp" />
     <ClCompile Include="Graphics_Engine\Factory.cpp" />
@@ -178,32 +176,16 @@
     <ClCompile Include="Graphics_Engine\Space\Point.cpp" />
     <ClCompile Include="Graphics_Engine\Space\QuadTree.cpp" />
     <ClCompile Include="Network_Representation\Agent_Network.h" />
-    <ClCompile Include="Server_Communications\ClientThreadConnection.cpp" />
-    <ClCompile Include="Server_Communications\MainServer.cpp" />
-    <ClCompile Include="Server_Communications\PseudoServer.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AI_Elements\Agent.h" />
-    <ClInclude Include="AI_Elements\Agent_Parameters.h" />
-    <ClInclude Include="AI_Elements\Identification_Details.h" />
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Distance_Calculatable.h" />
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Calculatable.h" />
-    <ClInclude Include="AI_Elements\Interfaces\Interface_Observer.h" />
-    <ClInclude Include="AI_Elements\Message_Processor.h" />
     <ClInclude Include="Framework\Concrete_Mediator.h" />
     <ClInclude Include="Framework\Framework.h" />
-    <ClInclude Include="Framework\Interfaces\Component.h" />
-    <ClInclude Include="Framework\Interfaces\Interface_Runnable.h" />
-    <ClInclude Include="Framework\Interfaces\Interface_Mediator.h" />
     <ClInclude Include="Graphics_Engine\Cooldown.h" />
     <ClInclude Include="Graphics_Engine\Factory.h" />
     <ClInclude Include="Graphics_Engine\Graphics_Engine.h" />
     <ClInclude Include="Graphics_Engine\Graphics\Graphics.h" />
     <ClInclude Include="Graphics_Engine\Graphics\Textures.h" />
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Actionable.h" />
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Drawable.h" />
-    <ClInclude Include="Graphics_Engine\Interfaces\Interface_Interactable.h" />
     <ClInclude Include="Graphics_Engine\Objects\Car.h" />
     <ClInclude Include="Graphics_Engine\Objects\Movable.h" />
     <ClInclude Include="Graphics_Engine\Objects\Object.h" />
@@ -221,10 +203,6 @@
     <ClInclude Include="Message_System\Queue_Manager.h" />
     <ClInclude Include="Network_Representation\Network.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Server_Communications\ClientThreadConnection.h" />
-    <ClInclude Include="Server_Communications\Interfaces\Connection.h" />
-    <ClInclude Include="Server_Communications\MainServer.h" />
-    <ClInclude Include="Server_Communications\PseudoServer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="car.png" />
@@ -249,6 +227,20 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CAI.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AI_Elements\AI_Elements.vcxproj">
+      <Project>{afb7c0d5-ec12-43d3-91cf-66ad9db57e17}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.vcxproj">
+      <Project>{7f47513e-9ef3-4738-b7f0-0afa769692f6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Network_Representation\Network_Representation.vcxproj">
+      <Project>{5e8e32d0-442f-476b-9698-1d09b515afa0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Server_Communications\Server_Communications.vcxproj">
+      <Project>{9f748e6b-7bb9-4cf8-8093-a79941676302}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

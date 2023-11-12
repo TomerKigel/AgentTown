@@ -2,7 +2,7 @@
 
 #include "../Cooldown.h"
 #include "../Space/Point.h"
-#include "../../AI_Elements/Agent.h"
+#include "Agent.h"
 #include "../../Graphics_Engine/Graphics/Graphics.h"
 #include "SFML\Graphics.hpp"
 #include "../../AI_Elements/Interfaces/Interface_Graphics_Observer.h"

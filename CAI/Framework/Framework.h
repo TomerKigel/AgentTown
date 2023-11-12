@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../Server_Communications/MainServer.h"
+#include "MainServer.h"
 #include "../Message_System/message.h"
 #include "../Graphics_Engine/Graphics_Engine.h"
 #include "../Message_System/Queue_Manager.h"
 #include "../Framework/Concrete_Mediator.h"
 #include "../Message_Interpreting_System/Interpreter.h"
-#include "../Network_Representation/Agent_Network.h"
+#include "Agent_Network.h"
 
 namespace cai
 {

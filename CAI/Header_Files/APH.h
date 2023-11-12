@@ -8,9 +8,9 @@
 #include "../Graphics_Engine/Graphics/Textures.h"
 #include "../Graphics_Engine/Sound/Sound.h"
 
-#include "../Graphics_Engine/Interfaces/Interface_Actionable.h"
-#include "../Graphics_Engine/Interfaces/Interface_Drawable.h"
-#include "../Graphics_Engine/Interfaces/Interface_Interactable.h"
+#include "Interface_Actionable.h"
+#include "Interface_Drawable.h"
+#include "Interface_Interactable.h"
 
 #include "../Graphics_Engine/Physics/Physics.h"
 

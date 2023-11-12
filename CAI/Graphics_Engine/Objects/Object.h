@@ -1,8 +1,8 @@
 #pragma once
 #include "../../Graphics_Engine/Space/AABB.h"
-#include "../../Graphics_Engine/Interfaces/Interface_Actionable.h"
-#include "../../Graphics_Engine/Interfaces/Interface_Drawable.h"
-#include "../../Graphics_Engine/Interfaces/Interface_Interactable.h"
+#include "Interface_Actionable.h"
+#include "Interface_Drawable.h"
+#include "Interface_Interactable.h"
 
 
 enum types { Obj = 100, mveble, sttc, cartype };

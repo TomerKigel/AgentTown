@@ -1,5 +1,5 @@
 #include "Framework.h"
-#include "Interfaces/Component.h"
+#include "Component.h"
 using namespace cai;
 
 Framework::Framework()
