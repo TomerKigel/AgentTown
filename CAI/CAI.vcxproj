@@ -210,6 +210,7 @@
     <None Include="I:\SFML-2.5.1\bin\sfml-window-d-2.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CMakeLIsts.txt" />
     <Text Include="Readme.md" />
     <Text Include="Standards.md" />
   </ItemGroup>

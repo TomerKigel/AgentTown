@@ -165,6 +165,7 @@
   <ItemGroup>
     <Text Include="Readme.md" />
     <Text Include="Standards.md" />
+    <Text Include="CMakeLIsts.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CAI.rc">

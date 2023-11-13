@@ -15,7 +15,6 @@
 #include "Interface_Runnable.h"
 #include "Component.h"
 #include "Agent.h"
-//#include "Agent_Network.h"
 #include "Interface_Network_Observer.h"
 
 class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer

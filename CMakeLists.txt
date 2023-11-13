@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.12)
+project(AgentTown)
+
+add_subdirectory(AI_Elements)
+add_subdirectory(Interfaces)
+add_subdirectory(Message_System)
+add_subdirectory(Message_Interpreting_System)
+add_subdirectory(Network_Representation)
+add_subdirectory(Server_Communications)
+add_subdirectory(CAI)
+add_executable(Framework_)

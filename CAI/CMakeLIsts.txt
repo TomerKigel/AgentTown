@@ -1,0 +1,5 @@
+project(CAI)
+
+file(GLOB SOURCES "*.cpp" "*.h")
+
+add_library(CAI STATIC ${SOURCES})
