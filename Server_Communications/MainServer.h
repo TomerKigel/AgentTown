@@ -5,7 +5,7 @@
 #include "boost/asio.hpp"
 #include <mutex>
 #include "Connection.h"
-#include "../CAI/Message_System/message.h"
+#include "message.h"
 #include "Component.h"
 
 using std::cin;

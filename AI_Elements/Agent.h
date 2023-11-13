@@ -3,8 +3,8 @@
 #include <mutex>
 #include <vector>
 #include <memory>
-#include "../CAI/Message_System/message.h"
-#include "../CAI/Message_System/Message_Parser.h"
+#include "message.h"
+#include "Message_Parser.h"
 #include "Interface_Graphics_Observer.h"
 #include "Agent_Parameters.h"
 #include "Message_Processor.h"

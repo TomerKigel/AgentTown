@@ -1,13 +1,21 @@
 #pragma once
 #include <fstream>
 #include <iterator>
-#include "../Header_Files/APH.h"
+#include <SFML/Graphics.hpp>
+#include "../Graphics_Engine/Space/QuadTree.h"
+#include "../Graphics_Engine/Graphics/Graphics.h"
+#include "../Graphics_Engine/Factory.h"
+#include "../Graphics_Engine/Cooldown.h"
+#include "../Graphics_Engine/Graphics/Textures.h"
+#include "../Graphics_Engine/Sound/Sound.h"
+#include "../Graphics_Engine/Physics/Physics.h"
+
 #include <boost/lexical_cast.hpp>
 #include "Queue_Manager.h"
 #include "Interface_Runnable.h"
 #include "Component.h"
 #include "Agent.h"
-#include "Agent_Network.h"
+//#include "Agent_Network.h"
 #include "Interface_Network_Observer.h"
 
 class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer

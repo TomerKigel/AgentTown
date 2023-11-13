@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,38 +21,36 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{491d9b3e-379a-4c70-b22a-0d9acfd6299e}</ProjectGuid>
-    <RootNamespace>CAI</RootNamespace>
+    <ProjectGuid>{71896ff9-5114-4a1a-8281-185349c8559b}</ProjectGuid>
+    <RootNamespace>Framework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <VCToolsVersion>
-    </VCToolsVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -72,27 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <ReferencePath>I:\mylib\lib;$(ReferencePath)</ReferencePath>
-    <LibraryPath>I:\mylib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,19 +102,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;WIN32_;DEBUG;_WINDOWS;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_DYNAMIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\CAI;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System</AdditionalIncludeDirectories>
-      <LanguageStandard_C>Default</LanguageStandard_C>
-      <AdditionalModuleDependencies>
-      </AdditionalModuleDependencies>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\boost\boost_1_81_0\stage\lib;I:\SFML-2.5.1\lib;D:\a\AgentTown\boost\stage\lib;C:\Program Files (x86)\SFML\.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\boost\boost_1_81_0\stage\lib;I:\SFML-2.5.1\lib;D:\a\AgentTown\boost\stage\lib;C:\Program Files (x86)\SFML\.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,91 +120,43 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;WIN32_;RELEASE;_WINDOWS;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_DYNAMIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\CAI;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System</AdditionalIncludeDirectories>
-      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files\boost\boost_1_81_0\stage\lib;I:\SFML-2.5.1\lib;D:\a\AgentTown\boost\stage\lib;C:\Program Files (x86)\SFML\.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics_Engine\Cooldown.cpp" />
-    <ClCompile Include="Graphics_Engine\Factory.cpp" />
-    <ClCompile Include="Graphics_Engine\Graphics_Engine.cpp" />
-    <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp" />
-    <ClCompile Include="Graphics_Engine\Graphics\Textures.cpp" />
-    <ClCompile Include="Graphics_Engine\Objects\Car.cpp" />
-    <ClCompile Include="Graphics_Engine\Objects\Movable.cpp" />
-    <ClCompile Include="Graphics_Engine\Objects\StaticObject.cpp" />
-    <ClCompile Include="Graphics_Engine\Physics\Physics.cpp" />
-    <ClCompile Include="Graphics_Engine\Sound\Sound.cpp" />
-    <ClCompile Include="Graphics_Engine\Space\AABB.cpp" />
-    <ClCompile Include="Graphics_Engine\Space\Point.cpp" />
-    <ClCompile Include="Graphics_Engine\Space\QuadTree.cpp" />
+    <ClInclude Include="Concrete_Mediator.h" />
+    <ClInclude Include="Framework.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics_Engine\Cooldown.h" />
-    <ClInclude Include="Graphics_Engine\Factory.h" />
-    <ClInclude Include="Graphics_Engine\Graphics_Engine.h" />
-    <ClInclude Include="Graphics_Engine\Graphics\Graphics.h" />
-    <ClInclude Include="Graphics_Engine\Graphics\Textures.h" />
-    <ClInclude Include="Graphics_Engine\Objects\Car.h" />
-    <ClInclude Include="Graphics_Engine\Objects\Movable.h" />
-    <ClInclude Include="Graphics_Engine\Objects\Object.h" />
-    <ClInclude Include="Graphics_Engine\Objects\StaticObject.h" />
-    <ClInclude Include="Graphics_Engine\Physics\Physics.h" />
-    <ClInclude Include="Graphics_Engine\Sound\Sound.h" />
-    <ClInclude Include="Graphics_Engine\Space\AABB.h" />
-    <ClInclude Include="Graphics_Engine\Space\Point.h" />
-    <ClInclude Include="Graphics_Engine\Space\QuadTree.h" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="car.png" />
-    <Image Include="Loading.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="I:\SFML-2.5.1\bin\openal32.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-audio-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-audio-d-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-graphics-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-graphics-d-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-network-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-network-d-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-system-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-system-d-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-window-2.dll" />
-    <None Include="I:\SFML-2.5.1\bin\sfml-window-d-2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Readme.md" />
-    <Text Include="Standards.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="CAI.rc" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AI_Elements\AI_Elements.vcxproj">
       <Project>{afb7c0d5-ec12-43d3-91cf-66ad9db57e17}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\CAI\CAI.vcxproj">
+      <Project>{491d9b3e-379a-4c70-b22a-0d9acfd6299e}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.vcxproj">
       <Project>{7f47513e-9ef3-4738-b7f0-0afa769692f6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Message_Interpreting_System\Message_Interpreting_System.vcxproj">
       <Project>{f33afa05-1f72-4dbc-9864-9a0cac91647b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Message_System\Message_System.vcxproj">
+      <Project>{67e02d96-c8cf-409f-9fe5-6f1a706e04ce}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Network_Representation\Network_Representation.vcxproj">
       <Project>{5e8e32d0-442f-476b-9698-1d09b515afa0}</Project>

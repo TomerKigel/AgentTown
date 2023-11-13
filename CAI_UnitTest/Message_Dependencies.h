@@ -7,9 +7,9 @@
 #pragma once
 
 //// add headers that you want to pre-compile here
-#include "../CAI/Message_System/Message.h"
-#include "../CAI/Message_System/Message_Generator.h"
-#include "../CAI/Message_System/Message_Parser.h"
-#include "../CAI/Message_System/Queue_Manager.h"
+#include "Message.h"
+#include "Message_Generator.h"
+#include "Message_Parser.h"
+#include "Queue_Manager.h"
 
 

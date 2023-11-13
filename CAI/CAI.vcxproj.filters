@@ -54,12 +54,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics_Engine\Graphics\Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -101,30 +95,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Message_System\Message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_System\Message_Generator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_System\Message_Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_System\Queue_Manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Message_Interpreting_System\Interpreter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Header_Files\APH.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Concrete_Mediator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics_Engine\Graphics\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -2,11 +2,13 @@
 
 #include "../Cooldown.h"
 #include "../Space/Point.h"
-#include "Agent.h"
+//#include "Agent.h"
 #include "../../Graphics_Engine/Graphics/Graphics.h"
 #include "SFML\Graphics.hpp"
-#include "../../AI_Elements/Interfaces/Interface_Graphics_Observer.h"
+#include "Interface_Graphics_Observer.h"
 #include "Movable.h"
+
+#include <mutex>
 class Car : public std::enable_shared_from_this<Car> , public Movable, public Interface_Graphics_Observer
 {
 private:
