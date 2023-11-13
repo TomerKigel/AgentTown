@@ -2,8 +2,11 @@
 #include "message.h"
 #include "boost/lexical_cast.hpp"
 #include "Component.h"
-#include "../Framework/Concrete_Mediator.h"
 #include "Message_Generator.h"
+#include "Interface_Runnable.h"
+#include "Queue_Manager.h"
+#include <mutex>
+#include "Message_Parser.h"
 
 class Interpreter : public Component<message::Message>, public Interface_Runnable
 {
