@@ -1,0 +1,55 @@
+name: CMake Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up CMake
+      uses: lukka/run-cmake@v2
+      with:
+        cmakeListsOrSettingsJson: 'CMakeLists.txt'  # Specify your CMakeLists.txt file
+
+      
+    - name: Cache Visual Studio Build Tools installer
+      uses: actions/cache@v2
+      with:
+          path: vs_buildtools.exe
+          key: ${{ runner.os }}-buildtools-${{ hashFiles('vs_buildtools.exe') }}
+    
+    - name: Install SFML
+      uses: oprypin/install-sfml@v1
+
+    - name: Install Visual Studio 2019 Build Tools
+      run: |
+        # Download Visual Studio 2019 Build Tools installer
+        Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
+
+        # Install Visual Studio 2019 Build Tools
+        Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
+   
+    - name: Build Boost
+      uses: egor-tensin/build-boost@v1.4
+      id: boost
+      with:
+        version: 1.81.0
+        libraries: filesystem program_options system
+        platform: x64
+        toolset: msvc142
+        configuration: Debug
+
+    - name: Build
+      run: cmake --build . --config Debug
+
+    #- name: Run tests (if applicable)
+    # run: ctest -C Release
