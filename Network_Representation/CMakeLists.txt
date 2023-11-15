@@ -1,5 +1,10 @@
 project(Network_Representation)
 
-file(GLOB SOURCES "*.cpp" "*.h")
+add_library(Network_Representation INTERFACE)
 
-add_library(Network_Representation STATIC ${SOURCES})
+target_link_libraries(Network_Representation INTERFACE Interfaces AI_Elements)
+
+target_include_directories(Network_Representation INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
+    ${CMAKE_CURRENT_SOURCE_DIR}/../AI_Elements
+)

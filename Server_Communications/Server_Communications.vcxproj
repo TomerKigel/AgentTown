@@ -27,6 +27,9 @@
     <ClCompile Include="MainServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.vcxproj">
+      <Project>{7f47513e-9ef3-4738-b7f0-0afa769692f6}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Message_System\Message_System.vcxproj">
       <Project>{67e02d96-c8cf-409f-9fe5-6f1a706e04ce}</Project>
     </ProjectReference>

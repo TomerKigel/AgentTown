@@ -122,7 +122,7 @@
       <PreprocessorDefinitions>SFML_DYNAMIC;WIN32_;DEBUG;_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;I:\SFML-2.5.1\include;D:\a\AgentTown\boost;C:\Program Files (x86)\SFML\.\include;C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_Interpreting_System</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <AdditionalModuleDependencies>
       </AdditionalModuleDependencies>

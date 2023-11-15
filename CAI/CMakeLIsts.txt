@@ -3,3 +3,19 @@ project(CAI)
 file(GLOB SOURCES "*.cpp" "*.h")
 
 add_library(CAI STATIC ${SOURCES})
+
+target_include_directories(CAI PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Message_System
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Message_Interpreting_System
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Network_Representation
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Server_Communications
+)
+
+target_link_libraries(CAI PRIVATE 
+Interfaces
+Message_System
+Message_Interpreting_System
+Network_Representation
+Server_Communications)
+

@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /CAI/CAI.vcxproj
 /CAI/CAI.vcxproj
+/CMakeCache.txt
+/cmake_install.cmake
