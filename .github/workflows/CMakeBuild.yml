@@ -19,6 +19,7 @@ jobs:
       uses: lukka/run-cmake@v2
       with:
         cmakeListsOrSettingsJson: 'CMakeLists.txt'
+        useShell: bash
       
     #- name: Cache Visual Studio Build Tools installer
     #  uses: actions/cache@v2
