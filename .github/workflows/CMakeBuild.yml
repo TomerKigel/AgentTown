@@ -15,11 +15,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up CMake
-      uses: lukka/run-cmake@v2
-      with:
-        cmakeListsOrSettingsJson: 'D:\a\AgentTown'
-        useShell: bash
+    - name: Configure the project
+        uses: threeal/cmake-action@v1.3.0
       
     #- name: Cache Visual Studio Build Tools installer
     #  uses: actions/cache@v2
@@ -48,8 +45,10 @@ jobs:
         toolset: msvc142
         configuration: Debug
 
-    - name: Build
-      run: cmake --build . --config Debug
+    - name: Build the project
+      runs: cmake --build build
 
-    #- name: Run tests (if applicable)
-    # run: ctest -C Release
+    - name: Test the project
+      runs: ctest --test-dir build
+
+
