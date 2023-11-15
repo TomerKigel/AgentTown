@@ -31,7 +31,7 @@ public:
 
 	Point GetBR();
 
-	bool operator==(const AABB& range);
+	bool operator==(const AABB& range) const;
 
 	bool operator<(AABB& range);
 

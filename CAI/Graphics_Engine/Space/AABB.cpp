@@ -46,7 +46,7 @@ Point AABB::GetBR()
 	return BR;
 }
 
-bool AABB::operator==(const AABB& range)
+bool AABB::operator==(const AABB& range) const
 {
 	if (!(BR.GetX() < range.TL.GetX() - 1 || range.BR.GetX() + 1 < TL.GetX()) &&
 		!(BR.GetY() < range.TL.GetY() - 1 || range.BR.GetY() + 1 < TL.GetY()))
