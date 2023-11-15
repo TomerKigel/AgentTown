@@ -18,7 +18,7 @@ jobs:
     - name: Set up CMake
       uses: lukka/run-cmake@v2
       with:
-        cmakeListsOrSettingsJson: 'D:\a\AgentTown\CMakeLists.txt'
+        cmakeListsOrSettingsJson: 'D:\a\AgentTown'
         useShell: bash
       
     #- name: Cache Visual Studio Build Tools installer
