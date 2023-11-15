@@ -21,13 +21,12 @@ add_executable(Framework_exe
     Framework/Concrete_Mediator.h
 )
 
-if(MSVC)
+
     set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
     set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
-else()
-    set(BOOST_ROOT "D:\a\AgentTown\boost")
-    set(SFML_DIR "C:\Program Files (x86)\SFML\.\lib\cmake\SFML")
-endif()
+    set(BOOST_ROOT_GIT "D:\a\AgentTown\boost")
+    set(SFML_DIR_GIT "C:\Program Files (x86)\SFML\.\lib\cmake\SFML")
+
 
 # Include directories for the Framework_exe project
 target_include_directories(Framework_exe PRIVATE
@@ -39,6 +38,7 @@ target_include_directories(Framework_exe PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Server_Communications
     ${CMAKE_CURRENT_SOURCE_DIR}/CAI
     BOOST_ROOT
+    BOOST_ROOT_GIT
 )
 
 set(Boost_USE_STATIC_LIBS ON)
