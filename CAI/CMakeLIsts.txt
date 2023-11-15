@@ -1,8 +1,34 @@
+cmake_minimum_required(VERSION 3.12)
 project(CAI)
+set(CMAKE_CXX_STANDARD 20)  # Adjust as needed
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_GENERATOR_TOOLSET "v142")
 
-file(GLOB SOURCES "*.cpp" "*.h")
+set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
+
+file(GLOB SOURCES "*.cpp" "*.h"
+"Graphics_Engine/*.cpp" "Graphics_Engine/*.h"
+"Graphics_Engine/Graphics/*.cpp" "Graphics_Engine/Graphics/*.h"
+"Graphics_Engine/Objects/*.cpp" "Graphics_Engine/Objects/*.h"
+"Graphics_Engine/Sound/*.cpp" "Graphics_Engine/Sound/*.h"
+"Graphics_Engine/Space/*.cpp" "Graphics_Engine/Space/*.h"
+"Graphics_Engine/Physics/*.cpp" "Graphics_Engine/Physics/*.h")
 
 add_library(CAI STATIC ${SOURCES})
+
+find_package(SFML 2.5.1 COMPONENTS graphics window system REQUIRED)
+
+target_link_libraries(CAI PRIVATE 
+Interfaces
+Message_System
+Message_Interpreting_System
+Network_Representation
+Server_Communications
+sfml-graphics
+sfml-window
+sfml-system
+sfml-audio)
+
 
 target_include_directories(CAI PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
@@ -12,10 +38,4 @@ target_include_directories(CAI PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Server_Communications
 )
 
-target_link_libraries(CAI PRIVATE 
-Interfaces
-Message_System
-Message_Interpreting_System
-Network_Representation
-Server_Communications)
 
