@@ -22,15 +22,6 @@ using ip::tcp;
 
 class ClientThreadConnection : virtual public Connection, public std::enable_shared_from_this<ClientThreadConnection>, public Component<message::Message>
 {
-private:
-	int connection_id_;
-	tcp::socket socket_;
-	std::unordered_map<int, std::shared_ptr<Connection>>* connections_;
-	message::Message incoming_msg;
-	std::vector<char> message_buffer;
-
-	std::mutex send_mutex;
-
 public:
 	ClientThreadConnection(tcp::socket&& socket, std::unordered_map<int, std::shared_ptr<Connection>>& connections, int connection_id_, Interface_Mediator* mediator_);
 
@@ -44,7 +35,9 @@ public:
 
 	void send(const std::string& message);
 
-	void send_channel(const std::string& message, string channel_name);
+	void send_channel(const std::string& message, const string channel_name);
+
+	void send_to_id_list(const std::string& message, const std::vector<int> id_list);
 
 	void send_all(const std::string& message);
 
@@ -55,5 +48,14 @@ public:
 	std::string service_name();
 
 	void disconnect();
+
+private:
+	int connection_id_;
+	tcp::socket socket_;
+	std::unordered_map<int, std::shared_ptr<Connection>>* connections_;
+	message::Message incoming_msg;
+	std::vector<char> message_buffer;
+
+	std::mutex send_mutex;
 
 };

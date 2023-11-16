@@ -29,6 +29,8 @@ bool MainServer::run() {
 void MainServer::pause()
 {
 	system_state_ = system_state::PAUSED;
+	acceptor_.cancel();
+	std::cout << "Main-Server paused" << std::endl;
 }
 
 
@@ -44,8 +46,8 @@ void MainServer::wait_for_connection()
 				connections_.insert(std::make_pair(running_connection_id_, connection_ptr));
 				connection_ptr->run();
 			}
-
-			wait_for_connection();
+			if(system_state_ == system_state::RUNNING)
+				wait_for_connection();
 		});
 }
 

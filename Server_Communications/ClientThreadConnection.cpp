@@ -11,7 +11,8 @@ ClientThreadConnection::ClientThreadConnection(tcp::socket&& socket, std::unorde
 
 ClientThreadConnection::~ClientThreadConnection()
 {
-	disconnect();
+	if(connections_->count(connection_id_) != 0)
+		disconnect();
 }
 
 int ClientThreadConnection::get_id() const
@@ -91,7 +92,7 @@ void ClientThreadConnection::read() {
 	}
 }
 
-void ClientThreadConnection::send(const string& message) {
+void ClientThreadConnection::send(const string& message){
 	std::scoped_lock<std::mutex> lock(send_mutex);
 	boost::asio::write(socket_, boost::asio::buffer(message));
 }
@@ -103,11 +104,18 @@ void ClientThreadConnection::send_all(const string& message) {
 }
 
 
-void ClientThreadConnection::send_channel(const std::string& message, string channel_name) {
+void ClientThreadConnection::send_channel(const std::string& message, const string channel_name) {
 	//TODO: make a send to all neighbours
 	/*for (auto& connection : *connections_)
 		connection.second->send(message);*/
 	std::cout << "ok";
+}
+
+void ClientThreadConnection::send_to_id_list(const std::string& message, const std::vector<int> id_list)
+{
+	for (auto& connection : *connections_)
+		if(std::find(id_list.begin(), id_list.end(),connection.first) != id_list.end())
+			connection.second->send(message);
 }
 
 

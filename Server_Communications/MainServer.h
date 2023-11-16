@@ -19,13 +19,6 @@ using ip::tcp;
 
 class MainServer : public Component<message::Message>
 {
-private:
-	tcp::acceptor acceptor_;
-
-	std::unordered_map<int, std::shared_ptr<Connection>> connections_;
-	int running_connection_id_;
-	std::vector<std::thread> threads_;
-
 public:
 	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint);
 
@@ -42,4 +35,11 @@ public:
 	std::string service_name();
 
 	void close();
+
+private:
+	tcp::acceptor acceptor_;
+
+	std::unordered_map<int, std::shared_ptr<Connection>> connections_;
+	int running_connection_id_;
+	std::vector<std::thread> threads_;
 };
