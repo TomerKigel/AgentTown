@@ -18,6 +18,9 @@
     <ClCompile Include="Network.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Agent_Network.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent_Network.h">

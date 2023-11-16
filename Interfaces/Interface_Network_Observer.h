@@ -1,7 +1,6 @@
 #pragma once
 #include "Interface_Observer.h"
 #include <memory>
-//#include "Agent.h"
 
 class Agent;
 class Interface_Network_Observer : public Interface_Observer

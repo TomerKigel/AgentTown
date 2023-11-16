@@ -1,10 +1,8 @@
 #pragma once
-//#include "../CAI/Message_System/Message_Parser.h"
-//#include "../CAI/Message_System/message.h"
 
 namespace message {
-    class Message;
-    class Parsed_Message;
+    struct Message;
+    struct Parsed_Message;
 }
 
 class Interface_Mediator

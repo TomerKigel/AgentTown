@@ -114,7 +114,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Program Files\boost\boost_1_81_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Agent_Network.cpp" />
     <ClCompile Include="Network.h" />
   </ItemGroup>
   <ItemGroup>

@@ -21,6 +21,7 @@ find_package(SFML 2.5.1 COMPONENTS graphics window system REQUIRED)
 target_link_libraries(CAI PRIVATE 
 Interfaces
 Message_System
+AI_Elements
 Message_Interpreting_System
 Network_Representation
 Server_Communications
@@ -33,6 +34,7 @@ sfml-audio)
 target_include_directories(CAI PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
     ${CMAKE_CURRENT_SOURCE_DIR}/../Message_System
+    ${CMAKE_CURRENT_SOURCE_DIR}/../AI_Elements
     ${CMAKE_CURRENT_SOURCE_DIR}/../Message_Interpreting_System
     ${CMAKE_CURRENT_SOURCE_DIR}/../Network_Representation
     ${CMAKE_CURRENT_SOURCE_DIR}/../Server_Communications

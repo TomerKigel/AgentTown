@@ -145,7 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="message.h" />
+    <ClInclude Include="Message.h" />
     <ClInclude Include="Queue_Manager.h" />
   </ItemGroup>
   <ItemGroup>

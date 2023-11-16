@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="message.h">
+    <ClInclude Include="Message.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Queue_Manager.h">
