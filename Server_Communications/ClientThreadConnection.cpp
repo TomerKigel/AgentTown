@@ -103,14 +103,6 @@ void ClientThreadConnection::send_all(const string& message) {
 		connection.second->send(message);
 }
 
-
-void ClientThreadConnection::send_channel(const std::string& message, const string channel_name) {
-	//TODO: make a send to all neighbours
-	/*for (auto& connection : *connections_)
-		connection.second->send(message);*/
-	std::cout << "ok";
-}
-
 void ClientThreadConnection::send_to_id_list(const std::string& message, const std::vector<int> id_list)
 {
 	for (auto& connection : *connections_)
@@ -124,6 +116,7 @@ void ClientThreadConnection::disconnect() {
 	try {
 		socket_.close();
 		connections_->erase(connection_id_);
+		mediator_->push_message(Message_Generator::generate_disconnect_message(connection_id_));
 		std::cout << "client serial number (" << connection_id_ << ") disconnected" << endl;
 	}
 	catch (...) {

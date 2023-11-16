@@ -10,10 +10,6 @@
 
 class Interpreter : public Component<message::Message>, public Interface_Runnable
 {
-	bool alive_;
-	std::mutex alive_mutex_;
-	Queue_Manager<message::Message> incoming_messages_;
-
 public:
 	Interpreter()
 	{
@@ -75,4 +71,8 @@ public:
 		std::scoped_lock lock(alive_mutex_);
 		alive_ = false;
 	}
+private:
+	bool alive_;
+	std::mutex alive_mutex_;
+	Queue_Manager<message::Message> incoming_messages_;
 };

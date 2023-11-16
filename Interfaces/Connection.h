@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 using std::string;
 
@@ -14,7 +15,7 @@ public:
 
 	virtual void send(const string& message) = 0;
 
-	virtual void send_channel(const string& message, string channel_name) = 0;
+	virtual void send_to_id_list(const std::string& message, const std::vector<int> id_list) = 0;
 
 	virtual void send_all(const string& message) = 0;
 

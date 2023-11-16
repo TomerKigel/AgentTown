@@ -9,11 +9,6 @@ class Agent;
 
 class Agent_Parameters
 {
-	double location_x_, location_y_;
-	std::vector<int> neighbors_;
-	int max_neighbour_capacity_;
-	bool changeable_ = true;
-	bool alive_ = true;
 public:
 	Agent_Parameters(double x = 0, double y = 0)
 	{
@@ -102,4 +97,10 @@ public:
 		location_x_ = x;
 		location_y_ = y;
 	}
+private:
+	double location_x_, location_y_;
+	std::vector<int> neighbors_;
+	int max_neighbour_capacity_;
+	bool changeable_ = true;
+	bool alive_ = true;
 };

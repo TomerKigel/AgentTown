@@ -7,10 +7,6 @@
 #include "Agent_Network.h"
 
 class Concrete_Mediator : public Interface_Mediator {
-private:
-    std::vector<Component<message::Message>*> message_components_;
-    std::vector<Component<message::Parsed_Message>*> parsed_message_components_;
-
 public:
     Concrete_Mediator(std::initializer_list<Component<message::Message>*> init_message_components, std::initializer_list<Component<message::Parsed_Message>*> init_parsed_message_components) {
         for (auto component : init_message_components)
@@ -54,4 +50,8 @@ public:
                 component->provide_message(msg);
         }
     }
+private:
+    std::vector<Component<message::Message>*> message_components_;
+    std::vector<Component<message::Parsed_Message>*> parsed_message_components_;
+
 };

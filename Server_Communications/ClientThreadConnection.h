@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "Queue_Manager.h"
 #include "message.h"
+#include "Message_Generator.h"
 #include "Component.h"
 #include <mutex>
 
@@ -34,8 +35,6 @@ public:
 	void run();
 
 	void send(const std::string& message);
-
-	void send_channel(const std::string& message, const string channel_name);
 
 	void send_to_id_list(const std::string& message, const std::vector<int> id_list);
 

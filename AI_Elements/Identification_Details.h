@@ -4,7 +4,6 @@
 
 class Identification_Details
 {
-	unsigned int agent_id_, connection_id_;
 public:
 	Identification_Details()
 	{
@@ -50,4 +49,6 @@ public:
 			throw std::exception("agent has no valid connection_id");
 		return connection_id_;
 	}
+private:
+	unsigned int agent_id_, connection_id_;
 };

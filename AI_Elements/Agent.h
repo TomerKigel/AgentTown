@@ -12,16 +12,6 @@
 
 class Agent
 {
-private:
-	Agent_Parameters parameters_;
-	std::vector<std::weak_ptr<Interface_Graphics_Observer>> observers;
-	std::unique_ptr<Message_Processor> processor;
-	Identification_Details info;
-
-	//concurrency variables
-	std::mutex param_mutex_;
-	std::mutex observers_mutex_;
-
 public:
 	Agent();
 
@@ -63,4 +53,14 @@ public:
 	void subscribe(std::shared_ptr<Interface_Graphics_Observer> obs);
 
 	void unsubscribe(std::shared_ptr<Interface_Graphics_Observer> obs);
+
+private:
+	Agent_Parameters parameters_;
+	std::vector<std::weak_ptr<Interface_Graphics_Observer>> observers;
+	std::unique_ptr<Message_Processor> processor;
+	Identification_Details info;
+
+	//concurrency variables
+	std::mutex param_mutex_;
+	std::mutex observers_mutex_;
 };

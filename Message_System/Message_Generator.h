@@ -20,4 +20,13 @@ public:
 		return a;
 	}
 
+	static message::Message generate_disconnect_message(int id)
+	{
+		message::Message a;
+		a.header.connection_id = id;
+		a.header.type = "disconnect";
+		a.direction = message::Message::message_direction::In;
+		return a;
+	}
+
 };

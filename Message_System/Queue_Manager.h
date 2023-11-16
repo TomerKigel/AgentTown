@@ -8,12 +8,9 @@
 template <class T>
 class Queue_Manager
 {
-	std::queue<T> message_queue;
-	std::condition_variable condition;
-	std::mutex mutex;
+
 public:
 	Queue_Manager() {}
-
 	void push(T element)
 	{
 		std::unique_lock<std::mutex> lock(mutex);
@@ -49,6 +46,9 @@ public:
 		size_t size = message_queue.size();
 		return size;
 	}
-
+private:
+	std::queue<T> message_queue;
+	std::condition_variable condition;
+	std::mutex mutex;
 };
 
