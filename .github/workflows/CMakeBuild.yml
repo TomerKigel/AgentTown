@@ -42,10 +42,8 @@ jobs:
         toolset: msvc142
         configuration: Debug
 
-    - name: Set up CMake
-      uses: cmake/setup-cmake@v2
-      with:
-        cmake-version: '3.20'
+    - name: Set-up CMake
+      uses: CMake@1
       
     - name: Configure and build
       run: |
