@@ -37,7 +37,6 @@ target_include_directories(Framework_exe PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Network_Representation
     ${CMAKE_CURRENT_SOURCE_DIR}/Server_Communications
     ${CMAKE_CURRENT_SOURCE_DIR}/CAI
-    BOOST_ROOT
 )
 
 set(Boost_USE_STATIC_LIBS ON)
