@@ -11,7 +11,6 @@ set(Boost_USE_STATIC_LIBS ON)
 target_include_directories(Server_Communications PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
     ${CMAKE_CURRENT_SOURCE_DIR}/../Message_System
-    ${Boost_INCLUDE_DIRS}
 )
 
 find_package(Boost REQUIRED COMPONENTS system)
