@@ -9,7 +9,6 @@ add_library(Message_System INTERFACE)
 # Include directories if needed
 target_include_directories(Message_System INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    BOOST_ROOT
 )
 
 set(Boost_USE_STATIC_LIBS ON)
