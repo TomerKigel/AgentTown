@@ -43,7 +43,7 @@ jobs:
         configuration: Debug
 
     - name: Set up CMake
-      uses: actions/setup-cmake@v2
+      uses: cmake/setup-cmake@v2
       with:
         cmake-version: '3.20'
       
