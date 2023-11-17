@@ -42,8 +42,8 @@ jobs:
         toolset: msvc142
         configuration: Debug
 
-    - name: Set-up CMake
-      uses: CMake@1
+    - name: Get CMake
+      uses: symbitic/install-cmake@master
       
     - name: Configure and build
       run: |
