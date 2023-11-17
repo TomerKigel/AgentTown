@@ -4,7 +4,7 @@ project(Message_System)
 
 add_library(Message_System INTERFACE)
 
-set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
+set(BOOST_ROOT "D:\a\AgentTown\boost")
 
 # Include directories if needed
 target_include_directories(Message_System INTERFACE
