@@ -32,7 +32,7 @@ def client_run(id):
     s.close()
 
 threads = []
-for i in range(10):
+for i in range(1,11):
     thread = Thread(target = client_run,args = [i])
     thread.start()
     threads.append(thread)
