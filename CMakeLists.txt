@@ -53,7 +53,7 @@ target_link_libraries(Framework_exe PRIVATE
     Network_Representation
     Server_Communications
     CAI
-    Boost::system
+    #Boost::system
     sfml-graphics
     sfml-window
     sfml-system
