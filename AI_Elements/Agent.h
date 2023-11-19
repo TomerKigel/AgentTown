@@ -3,6 +3,7 @@
 #include <mutex>
 #include <vector>
 #include <memory>
+
 #include "message.h"
 #include "Message_Parser.h"
 #include "Interface_Graphics_Observer.h"

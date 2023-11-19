@@ -1,10 +1,12 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+
 #include "Agent.h"
 #include "Queue_Manager.h"
 #include "Message_Parser.h"
 
-#include <algorithm>
+
 class Agent;
 
 class Agent_Parameters

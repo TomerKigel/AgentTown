@@ -132,7 +132,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;$(SolutionDir)\Interfaces;$(SolutionDir)\Message_System;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -152,7 +152,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;D:\a\AgentTown\boost</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;$(SolutionDir)\Interfaces;$(SolutionDir)\Message_System;D:\a\AgentTown\boost</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

@@ -17,7 +17,7 @@ namespace cai
 
 		Framework(const Framework&) = delete;
 
-		enum class systems { Graphics, Interpreter, Communications, Representational_Network };
+		enum class systems {Graphics, Interpreter, Communications, Representational_Network };
 
 		void run(systems system);
 

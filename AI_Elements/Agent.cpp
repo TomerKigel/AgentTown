@@ -1,6 +1,4 @@
 #include "Agent.h"
-#include <thread>
-#include <mutex>
 
 void Agent::push_message(message::Parsed_Message& msg)
 {

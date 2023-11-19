@@ -1,15 +1,15 @@
 #pragma once
 
+#include <thread>
+#include <mutex>
+#include <optional>
+
 #include "message.h"
 #include "Interface_Runnable.h"
 #include "Interface_Graphics_Observer.h"
 #include "Message_Parser.h"
 #include "Queue_Manager.h"
 #include "Agent_Parameters.h"
-
-#include <thread>
-#include <mutex>
-#include <optional>
 
 class Message_Processor : public Interface_Runnable
 {
