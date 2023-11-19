@@ -22,7 +22,7 @@ add_executable(Framework_exe
 )
 
 
-    set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
+    #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
     set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
     #set(BOOST_ROOT "D:/a/AgentTown/boost")
     #set(SFML_DIR "C:/Program Files (x86)/SFML/./lib/cmake/SFML")
