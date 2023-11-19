@@ -4,7 +4,7 @@ project(Message_System)
 
 add_library(Message_System INTERFACE)
 
-  set(BOOST_ROOT "D:/a/AgentTown/boost")
+set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
 # Include directories if needed
 target_include_directories(Message_System INTERFACE
@@ -13,6 +13,6 @@ target_include_directories(Message_System INTERFACE
 
 set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost 1.81.0 REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 
 target_link_libraries(Message_System INTERFACE)

@@ -22,10 +22,10 @@ add_executable(Framework_exe
 )
 
 
-    #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
-    #set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
-    set(BOOST_ROOT "D:/a/AgentTown/boost")
-    set(SFML_DIR "C:/Program Files (x86)/SFML/./lib/cmake/SFML")
+    set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
+    set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
+    #set(BOOST_ROOT "D:/a/AgentTown/boost")
+    #set(SFML_DIR "C:/Program Files (x86)/SFML/./lib/cmake/SFML")
 
 
 # Include directories for the Framework_exe project
@@ -42,7 +42,7 @@ target_include_directories(Framework_exe PRIVATE
 set(Boost_USE_STATIC_LIBS ON)
 
 find_package(SFML 2.5.1 COMPONENTS graphics window system REQUIRED)
-find_package(Boost 1.81.0 REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 
 # Link the libraries
 target_link_libraries(Framework_exe PRIVATE
@@ -53,7 +53,7 @@ target_link_libraries(Framework_exe PRIVATE
     Network_Representation
     Server_Communications
     CAI
-    #Boost::system
+    Boost::system
     sfml-graphics
     sfml-window
     sfml-system
