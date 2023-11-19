@@ -15,6 +15,6 @@ target_include_directories(Server_Communications PRIVATE
 
 find_package(Boost 1.81.0 REQUIRED)
 
-target_link_libraries(Server_Communications PRIVATE Interfaces Message_System Boost::system)
+target_link_libraries(Server_Communications PRIVATE Interfaces Message_System)
 
 
