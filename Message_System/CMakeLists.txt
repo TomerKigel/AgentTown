@@ -13,7 +13,7 @@ target_include_directories(Message_System INTERFACE
 
 set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost 1.81.0 REQUIRED)
 
 target_link_libraries(Message_System INTERFACE
     Boost::system
