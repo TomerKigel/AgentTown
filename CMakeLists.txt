@@ -42,7 +42,7 @@ target_include_directories(Framework_exe PRIVATE
 set(Boost_USE_STATIC_LIBS ON)
 
 find_package(SFML 2.5.1 COMPONENTS graphics window system REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost 1.81.0 REQUIRED)
 
 # Link the libraries
 target_link_libraries(Framework_exe PRIVATE
