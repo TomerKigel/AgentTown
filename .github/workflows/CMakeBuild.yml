@@ -38,7 +38,7 @@ jobs:
         version: 1.81.0
         libraries: filesystem program_options system
         platform: x64
-        toolset: g++11
+        toolset: gcc
         configuration: Debug
       
     - name: Configure and build
