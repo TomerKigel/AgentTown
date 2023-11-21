@@ -27,8 +27,8 @@ jobs:
        mkdir sfml_install
        # TODO: Maybe investigate why the certificate checks for the SFML sources fail
        wget https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip --no-check-certificate
-       unzip -q SFML-2.6.0-sources.zip
-       pushd SFML-2.6.0 && mkdir build && cd build && cmake .. && make
+       unzip -q SFML-2.5.1-sources.zip
+       pushd SFML-2.5.1 && mkdir build && cd build && cmake .. && make
        make DESTDIR=$GITHUB_WORKSPACE/sfml_install install
        popd
     - name: Build
