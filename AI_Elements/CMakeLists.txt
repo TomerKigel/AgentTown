@@ -9,7 +9,7 @@ set(BOOST_ROOT "/home/vboxuser/Desktop/boost_1_81_0")
 
 set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost 1.81.0)
 
 
 target_include_directories(AI_Elements PRIVATE
