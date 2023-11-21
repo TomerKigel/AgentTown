@@ -10,12 +10,12 @@ target_include_directories(Message_System INTERFACE
     ${Boost_INCLUDE_DIRS}
 )
 
-set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
+#set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
-set(Boost_USE_STATIC_LIBS ON)
+#set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost REQUIRED COMPONENTS system)
+#find_package(Boost REQUIRED COMPONENTS system)
 
 target_link_libraries(Message_System INTERFACE)#Boost::system)
 
