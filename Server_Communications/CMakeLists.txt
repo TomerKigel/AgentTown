@@ -5,7 +5,7 @@ file(GLOB SOURCES "*.cpp" "*.h")
 add_library(Server_Communications STATIC ${SOURCES})
 
 
-set(BOOST_ROOT "D:\a\AgentTown\boost")
+set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
 find_package(Boost REQUIRED COMPONENTS system)

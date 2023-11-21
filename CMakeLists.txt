@@ -38,8 +38,9 @@ add_executable(Framework_exe
     Framework/Concrete_Mediator.h
 )
 
-set(BOOST_ROOT "D:\a\AgentTown\boost")
-set(SFML_DIR "/home/vboxuser/Desktop/SFML-2.5.1/lib/cmake/SFML")
+set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
+set(SFML_DIR "/home/runner/work/AgentTown/AgentTown/SFML-2.5.1/lib/cmake/SFML")
+
 
 # Include directories for the Framework_exe project
 target_include_directories(Framework_exe PRIVATE
