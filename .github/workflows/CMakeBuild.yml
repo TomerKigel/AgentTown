@@ -30,7 +30,12 @@ jobs:
        pushd SFML-2.5.1 && mkdir build && cd build && cmake .. && make
        make DESTDIR=$GITHUB_WORKSPACE/sfml_install install
        popd
+
        
+    - name: install boost
+      run: |
+        sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
+      
     - name: Build Boost
       uses: egor-tensin/build-boost@v1.4
       id: boost
@@ -41,10 +46,6 @@ jobs:
         toolset: gcc
         configuration: Debug
 
-    - name: install boost
-      run: |
-        sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
-      
     - name: Configure and build
       run: |
         mkdir build
