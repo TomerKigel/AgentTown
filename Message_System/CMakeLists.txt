@@ -4,18 +4,18 @@ project(Message_System)
 
 add_library(Message_System INTERFACE)
 
+# Include directories if needed
+target_include_directories(Message_System INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${Boost_INCLUDE_DIRS}
+)
+
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
 set(Boost_USE_STATIC_LIBS ON)
 
 find_package(Boost REQUIRED COMPONENTS system)
-
-# Include directories if needed
-target_include_directories(Message_System INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${Boost_INCLUDE_DIRS}
-)
 
 target_link_libraries(Message_System INTERFACE)#Boost::system)
 
