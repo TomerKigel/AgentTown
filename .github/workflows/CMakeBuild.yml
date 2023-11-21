@@ -30,6 +30,8 @@ jobs:
        pushd SFML-2.5.1 && mkdir build && cd build && cmake .. && make
        make DESTDIR=$GITHUB_WORKSPACE/sfml_install install
        popd
+       cd sfml_install
+       ls
 
        
     #- name: install boost
