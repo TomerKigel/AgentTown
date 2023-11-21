@@ -24,13 +24,13 @@ jobs:
     - name: Install SFML
       uses: oprypin/install-sfml@v1
 
-    - name: Install Visual Studio 2019 Build Tools
-      run: |
+    #- name: Install Visual Studio 2019 Build Tools
+    #  run: |
         # Download Visual Studio 2019 Build Tools installer
-        Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
+    #    Invoke-WebRequest -Uri 'https://aka.ms/vs/16/release/vs_buildtools.exe' -OutFile 'vs_buildtools.exe'
 
         # Install Visual Studio 2019 Build Tools
-        Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
+    #   Start-Process -Wait -FilePath '.\vs_buildtools.exe' -ArgumentList '--quiet', '--norestart', '--nocache', '--installPath', 'C:\BuildTools', '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.VCTools', '--includeRecommended', '--includeOptional'
    
     - name: Build Boost
       uses: egor-tensin/build-boost@v1.4
@@ -39,7 +39,7 @@ jobs:
         version: 1.81.0
         libraries: filesystem program_options system
         platform: x64
-        toolset: msvc142
+        toolset: g++11
         configuration: Debug
 
     - name: Get CMake
