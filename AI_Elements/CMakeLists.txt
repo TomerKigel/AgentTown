@@ -4,7 +4,7 @@ file(GLOB SOURCES "*.cpp" "*.h")
 
 add_library(AI_Elements STATIC ${SOURCES})
 
-set(BOOST_ROOT "/home/vboxuser/Desktop/boost_1_81_0")
+set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
 set(Boost_USE_STATIC_LIBS ON)
