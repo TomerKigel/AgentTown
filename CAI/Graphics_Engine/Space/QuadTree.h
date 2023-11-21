@@ -1,6 +1,6 @@
 #pragma once
 #include "../Objects/Object.h"
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include <vector>
 
 class QuadTree

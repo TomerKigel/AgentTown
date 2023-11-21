@@ -19,9 +19,9 @@ Agent::Agent(int id, int connection_id)
 	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
 	parameters_.revive();
 	if (id < 0)
-		throw std::exception("Negative id in agent creation");
+		throw std::runtime_error("Negative id in agent creation");
 	if (connection_id < 0)
-		throw std::exception("Negative connection_id in agent creation");
+		throw std::runtime_error("Negative connection_id in agent creation");
 	info.set_connection_id(connection_id);
 	info.set_id(id);
 	processor->run();

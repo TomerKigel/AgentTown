@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 #include <iostream>
+#include <cstring>
 
 namespace message
 {

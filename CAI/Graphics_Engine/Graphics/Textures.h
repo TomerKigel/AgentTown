@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include "../../Graphics_Engine//Space/AABB.h"
 struct tbuffer
 {

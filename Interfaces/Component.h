@@ -1,7 +1,7 @@
 #pragma once
 #include "Interface_Mediator.h"
 
-static enum class system_state { RUNNING, PAUSED, TERMINATED };
+enum class system_state { RUNNING, PAUSED, TERMINATED };
 
 template <class T>
 class Component {

@@ -4,6 +4,7 @@
 #include <mutex>
 #include <optional>
 #include <queue>
+#include <condition_variable>
 
 template <class T>
 class Queue_Manager

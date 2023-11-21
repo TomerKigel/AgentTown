@@ -39,14 +39,14 @@ public:
 	unsigned int get_id() const
 	{
 		if (agent_id_ == -1)
-			throw std::exception("agent has no valid id");
+			throw std::runtime_error("agent has no valid id");
 		return agent_id_;
 	}
 
 	unsigned int get_connection_id() const
 	{
 		if (connection_id_ == -1)
-			throw std::exception("agent has no valid connection_id");
+			throw std::runtime_error("agent has no valid connection_id");
 		return connection_id_;
 	}
 private:

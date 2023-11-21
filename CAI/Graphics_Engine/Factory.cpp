@@ -1,6 +1,6 @@
 #pragma once
 #include "Factory.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 CarParameters Factory::Car_Parameters;
 StaticParameters Factory::StaticObject_Parameters;

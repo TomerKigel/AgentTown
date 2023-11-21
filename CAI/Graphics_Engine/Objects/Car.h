@@ -4,7 +4,7 @@
 #include "../Space/Point.h"
 //#include "Agent.h"
 #include "../../Graphics_Engine/Graphics/Graphics.h"
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include "Interface_Graphics_Observer.h"
 #include "Movable.h"
 

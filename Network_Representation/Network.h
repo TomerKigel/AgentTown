@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "Interface_Network_Observer.h"
+#include <vector>
 
 template <class T>
 class Network
