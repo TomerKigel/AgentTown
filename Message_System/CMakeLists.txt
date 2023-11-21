@@ -15,7 +15,7 @@ set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 
 set(Boost_USE_STATIC_LIBS ON)
 
-find_package(Boost 1.81.0 EXACT)
+find_package(Boost 1.81.0 EXACT REQUIRED COMPONENTS lexical_cast)
 
 target_link_libraries(Message_System INTERFACE)#Boost::system)
 
