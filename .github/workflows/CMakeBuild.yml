@@ -22,7 +22,7 @@ jobs:
     #      key: ${{ runner.os }}-buildtools-${{ hashFiles('vs_buildtools.exe') }}
     
     - name: Install SFML
-       run: |
+      run: |
        set -e
        mkdir sfml_install
        # TODO: Maybe investigate why the certificate checks for the SFML sources fail
