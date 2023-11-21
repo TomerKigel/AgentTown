@@ -13,7 +13,7 @@ target_include_directories(Server_Communications PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
-find_package(Boost 1.81.0 EXACT)
+find_package(Boost 1.81.0 EXACT REQUIRED system)
 
 target_link_libraries(Server_Communications PRIVATE Interfaces Message_System)
 
