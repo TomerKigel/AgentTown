@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_GENERATOR_TOOLSET "v142")
 
 #set(SFML_DIR "I:/SFML-2.5.1/lib/cmake/SFML")
-set(SFML_DIR "/home/runner/work/AgentTown/SFML-2.5.1/lib/cmake/SFML")
+set(SFML_DIR "$ENV{GITHUB_WORKSPACE}/sfml_install")
 
 file(GLOB SOURCES "*.cpp" "*.h"
 "Graphics_Engine/*.cpp" "Graphics_Engine/*.h"
