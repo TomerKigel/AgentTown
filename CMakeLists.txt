@@ -39,7 +39,7 @@ add_executable(Framework_exe
 )
 
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
-set(SFML_DIR "/home/runner/work/AgentTown/AgentTown/SFML-2.5.1/lib/cmake/SFML")
+set(SFML_DIR ""$ENV{GITHUB_WORKSPACE}/sfml_install"/lib/cmake/SFML")
 
 
 # Include directories for the Framework_exe project
