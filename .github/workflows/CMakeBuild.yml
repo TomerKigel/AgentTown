@@ -40,6 +40,10 @@ jobs:
         platform: x64
         toolset: gcc
         configuration: Debug
+
+    - name: install boost
+      run: |
+        sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
       
     - name: Configure and build
       run: |
