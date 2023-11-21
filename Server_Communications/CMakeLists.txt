@@ -4,10 +4,8 @@ file(GLOB SOURCES "*.cpp" "*.h")
 
 add_library(Server_Communications STATIC ${SOURCES})
 
-
+set(Boost_USE_STATIC_LIBS ON)
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
-
-find_package(Boost 1.81.0 EXACT)
 
 target_include_directories(Server_Communications PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
@@ -15,9 +13,12 @@ target_include_directories(Server_Communications PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
-set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.81.0 EXACT)
+
+target_link_libraries(Server_Communications PRIVATE Interfaces Message_System)
 
 
-target_link_libraries(Server_Communications PRIVATE Interfaces Message_System) #Boost::system)
+
+
 
 
