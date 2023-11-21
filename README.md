@@ -73,6 +73,7 @@ C:\Program Files\boost\boost_1_81_0\stage\lib;
 I:\SFML-2.5.1\lib
 change them to your install path.
 
+
 how to update gcc to allow use of cpp20:
 https://www.cyberithub.com/how-to-update-or-upgrade-gcc-to-latest-version-on-ubuntu-debian/
 <h2>Stay in touch</h2>
