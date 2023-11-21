@@ -1,6 +1,5 @@
 project(Message_System)
 
-# No source files for a header-only library
 
 add_library(Message_System INTERFACE)
 
