@@ -32,9 +32,9 @@ jobs:
        popd
 
        
-    - name: install boost
-      run: |
-        sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
+    #- name: install boost
+     # run: |
+       # sudo apt install build-essential libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev
       
     - name: Build Boost
       uses: egor-tensin/build-boost@v1.4
