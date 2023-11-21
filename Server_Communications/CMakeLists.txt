@@ -8,7 +8,7 @@ add_library(Server_Communications STATIC ${SOURCES})
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 #set(BOOST_ROOT "C:/Program Files/boost/boost_1_81_0")
 
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost 1.81.0 EXACT)
 
 target_include_directories(Server_Communications PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/../Interfaces
