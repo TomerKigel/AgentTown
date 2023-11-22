@@ -93,6 +93,7 @@ in each CMakelists.txt in each project as you can see below:
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 set(SFML_DIR "$ENV{GITHUB_WORKSPACE}/sfml_install/usr/local/lib/cmake/SFML")
 ```
+
 You can then open the terminal and make a build directory, build, and run from it:
 
 ```
