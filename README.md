@@ -46,36 +46,41 @@ To compile and run the project few things are required:
 
 Download and install Boost library. An explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
 
-(currently, a mandatory step, in the future it should be optional) Download SFML
-version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/)
+(mandatory for CAI project) Download SFML <b>64x(not 32bits!)</b>
+version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/) 
 
-all settings are already set up properly in the .vcxproj files accordingly. After cloning You only need to change the path to sfml and boost
-to the directories, you have installed them in.
 
-In the {Project settings -> C/C++ -> General -> Additional Include Directories} you will see 
-D:\a\AgentTown\boost;
-and C:\Program Files (x86)\SFML\.\include;
-leave them unchanged!!
+<h3>On Windows</h3>
+all settings are already set up properly in the .vcxproj files accordingly. After cloning You only need to add the path to the sfml and boost
+directories you have installed.
 
-The change should be made to:
+The project was developed in Visual Studio 2019 and uses toolset v142 but should work fine with any newer toolset.
+If you are trying to build on a newer version of Visual Studio (2022 or higher) you should change the toolset from v142 to the new toolset(v143 or higher).
+
+In the {Project settings -> C/C++ -> General -> Additional Include Directories} you should add the include paths that look like: 
 C:\Program Files\boost\boost_1_81_0\;
 I:\SFML-2.5.1\Include
-change them to your install path.
 
-
-In the {Project settings -> Linker -> General -> Additional Library Directories} you will see 
-D:\a\AgentTown\boost;
-and C:\Program Files (x86)\SFML\.\include;
-Leave them unchanged!
-
-The change should be made to:
+In the {Project settings -> Linker -> General -> Additional Library Directories} you should add the lib paths that look like: 
 C:\Program Files\boost\boost_1_81_0\stage\lib;
 I:\SFML-2.5.1\lib
-change them to your install path.
+
+For more information about the installation and setup, you can check SFML and BOOST official websites.
+
+<h3>On Linux(Ubuntu)</h3>
+all settings are already set up properly in the CMakeLists.txt files in each project. After cloning You only need to change the paths to boost and sfml
+in each CMakelists.txt in each project as you can see below:
+
+set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
+set(SFML_DIR "$ENV{GITHUB_WORKSPACE}/sfml_install/usr/local/lib/cmake/SFML")
 
 
-how to update gcc to allow use of cpp20:
-https://www.cyberithub.com/how-to-update-or-upgrade-gcc-to-latest-version-on-ubuntu-debian/
+building with cmake requires building with g++11 as this project uses the c++20 standard.
+verify your system is up to date.
+
+here is a tutorial as to how to update gcc to allow use of cpp20 if it isn't g++11 or higher:
+[g++11](https://www.cyberithub.com/how-to-update-or-upgrade-gcc-to-latest-version-on-ubuntu-debian/)
+
 <h2>Stay in touch</h2>
 
 •[Tomer Kigel](https://www.linkedin.com/in/tomer-kigel/ "Tomer Kigel") on Linkedin
