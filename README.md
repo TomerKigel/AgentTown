@@ -87,7 +87,7 @@ For more information about the installation and setup, you can check SFML and BO
 
 <h3>On Linux(Ubuntu)</h3>
 all settings are already set up properly in the CMakeLists.txt files in each project. After cloning You only need to change the paths to boost and sfml
-in each CMakelists.txt in each project as you can see below:
+in CMakelists.txt  files that are in each project as you can see below:
 
 ```
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
