@@ -57,13 +57,25 @@ directories you have installed.
 The project was developed in Visual Studio 2019 and uses toolset v142 but should work fine with any newer toolset.
 If you are trying to build on a newer version of Visual Studio (2022 or higher) you should change the toolset from v142 to the new toolset(v143 or higher).
 
-In the {Project settings -> C/C++ -> General -> Additional Include Directories} you should add the include paths that look like: 
+In the 
+'''
+Project settings -> C/C++ -> General -> Additional Include Directories
+'''
+you should add the include paths that look like: 
+'''
 C:\Program Files\boost\boost_1_81_0\;
 I:\SFML-2.5.1\Include
+'''
 
-In the {Project settings -> Linker -> General -> Additional Library Directories} you should add the lib paths that look like: 
+In the 
+'''
+Project settings -> Linker -> General -> Additional Library Directories
+'''
+you should add the lib paths that look like: 
+'''
 C:\Program Files\boost\boost_1_81_0\stage\lib;
 I:\SFML-2.5.1\lib
+'''
 
 For more information about the installation and setup, you can check SFML and BOOST official websites.
 
@@ -71,8 +83,10 @@ For more information about the installation and setup, you can check SFML and BO
 all settings are already set up properly in the CMakeLists.txt files in each project. After cloning You only need to change the paths to boost and sfml
 in each CMakelists.txt in each project as you can see below:
 
+'''
 set(BOOST_ROOT "/home/runner/work/AgentTown/boost")
 set(SFML_DIR "$ENV{GITHUB_WORKSPACE}/sfml_install/usr/local/lib/cmake/SFML")
+'''
 
 
 building with cmake requires building with g++11 as this project uses the c++20 standard.
