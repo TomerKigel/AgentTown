@@ -54,8 +54,10 @@ version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/
 all settings are already set up properly in the .vcxproj files accordingly. After cloning You only need to add the path to the sfml and boost
 directories you have installed.
 
+
 The project was developed in Visual Studio 2019 and uses toolset v142 but should work fine with any newer toolset.
-If you are trying to build on a newer version of Visual Studio (2022 or higher) you should change the toolset from v142 to the new toolset(v143 or higher).
+If you are trying to build on a newer version of Visual Studio (2022 or higher) you might not have toolset v142 installed so you have two options.
+Either install the older toolset or change the toolset from v142 to the new toolset(v143 or higher).
 
 In the 
 
