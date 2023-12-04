@@ -5,12 +5,12 @@ as an ADMIN
 <br>I want to create(set up) a new network that will host agents and communications between them</br>
 so I can run DCOP experiments
 <h4>Back (acceptance criteria)</h4>
--when the framework is requested to create a new network with a network name parameter it should check if an existing network with a given name already exists<br>
- if the network already exists it should abort the attempt to make a new network<br>
- otherwise, it should create a new network and return it to the requester.<br>
--when the framework is requested to create a new network without a network name parameter it should default to 'DEFAULT' network name thus behaving like a singelton<br>
- if there was a previous request for a network without a name, the action should be aborted. otherwise, the network should be created.<br>
-<br>
+<br>-when the framework is requested to create a new network with a network name parameter it should check if an existing network with a given name already exists</br>
+ <br>if the network already exists it should abort the attempt to make a new network</br>
+ <br>otherwise, it should create a new network and return it to the requester.</br>
+<br>-when the framework is requested to create a new network without a network name parameter it should default to 'DEFAULT' network name thus behaving like a singelton</br>
+<br> if there was a previous request for a network without a name, the action should be aborted. otherwise, the network should be created.</br>
+<br></br>
 status: incomplete - no support for multiple networks, no framework API support
 
 ---
