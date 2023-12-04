@@ -2,7 +2,7 @@
 
 <h4>Front</h4>
 as an ADMIN
-I want to create(set up) a new network that will host agents and communications between them<br>
+<br>I want to create(set up) a new network that will host agents and communications between them</br>
 so I can run DCOP experiments
 <h4>Back (acceptance criteria)</h4>
 -when the framework is requested to create a new network with a network name parameter it should check if an existing network with a given name already exists<br>
