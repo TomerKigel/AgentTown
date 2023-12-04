@@ -13,7 +13,7 @@ so I can run DCOP experiments.
 - When the framework is requested to create a new network without a network name parameter, it should default to 'DEFAULT' network name, thus behaving like a singleton.
   - If there was a previous request for a network without a name, the action should be aborted. Otherwise, the network should be created.
 
-<span style="color:red">Status: Incomplete - no support for multiple networks, no framework API support.</span>
+**Status: Incomplete - no support for multiple networks, no framework API support. (red)**
 
 ---
 
@@ -31,4 +31,4 @@ so I can compare experiments and revisit previous work.
   - If the mode of operation is PAUSED, drop everything currently being done and start reconstruction.
   - Retrieve setup and messages from the database in chronological order and apply their side effects (i.e., run all records through all active internal systems, including the framework).
 
-<span style="color:red">Status: Incomplete - no database, no framework API support.</span>
+**Status: Incomplete - no database, no framework API support. (red)**
