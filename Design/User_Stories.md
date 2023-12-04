@@ -15,6 +15,8 @@ so I can run DCOP experiments.
 
 [![Status](https://img.shields.io/badge/Status-Incomplete-red)](https://img.shields.io/badge/Status-Incomplete-red)
 
+**Reason:** No support for multiple networks, no framework API support.
+
 ---
 
 ## Front
@@ -32,3 +34,5 @@ so I can compare experiments and revisit previous work.
   - Retrieve setup and messages from the database in chronological order and apply their side effects (i.e., run all records through all active internal systems, including the framework).
 
 [![Status](https://img.shields.io/badge/Status-Incomplete-red)](https://img.shields.io/badge/Status-Incomplete-red)
+
+**Reason:** No database, no framework API support.
