@@ -3,7 +3,7 @@
 ## Front
 
 As an ADMIN  
-I want to create (set up) a new network that will host agents and communications between them
+I want to create (set up) a new network that will host agents and communications between them  
 so I can run DCOP experiments.
 
 ## Back (Acceptance Criteria)
@@ -22,7 +22,7 @@ so I can run DCOP experiments.
 ## Front
 
 As an ADMIN  
-I want to be able to recreate experiments
+I want to be able to recreate experiments  
 so I can compare experiments and revisit previous work.
 
 ## Back (Acceptance Criteria)
