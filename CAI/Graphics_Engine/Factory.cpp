@@ -1,4 +1,3 @@
-#pragma once
 #include "Factory.h"
 #include <SFML/Graphics.hpp>
 

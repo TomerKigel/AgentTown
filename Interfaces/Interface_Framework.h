@@ -3,21 +3,19 @@
 #include <vector>
 #include "Component.h"
 
-enum class systems;
+
 
 
 class Interface_Framework
 {
+public:
 	//components api
 
-	virtual void add_message_component(Component<message::Message> &component,bool needs_main_thread) = 0;
+	enum class systems { Graphics, Interpreter, Communications, Representational_Network };
 
-	virtual void add_parsed_message_component(Component<message::Message> &component, bool needs_main_thread) = 0;
+	virtual void add_system(systems system) = 0;
 
-	virtual void remove_component(std::string name) = 0;
-
-	virtual void remove_component(Component<message::Message> &component) = 0;
-
+	virtual void remove_system(systems system) = 0;
 
 	// representational network api
 
@@ -31,16 +29,15 @@ class Interface_Framework
 	virtual std::vector<std::string> get_names_of_components() = 0;
 
 
-
 	// system state api
 
-	virtual void run(systems system);
+	virtual void run(systems system) = 0;
 
-	virtual void halt(systems system);
+	virtual void halt(systems system) = 0;
 
-	virtual void run_all();
+	virtual void run_all() = 0;
 
-	virtual void halt_all();
+	virtual void halt_all() = 0;
 
-	virtual void close() noexcept;
+	virtual void close() noexcept = 0;
 };

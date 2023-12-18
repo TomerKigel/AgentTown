@@ -18,19 +18,12 @@ namespace cai
 
 		Framework(const Framework&) = delete;
 
-		enum class systems {Graphics, Interpreter, Communications, Representational_Network };
-
 
 		//components api
 
-		void add_message_component(Component<message::Message>& component, bool needs_main_thread) {};
+		void add_system(systems system);
 
-		void add_parsed_message_component(Component<message::Message>& component, bool needs_main_thread) {};
-
-		void remove_component(std::string name) {};
-
-		void remove_component(Component<message::Message>& component) {};
-
+		void remove_system(systems system);
 
 		// representational network api
 
@@ -42,7 +35,7 @@ namespace cai
 		/// <param name="network_name"> - The name of the new network to be created.  <para />
 		/// defaults to 'DEFAULT' if no value is passed
 		/// </param>
-		void create_network(std::string network_name = "DEFAULT") {};
+		void create_network(std::string network_name = "DEFAULT");
 
 
 		/// <summary>
@@ -50,20 +43,22 @@ namespace cai
 		/// </summary>
 		/// <param name="network_name"> - The name of the network to be deleted.</param>
 		/// <exception cref="std::runtime_error">- Thrown when invalid name is passed</exception> 
-		void delete_network(std::string network_name) {};
+		void delete_network(std::string network_name);
 
 
 		// utility api
 
-		std::vector<std::string> get_names_of_components() { std::vector<std::string> a; return a; };
+		std::vector<std::string> get_names_of_components();
 
 		//System state api
 
 		void run(systems system);
 
-		void halt_all();
-
 		void halt(systems system);
+
+		void run_all();
+
+		void halt_all();
 
 		void close() noexcept;
 
@@ -82,8 +77,6 @@ namespace cai
 
 		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
 		std::unique_ptr<Concrete_Mediator> SystemMediator_;
-
-		void start_all();
 	};
 }
 

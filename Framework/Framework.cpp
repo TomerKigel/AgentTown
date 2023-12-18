@@ -14,10 +14,10 @@ Framework::Framework()
 	std::initializer_list<Component<message::Message>*> msg_based = { &*base_server_, &interpreter_ };
 	std::initializer_list<Component<message::Parsed_Message>*> pmsg_based = { &agent_network_, &engine_ };
 	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
-	start_all();
+	run_all();
 }
 
-void Framework::start_all()
+void Framework::run_all()
 {
 	context_thread_ = std::thread([this]() { io_context_.run(); });
 	interpreter_thread_ = std::thread([this]() { interpreter_.run(); });
@@ -27,7 +27,7 @@ void Framework::start_all()
 
 void Framework::run(systems system)
 {
-	switch (system) {
+	switch (systems::Communications) {
 	case systems::Communications:
 		if (base_server_.get()->state() == system_state::PAUSED) {
 			base_server_.get()->run();
@@ -61,8 +61,9 @@ void Framework::halt_all()
 	base_server_.get()->pause();
 }
 
-void cai::Framework::halt(systems system)
+void Framework::halt(systems system)
 {
+	
 	switch (system) {
 	case systems::Communications:
 		if (base_server_.get()->state() == system_state::RUNNING) {
@@ -89,8 +90,6 @@ void cai::Framework::halt(systems system)
 	}
 }
 
-
-
 void Framework::close() noexcept
 {
 	agent_network_.close();
@@ -104,4 +103,33 @@ Framework::~Framework()
 	context_thread_.join();
 	interpreter_thread_.join();
 	representational_network_thread_.join();
+}
+
+void Framework::add_system(systems system)
+{
+
+}
+
+void Framework::remove_system(systems system)
+{
+
+}
+
+void Framework::create_network(std::string network_name)
+{
+
+}
+
+void Framework::delete_network(std::string network_name) 
+{ 
+
+};
+
+
+// utility api
+
+std::vector<std::string> Framework::get_names_of_components()
+{
+	std::vector<std::string> a;
+	return a;
 }
