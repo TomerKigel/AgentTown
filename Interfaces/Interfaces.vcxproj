@@ -27,6 +27,7 @@
     <ClInclude Include="Interface_Actionable.h" />
     <ClInclude Include="Interface_Distance_Calculatable.h" />
     <ClInclude Include="Interface_Drawable.h" />
+    <ClInclude Include="Interface_Framework.h" />
     <ClInclude Include="Interface_Graphics_Observer.h" />
     <ClInclude Include="Interface_Interactable.h" />
     <ClInclude Include="Interface_Mediator.h" />
