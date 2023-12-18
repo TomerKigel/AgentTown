@@ -23,13 +23,13 @@ namespace cai
 
 		//components api
 
-		virtual void add_message_component(Component<message::Message>& component, bool needs_main_thread) {};
+		void add_message_component(Component<message::Message>& component, bool needs_main_thread) {};
 
-		virtual void add_parsed_message_component(Component<message::Message>& component, bool needs_main_thread) {};
+		void add_parsed_message_component(Component<message::Message>& component, bool needs_main_thread) {};
 
-		virtual void remove_component(std::string name) {};
+		void remove_component(std::string name) {};
 
-		virtual void remove_component(Component<message::Message>& component) {};
+		void remove_component(Component<message::Message>& component) {};
 
 
 		// representational network api
@@ -42,7 +42,7 @@ namespace cai
 		/// <param name="network_name"> - The name of the new network to be created.  <para />
 		/// defaults to 'DEFAULT' if no value is passed
 		/// </param>
-		virtual void create_network(std::string network_name = "DEFAULT") {};
+		void create_network(std::string network_name = "DEFAULT") {};
 
 
 		/// <summary>
@@ -50,12 +50,12 @@ namespace cai
 		/// </summary>
 		/// <param name="network_name"> - The name of the network to be deleted.</param>
 		/// <exception cref="std::runtime_error">- Thrown when invalid name is passed</exception> 
-		virtual void delete_network(std::string network_name) {};
+		void delete_network(std::string network_name) {};
 
 
 		// utility api
 
-		virtual std::vector<std::string> get_names_of_components() {};
+		std::vector<std::string> get_names_of_components() { std::vector<std::string> a; return a; };
 
 		//System state api
 
