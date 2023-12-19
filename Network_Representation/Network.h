@@ -12,7 +12,7 @@ public:
 
 	int size() { return nodes.size(); }
 	void clear() { nodes.clear(); }
-	bool empty() { nodes.empty(); }
+	bool empty() { return nodes.empty(); }
 
 	//Observer Sub
 	void subscribe_to_network(Interface_Network_Observer* observer)
