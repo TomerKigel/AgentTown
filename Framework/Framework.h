@@ -16,16 +16,35 @@ namespace cai
 	public:
 		Framework();
 
+		//disallow copying
 		Framework(const Framework&) = delete;
 
+		//******************//
+		//  components api  //
+		//******************//
 
-		//components api
 
+		/// <summary>
+		/// adds a system to the framework
+		/// </summary>
+		/// <param name="system"> - the system to instantiate in the framework</param>
+		/// <exception cref= "std::runtime_error"> - Thrown when a system is already part of the framework</exception>
 		void add_system(systems system);
 
+		/// <summary>
+		/// removes a system to the framework
+		/// </summary>
+		/// <param name="system"> - the system to remove from the framework</param>
+		/// <exception cref= "std::runtime_error"> - Thrown when a system is not part of the framework, not added or already removed</exception>
 		void remove_system(systems system);
 
-		// representational network api
+
+
+
+
+		//********************************//
+		//  representational network api  //
+		//********************************//
 
 		/// <summary>
 		/// creates a new representational network  <para />
@@ -46,20 +65,53 @@ namespace cai
 		void delete_network(std::string network_name);
 
 
-		// utility api
+		//**************//
+		//  utility api //
+		//**************//
 
+
+		/// <summary>
+		/// get all system names that were added to the framework
+		/// </summary>
+		/// <returns> list of system names </returns>
 		std::vector<std::string> get_names_of_components();
 
-		//System state api
+		
+		//********************//
+		//  System state api  //
+		//********************//
 
+		/// <summary>
+		/// change state of a specific system to - RUN
+		/// </summary>
+		/// <param name = "system"> - the system to run, has to have the system previously added </param>
+		/// <exception cref="std::runtime_error">- Thrown when attempting to run a system that doesn't exist in the framework</exception> 
 		void run(systems system);
 
+
+		/// <summary>
+		/// change state of a specific system to - PAUSE
+		/// </summary>
+		/// <param name = "system"> - the system to halt, has to have the system previously added </param>
+		/// <exception cref="std::runtime_error">- Thrown when attempting to halt a system that doesn't exist in the framework</exception> 
 		void halt(systems system);
 
+
+		/// <summary>
+		/// change state of all systems in the framework to - RUN
+		/// </summary>
 		void run_all();
 
+
+		/// <summary>
+		/// change state of all systems in the framework to - PAUSE
+		/// </summary>
 		void halt_all();
 
+
+		/// <summary>
+		/// terminates and removes all systems on the framework
+		/// </summary>
 		void close() noexcept;
 
 		~Framework();

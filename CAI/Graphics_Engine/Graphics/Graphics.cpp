@@ -93,6 +93,7 @@ Graphics::Graphics(sf::Vector2f tlc, std::string filename, std::shared_ptr<sf::R
 	TB.push_back(tb);
 	spr.setPosition(tlc);
 }
+
 void Graphics::Draw()
 {
 	switch (wtod)
