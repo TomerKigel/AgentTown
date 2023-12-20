@@ -6,7 +6,7 @@
 #include "Queue_Manager.h"
 #include "message.h"
 #include "Message_Generator.h"
-#include "Component.h"
+#include "System.h"
 #include <mutex>
 
 #define MAX_MESSAGE_SIZE 10240
@@ -21,7 +21,7 @@ using namespace boost::asio;
 using ip::tcp;
 
 
-class ClientThreadConnection : virtual public Connection, public std::enable_shared_from_this<ClientThreadConnection>, public Component<message::Message>
+class ClientThreadConnection : virtual public Connection, public std::enable_shared_from_this<ClientThreadConnection>, public System<message::Message>
 {
 public:
 	ClientThreadConnection(tcp::socket&& socket, std::unordered_map<int, std::shared_ptr<Connection>>& connections, int connection_id_, Interface_Mediator* mediator_);
@@ -44,7 +44,7 @@ public:
 
 	void provide_message(message::Message& msg);
 
-	std::string service_name();
+	std::string component_name();
 
 	void disconnect();
 

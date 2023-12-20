@@ -130,7 +130,7 @@ void ClientThreadConnection::provide_message(message::Message& msg)
 	send(message::to_string(msg));
 }
 
-std::string ClientThreadConnection::service_name()
+std::string ClientThreadConnection::component_name()
 {
 	return "connection id:" + this->connection_id_;
 }

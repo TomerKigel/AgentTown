@@ -6,9 +6,9 @@ Framework::Framework()
 {
 	host_ = "127.0.0.1";
 	port_ = 7777;
-	std::initializer_list<Component<message::Message>*> msg_based = { /*&*base_server_,*/ &interpreter_};
-	std::initializer_list<Component<message::Parsed_Message>*> pmsg_based = { &agent_network_/*, &engine_*/};
-	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
+	SystemMediator_ = std::make_unique<Concrete_Mediator>();
+	SystemMediator_->add_component(&interpreter_);
+	SystemMediator_->add_component(&agent_network_);
 	list_of_active_components.push_back(&interpreter_);
 	list_of_active_components.push_back(&agent_network_);
 }
@@ -21,11 +21,15 @@ void Framework::run_all()
 
 
 	//optional systems
-	base_server_->run();
-	context_thread_ = std::thread([this]() { io_context_.run(); });
+	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &*base_server_) != list_of_active_components.end()) {
+		base_server_->run();
+		context_thread_ = std::thread([this]() { io_context_.run(); });
+	}
 	
 	//blocking system because of sfml
-	engine_.run();
+	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) != list_of_active_components.end()) {
+		engine_.run();
+	}
 }
 
 void Framework::run(systems system)

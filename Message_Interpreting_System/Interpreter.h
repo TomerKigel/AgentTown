@@ -1,14 +1,14 @@
 #pragma once
 #include "message.h"
 #include "boost/lexical_cast.hpp"
-#include "Component.h"
+#include "System.h"
 #include "Message_Generator.h"
 #include "Interface_Runnable.h"
 #include "Queue_Manager.h"
 #include <mutex>
 #include "Message_Parser.h"
 
-class Interpreter : public Component<message::Message>, public Interface_Runnable
+class Interpreter : public System<message::Message>, public Interface_Runnable
 {
 public:
 	Interpreter()
@@ -55,7 +55,7 @@ public:
 	{
 		incoming_messages_.push(msg);
 	}
-	std::string service_name()
+	std::string component_name()
 	{
 		return "interpreter";
 	}

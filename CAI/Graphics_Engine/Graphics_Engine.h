@@ -13,11 +13,11 @@
 #include <boost/lexical_cast.hpp>
 #include "Queue_Manager.h"
 #include "Interface_Runnable.h"
-#include "Component.h"
+#include "System.h"
 #include "Agent.h"
 #include "Interface_Network_Observer.h"
 
-class Graphics_Engine : public Interface_Runnable , public Component<message::Parsed_Message> , public Interface_Network_Observer
+class Graphics_Engine : public Interface_Runnable , public System<message::Parsed_Message> , public Interface_Network_Observer
 {
 private:
 	std::shared_ptr<sf::RenderWindow> window_;
@@ -43,7 +43,7 @@ public:
 	void operator=(const Graphics_Engine&& gm) noexcept;
 
 	void provide_message(message::Parsed_Message &pmsg);
-	std::string service_name();
+	std::string component_name();
 
 	void agent_added(std::shared_ptr<Agent> added_agent);
 	void agent_removed(std::shared_ptr<Agent> added_agent);

@@ -130,7 +130,7 @@ namespace cai
 		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
 		std::unique_ptr<Concrete_Mediator> SystemMediator_;
 
-		std::vector<std::any> list_of_active_components;
+		std::vector<Component *> list_of_active_components;
 	};
 }
 

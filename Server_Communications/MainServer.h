@@ -6,7 +6,7 @@
 #include <mutex>
 #include "Connection.h"
 #include "message.h"
-#include "Component.h"
+#include "System.h"
 
 using std::cin;
 using std::cout;
@@ -17,7 +17,7 @@ using std::string;
 using namespace boost::asio;
 using ip::tcp;
 
-class MainServer : public Component<message::Message>
+class MainServer : public System<message::Message>
 {
 public:
 	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint);
@@ -32,7 +32,7 @@ public:
 
 	void provide_message(message::Message& msg);
 
-	std::string service_name();
+	std::string component_name();
 
 	void close();
 

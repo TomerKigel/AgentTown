@@ -54,7 +54,7 @@ void Agent_Network::provide_message(message::Parsed_Message& msg)
 	incoming_messages_.push(msg);
 }
 
-std::string Agent_Network::service_name()
+std::string Agent_Network::component_name()
 {
 	return "representational network";
 }

@@ -1,9 +1,9 @@
 #pragma once
 #include "Network.h"
 #include "Agent.h"
-#include "Component.h"
+#include "System.h"
 
-class Agent_Network : public Network<std::shared_ptr<Agent>>, public Component<message::Parsed_Message>, public Interface_Runnable
+class Agent_Network : public Network<std::shared_ptr<Agent>>, public System<message::Parsed_Message>, public Interface_Runnable
 {
 public:
 	Agent_Network();
@@ -19,7 +19,7 @@ public:
 
 	virtual void provide_message(message::Parsed_Message& msg);
 
-	std::string service_name();
+	std::string component_name();
 
 	void run();
 	void pause();

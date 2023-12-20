@@ -197,7 +197,7 @@ void Graphics_Engine::provide_message(message::Parsed_Message &pmsg)
 	incoming_messages_.push(pmsg);
 }
 
-std::string Graphics_Engine::service_name()
+std::string Graphics_Engine::component_name()
 {
 	return "graphics engine";
 }

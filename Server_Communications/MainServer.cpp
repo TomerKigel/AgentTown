@@ -70,7 +70,7 @@ void MainServer::provide_message(message::Message& msg)
 	connections_.at(msg.header.connection_id)->send(message::to_string(msg));
 }
 
-std::string MainServer::service_name()
+std::string MainServer::component_name()
 {
 	return "main server";
 }

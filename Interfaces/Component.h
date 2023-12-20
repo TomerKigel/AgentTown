@@ -9,6 +9,8 @@ public:
     {
         this->mediator_ = mediator;
     }
+
+    virtual std::string component_name() = 0;
 protected:
     Interface_Mediator* mediator_;
 };
