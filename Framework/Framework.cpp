@@ -107,7 +107,7 @@ Framework::~Framework()
 
 void Framework::add_system(systems system)
 {
-
+	
 }
 
 void Framework::remove_system(systems system)
@@ -124,9 +124,6 @@ void Framework::delete_network(std::string network_name)
 { 
 
 };
-
-
-// utility api
 
 std::vector<std::string> Framework::get_names_of_components()
 {
