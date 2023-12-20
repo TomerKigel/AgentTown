@@ -1,4 +1,4 @@
-name: Build with Boost
+name: Windows build
 
 on:
   push:
