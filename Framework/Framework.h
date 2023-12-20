@@ -27,14 +27,14 @@ namespace cai
 		/// <summary>
 		/// adds a system to the framework
 		/// </summary>
-		/// <param name="system"> - the system to instantiate in the framework</param>
+		/// <param name="system"> - the system to instantiate in the framework<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
 		/// <exception cref= "std::runtime_error"> - Thrown when a system is already part of the framework</exception>
 		void add_system(systems system);
 
 		/// <summary>
 		/// removes a system to the framework
 		/// </summary>
-		/// <param name="system"> - the system to remove from the framework</param>
+		/// <param name="system"> - the system to remove from the framework.<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
 		/// <exception cref= "std::runtime_error"> - Thrown when a system is not part of the framework, not added or already removed</exception>
 		void remove_system(systems system);
 

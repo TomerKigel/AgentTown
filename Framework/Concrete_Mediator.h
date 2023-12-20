@@ -8,16 +8,16 @@
 
 class Concrete_Mediator : public Interface_Mediator {
 public:
+    Concrete_Mediator() {}
+
     Concrete_Mediator(std::initializer_list<Component<message::Message>*> init_message_components, std::initializer_list<Component<message::Parsed_Message>*> init_parsed_message_components) {
         for (auto component : init_message_components)
         {
-            component->set_mediator(this);
-            message_components_.push_back(component);
+            add_component(component);
         }
         for (auto component : init_parsed_message_components)
         {
-            component->set_mediator(this);
-            parsed_message_components_.push_back(component);
+            add_component(component);
         }
     }
 
@@ -50,6 +50,35 @@ public:
                 component->provide_message(msg);
         }
     }
+
+    void add_component(Component<message::Message>* component)
+    {
+        component->set_mediator(this);
+        message_components_.push_back(component);
+    }
+
+    void add_component(Component<message::Parsed_Message>* component)
+    {
+        component->set_mediator(this);
+        parsed_message_components_.push_back(component);
+    }
+
+    void remove_component(std::string component_name)
+    {
+        std::erase_if(message_components_, [component_name](Component<message::Message>* component) {return component_name.compare(component->service_name()) == 0; });
+        std::erase_if(parsed_message_components_, [component_name](Component<message::Parsed_Message>* component) {return component_name.compare(component->service_name()) == 0; });
+    }
+
+    void remove_component(Component<message::Message>* component)
+    {
+        std::erase(message_components_, component);
+    }
+
+    void remove_component(Component<message::Parsed_Message>* component)
+    {
+        std::erase(parsed_message_components_, component);
+    }
+
 private:
     std::vector<Component<message::Message>*> message_components_;
     std::vector<Component<message::Parsed_Message>*> parsed_message_components_;
