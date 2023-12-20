@@ -9,6 +9,8 @@ Framework::Framework()
 	std::initializer_list<Component<message::Message>*> msg_based = { /*&*base_server_,*/ &interpreter_};
 	std::initializer_list<Component<message::Parsed_Message>*> pmsg_based = { &agent_network_/*, &engine_*/};
 	SystemMediator_ = std::make_unique<Concrete_Mediator>(msg_based, pmsg_based);
+	list_of_active_components.push_back(&interpreter_);
+	list_of_active_components.push_back(&agent_network_);
 }
 
 void Framework::run_all()
@@ -114,6 +116,7 @@ void Framework::add_system(systems system)
 		engine_ = Graphics_Engine();
 		SystemMediator_->add_component(&engine_);
 		agent_network_.subscribe_to_network(&engine_);
+		list_of_active_components.push_back(&engine_);
 		break;
 	case systems::Interpreter:
 		SystemMediator_->add_component(&interpreter_);
@@ -122,6 +125,7 @@ void Framework::add_system(systems system)
 		end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);
 		base_server_ = std::make_unique<MainServer>(io_context_, end_point_);
 		SystemMediator_->add_component(&*base_server_);
+		list_of_active_components.push_back(&*base_server_);
 		break;
 	case systems::Representational_Network:
 		SystemMediator_->add_component(&agent_network_);
@@ -151,7 +155,7 @@ void Framework::remove_system(systems system)
 
 void Framework::create_network(std::string network_name)
 {
-
+	
 }
 
 void Framework::delete_network(std::string network_name) 

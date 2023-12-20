@@ -34,6 +34,7 @@
     <ClInclude Include="Interface_Network_Observer.h" />
     <ClInclude Include="Interface_Observer.h" />
     <ClInclude Include="Interface_Runnable.h" />
+    <ClInclude Include="System.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

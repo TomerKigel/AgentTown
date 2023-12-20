@@ -10,7 +10,7 @@ class Concrete_Mediator : public Interface_Mediator {
 public:
     Concrete_Mediator() {}
 
-    Concrete_Mediator(std::initializer_list<Component<message::Message>*> init_message_components, std::initializer_list<Component<message::Parsed_Message>*> init_parsed_message_components) {
+    Concrete_Mediator(std::initializer_list<Component> init_components) {
         for (auto component : init_message_components)
         {
             add_component(component);

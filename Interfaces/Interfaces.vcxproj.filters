@@ -56,6 +56,9 @@
     <ClInclude Include="Interface_Framework.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
