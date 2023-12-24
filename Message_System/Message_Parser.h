@@ -63,6 +63,8 @@ namespace message
 
 		if (const auto new_id = message::get_part_of_message(msg, "network_name:", "\n"))
 			pmsg.network_name = new_id.value();
+		else
+			pmsg.network_name = "DEFAULT";
 
 		if (const auto new_id = message::get_part_of_message(msg, "new_id:", "\n"))
 			pmsg.new_id = boost::lexical_cast<int>(new_id.value());
