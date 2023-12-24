@@ -36,7 +36,7 @@ Contact information:
 #include "Interpreter.h" 
 #include "message.h"
 #include "Message_Parser.h"
-#include "Agent_Network.h"
+#include "Networks_Manager.h"
 #include "System.h"
 
 class Concrete_Mediator : public Interface_Mediator {
@@ -62,7 +62,7 @@ public:
        auto dest = pmsg.destinations.front();
         for (auto component : components_)
         {
-            Agent_Network* network = dynamic_cast<Agent_Network*>(component);
+            Networks_Manager* network = dynamic_cast<Networks_Manager*>(component);
             if(network)
             {
                 network->provide_message(pmsg);

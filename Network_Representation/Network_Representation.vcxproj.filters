@@ -21,6 +21,12 @@
     <ClCompile Include="Agent_Network.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Networks_Manager.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Networks_Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent_Network.h">

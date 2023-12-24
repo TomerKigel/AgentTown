@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClCompile Include="Agent_Network.cpp" />
     <ClCompile Include="Network.h" />
+    <ClCompile Include="Networks_Manager.cpp" />
+    <ClCompile Include="Networks_Manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent_Network.h" />

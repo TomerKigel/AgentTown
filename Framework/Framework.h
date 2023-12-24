@@ -40,7 +40,7 @@ Contact information:
 #include "Queue_Manager.h"
 #include "Concrete_Mediator.h"
 #include "Interpreter.h"
-#include "Agent_Network.h"
+#include "Networks_Manager.h"
 #include "Interface_Framework.h"
 
 namespace cai
@@ -50,13 +50,15 @@ namespace cai
 	public:
 		Framework();
 
+		~Framework();
+
 		//copying this class is disallowed
 		Framework(const Framework&) = delete;
+
 
 		//******************//
 		//  components api  //
 		//******************//
-
 
 		/// <summary>
 		/// adds a system to the framework
@@ -71,9 +73,6 @@ namespace cai
 		/// <param name="system"> - the system to remove from the framework.<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
 		/// <exception cref= "std::runtime_error"> - Thrown when a system is not part of the framework, not added or already removed</exception>
 		void remove_system(systems system);
-
-
-
 
 
 		//********************************//
@@ -102,7 +101,6 @@ namespace cai
 		//**************//
 		//  utility api //
 		//**************//
-
 
 		/// <summary>
 		/// get all system names that were added to the framework
@@ -148,23 +146,29 @@ namespace cai
 		/// </summary>
 		void close() noexcept;
 
-		~Framework();
-
 	private:
-		std::unique_ptr<MainServer> base_server_;
+		//handlers of framework systems
+
+		std::unique_ptr<Concrete_Mediator> SystemMediator_;
 		Graphics_Engine engine_;
 		Interpreter interpreter_;
-		Agent_Network agent_network_;
+		Networks_Manager networks_manager_;
+		std::unique_ptr<MainServer> base_server_;
+
+		//network configuration variables for the base_server_ system
 
 		boost::asio::io_context io_context_;
 		boost::asio::ip::tcp::endpoint end_point_;
 		std::string host_;
 		int port_;
 
-		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
-		std::unique_ptr<Concrete_Mediator> SystemMediator_;
+		//Thread handlers
 
-		std::vector<Component *> list_of_active_components;
+		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
+
+		//vector of all active systems 
+
+		std::vector<Component*> list_of_active_components;
 	};
 }
 
