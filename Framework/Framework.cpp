@@ -42,6 +42,7 @@ Framework::Framework()
 	//set network parameters
 	host_ = "127.0.0.1";
 	port_ = 7777;
+	
 
 	//add mandatory systems
 	SystemMediator_ = std::make_unique<Concrete_Mediator>();
@@ -61,8 +62,8 @@ void Framework::run_all()
 
 
 	//run optional systems
-	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &*base_server_) != list_of_active_components.end()) {
-		base_server_->run();
+	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
+		base_server_.run();
 		context_thread_ = std::thread([this]() { io_context_.run(); });
 	}
 	
@@ -76,8 +77,8 @@ void Framework::run(systems system)
 {
 	switch (systems::Communications) {
 	case systems::Communications:
-		if (base_server_->state() == system_state::PAUSED) {
-			base_server_->run();
+		if (base_server_.state() == system_state::PAUSED) {
+			base_server_.run();
 		}
 		break;
 	case systems::Interpreter:
@@ -105,15 +106,15 @@ void Framework::halt_all()
 	interpreter_.pause();
 	networks_manager_.pause_all();
 	engine_.pause();
-	base_server_.get()->pause();
+	base_server_.pause();
 }
 
 void Framework::halt(systems system)
 {
 	switch (system) {
 	case systems::Communications:
-		if (base_server_.get()->state() == system_state::RUNNING) {
-			base_server_.get()->pause();
+		if (base_server_.state() == system_state::RUNNING) {
+			base_server_.pause();
 		}
 		break;
 	case systems::Interpreter:
@@ -141,7 +142,7 @@ void Framework::close() noexcept
 	networks_manager_.close_all();
 	interpreter_.close();
 	engine_.close();
-	base_server_->close();
+	base_server_.close();
 }
 
 Framework::~Framework()
@@ -171,11 +172,11 @@ void Framework::add_system(systems system)
 		//log no system added
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &*base_server_) == list_of_active_components.end()) {
+		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) == list_of_active_components.end()) {
 			end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);
-			base_server_ = std::make_unique<MainServer>(io_context_, end_point_);
-			SystemMediator_->add_component(&*base_server_);
-			list_of_active_components.push_back(&*base_server_);
+			base_server_.bind_server(end_point_);
+			SystemMediator_->add_component(&base_server_);
+			list_of_active_components.push_back(&base_server_);
 		}
 		else
 		{
@@ -202,8 +203,8 @@ void Framework::remove_system(systems system)
 		//log can't remove interpreter
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &*base_server_) != list_of_active_components.end()) {
-			SystemMediator_->remove_component(&*base_server_);
+		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
+			SystemMediator_->remove_component(&base_server_);
 		}
 		break;
 	case systems::Representational_Network:

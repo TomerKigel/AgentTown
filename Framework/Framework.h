@@ -147,18 +147,19 @@ namespace cai
 		void close() noexcept;
 
 	private:
+		//network configuration variables for the base_server_ system
+
+		boost::asio::io_context io_context_;
+		boost::asio::ip::tcp::endpoint end_point_;
+
 		//handlers of framework systems
 
 		std::unique_ptr<Concrete_Mediator> SystemMediator_;
 		Graphics_Engine engine_;
 		Interpreter interpreter_;
 		Networks_Manager networks_manager_;
-		std::unique_ptr<MainServer> base_server_;
+		MainServer base_server_{ io_context_,end_point_};
 
-		//network configuration variables for the base_server_ system
-
-		boost::asio::io_context io_context_;
-		boost::asio::ip::tcp::endpoint end_point_;
 		std::string host_;
 		int port_;
 

@@ -39,7 +39,19 @@ MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint&
 	running_connection_id_ = 1;
 	system_state_ = system_state::RUNNING;
 }
+void MainServer::bind_server(const tcp::endpoint& endpoint)
+{
+	acceptor_.close(); // Close the existing acceptor
 
+	try {
+		acceptor_.open(endpoint.protocol());
+		acceptor_.bind(endpoint);
+		acceptor_.listen();
+	}
+	catch (std::exception& e) {
+		std::cerr << "Error rebinding acceptor: " << e.what() << std::endl;
+	}
+}
 
 MainServer::~MainServer() {
 	close();

@@ -54,6 +54,8 @@ class MainServer : public System<message::Message>
 public:
 	MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint);
 
+	void bind_server(const tcp::endpoint& endpoint);
+
 	virtual ~MainServer();
 
 	void wait_for_connection();
@@ -70,6 +72,7 @@ public:
 
 private:
 	tcp::acceptor acceptor_;
+	boost::asio::io_context temp_io_context;
 
 	std::unordered_map<int, std::shared_ptr<Connection>> connections_;
 	int running_connection_id_;
