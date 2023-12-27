@@ -148,24 +148,21 @@ namespace cai
 
 	private:
 		//network configuration variables for the base_server_ system
-
-		boost::asio::io_context io_context_;
-		boost::asio::ip::tcp::endpoint end_point_;
-
-		//handlers of framework systems
-
-		std::unique_ptr<Concrete_Mediator> SystemMediator_;
-		Graphics_Engine engine_;
-		Interpreter interpreter_;
-		Networks_Manager networks_manager_;
-		MainServer base_server_{ io_context_,end_point_};
-
 		std::string host_;
 		int port_;
 
+		//handlers of framework systems
+
+		Concrete_Mediator SystemMediator_;
+		Graphics_Engine engine_;
+		Interpreter interpreter_;
+		Networks_Manager networks_manager_;
+		MainServer base_server_;
+
+		
 		//Thread handlers
 
-		std::thread context_thread_, engine_thread_, interpreter_thread_, representational_network_thread_;
+		std::thread engine_thread_, interpreter_thread_, representational_network_thread_;
 
 		//vector of all active systems 
 

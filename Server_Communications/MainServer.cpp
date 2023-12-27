@@ -34,18 +34,24 @@ Contact information:
 #include "ClientThreadConnection.h"
 
 
-MainServer::MainServer(boost::asio::io_context& io_context, const tcp::endpoint& endpoint) : acceptor_(io_context, endpoint)
+MainServer::MainServer() : acceptor_(io_context_, end_point_)
 {
 	running_connection_id_ = 1;
 	system_state_ = system_state::RUNNING;
 }
-void MainServer::bind_server(const tcp::endpoint& endpoint)
+
+void MainServer::bind_server(std::string host, int port)
 {
+
+	host_ = host;
+	port_ = port;
+
 	acceptor_.close(); // Close the existing acceptor
 
+	end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host), port); // rebind the endpoint;
 	try {
-		acceptor_.open(endpoint.protocol());
-		acceptor_.bind(endpoint);
+		acceptor_.open(end_point_.protocol());
+		acceptor_.bind(end_point_);
 		acceptor_.listen();
 	}
 	catch (std::exception& e) {
@@ -59,6 +65,7 @@ MainServer::~MainServer() {
 
 bool MainServer::run() {
 	std::cout << "Main-Server starting" << std::endl;
+	context_thread_ = std::thread([this]() { io_context_.run(); });
 	try {
 		system_state_ = system_state::RUNNING;
 		wait_for_connection();
@@ -102,6 +109,7 @@ void MainServer::close() {
 		for (auto& connection : connections_)
 			connection.second->disconnect();
 		system_state_ = system_state::TERMINATED;
+		context_thread_.join();
 	}
 	catch (...) {
 		std::cout << "closing failed: connection already closed" << std::endl;

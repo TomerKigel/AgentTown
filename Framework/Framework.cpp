@@ -45,9 +45,8 @@ Framework::Framework()
 	
 
 	//add mandatory systems
-	SystemMediator_ = std::make_unique<Concrete_Mediator>();
-	SystemMediator_->add_component(&interpreter_);
-	SystemMediator_->add_component(&networks_manager_);
+	SystemMediator_.add_component(&interpreter_);
+	SystemMediator_.add_component(&networks_manager_);
 
 	//set mandatory systems as active
 	list_of_active_components.push_back(&interpreter_);
@@ -64,7 +63,7 @@ void Framework::run_all()
 	//run optional systems
 	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
 		base_server_.run();
-		context_thread_ = std::thread([this]() { io_context_.run(); });
+		//context_thread_ = std::thread([this]() { io_context_.run(); });
 	}
 	
 	
@@ -147,7 +146,6 @@ void Framework::close() noexcept
 
 Framework::~Framework()
 {
-	context_thread_.join();
 	interpreter_thread_.join();
 	representational_network_thread_.join();
 }
@@ -159,7 +157,7 @@ void Framework::add_system(systems system)
 	case systems::Graphics:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) == list_of_active_components.end()){
 			engine_ = Graphics_Engine();
-			SystemMediator_->add_component(&engine_);
+			SystemMediator_.add_component(&engine_);
 			networks_manager_.subscribe_to_network(&engine_);
 			list_of_active_components.push_back(&engine_);
 		}
@@ -173,9 +171,9 @@ void Framework::add_system(systems system)
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) == list_of_active_components.end()) {
-			end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);
-			base_server_.bind_server(end_point_);
-			SystemMediator_->add_component(&base_server_);
+			/*end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);*/
+			base_server_.bind_server(host_,port_);
+			SystemMediator_.add_component(&base_server_);
 			list_of_active_components.push_back(&base_server_);
 		}
 		else
@@ -195,7 +193,7 @@ void Framework::remove_system(systems system)
 	{
 	case systems::Graphics:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) != list_of_active_components.end()) {
-			SystemMediator_->remove_component(&engine_);
+			SystemMediator_.remove_component(&engine_);
 			networks_manager_.unsubscribe_from_network(&engine_);
 		}
 		break;
@@ -204,7 +202,7 @@ void Framework::remove_system(systems system)
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
-			SystemMediator_->remove_component(&base_server_);
+			SystemMediator_.remove_component(&base_server_);
 		}
 		break;
 	case systems::Representational_Network:

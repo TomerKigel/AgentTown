@@ -217,3 +217,4 @@ void Graphics_Engine::close()
 {
 	this->system_state_ = system_state::TERMINATED;
 }
+

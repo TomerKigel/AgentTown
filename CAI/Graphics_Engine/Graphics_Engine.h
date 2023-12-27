@@ -53,5 +53,4 @@ public:
 	void pause();
 	void restart();
 	void close();
-
 };
