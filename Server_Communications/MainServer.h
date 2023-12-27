@@ -111,17 +111,22 @@ private:
 	/// </summary>
 	void wait_for_connection();
 
+	//endpoint parameters
 
-	//
 	std::string host_ = "127.0.0.1";
 	int port_ = 7777;
-
 	boost::asio::ip::tcp::endpoint end_point_{ boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_) };
-	boost::asio::io_context io_context_;
-	tcp::acceptor acceptor_;
+
+	//connection managment
 
 	std::unordered_map<int, std::shared_ptr<Connection>> connections_;
 	int running_connection_id_;
+
+	//threads
+
 	std::vector<std::thread> threads_;
 	std::thread context_thread_;
+
+	boost::asio::io_context io_context_;
+	tcp::acceptor acceptor_;
 };
