@@ -33,16 +33,36 @@ Contact information:
 #pragma once
 #include "Interface_Mediator.h"
 
-class Component{
+/// <summary>
+/// Represents a base class for components participating in the mediator pattern.
+/// </summary>
+class Component
+{
 public:
+    /// <summary>
+    /// Constructor for the Component class.
+    /// </summary>
+    /// <param name="mediator">The mediator to associate with the component.</param>
     Component(Interface_Mediator* mediator = nullptr) : mediator_(mediator) {}
 
+    /// <summary>
+    /// Set the mediator for the component.
+    /// </summary>
+    /// <param name="mediator">The mediator to set.</param>
     void set_mediator(Interface_Mediator* mediator)
     {
         this->mediator_ = mediator;
     }
 
+    /// <summary>
+    /// Get the name of the component.
+    /// </summary>
+    /// <returns>The name of the component.</returns>
     virtual std::string component_name() = 0;
+
 protected:
+    /// <summary>
+    /// The mediator associated with the component.
+    /// </summary>
     Interface_Mediator* mediator_;
 };

@@ -163,11 +163,11 @@ void Framework::add_system(systems system)
 		}
 		else
 		{
-			//log no system added, already exists
+			//log - no system added, already exists
 		}
 		break;
 	case systems::Interpreter:
-		//log no system added
+		//log - no system added
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) == list_of_active_components.end()) {
@@ -178,11 +178,11 @@ void Framework::add_system(systems system)
 		}
 		else
 		{
-			//log no system added, already exists
+			//log - no system added, already exists
 		}
 		break;
 	case systems::Representational_Network:
-		//log no system added
+		//log - no system added
 		break;
 	}
 }
@@ -198,7 +198,7 @@ void Framework::remove_system(systems system)
 		}
 		break;
 	case systems::Interpreter:
-		//log can't remove interpreter
+		//log - can't remove interpreter
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
@@ -206,7 +206,7 @@ void Framework::remove_system(systems system)
 		}
 		break;
 	case systems::Representational_Network:
-		//log can't remove Representational_Network
+		//log - can't remove Representational_Network
 		break;
 	}
 }

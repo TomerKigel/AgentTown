@@ -36,20 +36,52 @@ Contact information:
 
 using std::string;
 
+/// <summary>
+/// Represents a connection interface for communication.
+/// </summary>
 class Connection
 {
 public:
-	virtual int get_id() const = 0;
+    /// <summary>
+    /// Get the unique identifier for the connection.
+    /// </summary>
+    /// <returns>The connection ID.</returns>
+    virtual int get_id() const = 0;
 
-	virtual void run() = 0;
+    /// <summary>
+    /// Run the connection logic.
+    /// This method is responsible for handling the main execution flow of the connection.
+    /// </summary>
+    virtual void run() = 0;
 
-	virtual void read() = 0;
+    /// <summary>
+    /// Read data from the connection.
+    /// Implementations should define how data is read from the connection source.
+    /// </summary>
+    virtual void read() = 0;
 
-	virtual void send(const string& message) = 0;
+    /// <summary>
+    /// Send a message to the connection.
+    /// </summary>
+    /// <param name="message">The message to be sent.</param>
+    virtual void send(const std::string& message) = 0;
 
-	virtual void send_to_id_list(const std::string& message, const std::vector<int> id_list) = 0;
+    /// <summary>
+    /// Send a message to a specific list of connection IDs.
+    /// </summary>
+    /// <param name="message">The message to be sent.</param>
+    /// <param name="id_list">The list of connection IDs to receive the message.</param>
+    virtual void send_to_id_list(const std::string& message, const std::vector<int> id_list) = 0;
 
-	virtual void send_all(const string& message) = 0;
+    /// <summary>
+    /// Send a message to all connected clients.
+    /// </summary>
+    /// <param name="message">The message to be sent.</param>
+    virtual void send_all(const std::string& message) = 0;
 
-	virtual void disconnect() = 0;
+    /// <summary>
+    /// Disconnect the connection.
+    /// Implementations should handle the necessary steps to disconnect and clean up resources.
+    /// </summary>
+    virtual void disconnect() = 0;
 };

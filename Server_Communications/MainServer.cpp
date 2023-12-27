@@ -103,12 +103,12 @@ void MainServer::wait_for_connection()
 }
 
 
-
 void MainServer::close() {
 	try {
+		system_state_ = system_state::TERMINATED;
+		acceptor_.close();
 		for (auto& connection : connections_)
 			connection.second->disconnect();
-		system_state_ = system_state::TERMINATED;
 		context_thread_.join();
 	}
 	catch (...) {
