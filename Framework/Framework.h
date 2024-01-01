@@ -43,6 +43,7 @@ Contact information:
 #include "Networks_Manager.h"
 #include "Interface_Framework.h"
 
+
 namespace cai
 {
 	class Framework : public Interface_Framework
@@ -147,6 +148,9 @@ namespace cai
 		void close() noexcept;
 
 	private:
+		//logging init
+		void init_logging();
+
 		//network configuration variables for the base_server_ system
 		std::string host_;
 		int port_;

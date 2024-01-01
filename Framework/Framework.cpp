@@ -35,14 +35,41 @@ Contact information:
 #include "Framework.h"
 #include "Component.h"
 
+#include <boost/log/trivial.hpp>
+#include <boost/log/core.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/utility/setup/file.hpp>
+#include <boost/log/utility/setup/console.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/utility/setup/common_attributes.hpp>
+
 using namespace cai;
+
+
+namespace keywords = boost::log::keywords;
+namespace logging = boost::log;
+namespace sinks = boost::log::sinks;
+namespace expr = boost::log::expressions;
+namespace attrs = boost::log::attributes;
+
+void Framework::init_logging() {
+	logging::add_file_log(
+		"log.txt",  // File name
+		keywords::format = "[%TimeStamp%] [%Severity%]: %Message%"
+	);
+	logging::add_common_attributes();
+}
 
 Framework::Framework()
 {
 	//set network parameters
 	host_ = "127.0.0.1";
 	port_ = 7777;
-	
+
+	//logging starts
+	init_logging();
+	BOOST_LOG_TRIVIAL(info) << "Framework is initialized with:\tport:" << port_ << "\t\ip:" << host_;
+	logging::core::get()->flush();
 
 	//add mandatory systems
 	SystemMediator_.add_component(&interpreter_);
@@ -163,7 +190,7 @@ void Framework::add_system(systems system)
 		}
 		else
 		{
-			//log - no system added, already exists
+			BOOST_LOG_TRIVIAL(warning) << "no system added, already exists";
 		}
 		break;
 	case systems::Interpreter:
@@ -171,18 +198,17 @@ void Framework::add_system(systems system)
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) == list_of_active_components.end()) {
-			/*end_point_ = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(host_), port_);*/
 			base_server_.bind_server(host_,port_);
 			SystemMediator_.add_component(&base_server_);
 			list_of_active_components.push_back(&base_server_);
 		}
 		else
 		{
-			//log - no system added, already exists
+			BOOST_LOG_TRIVIAL(warning) << "no system added, already exists";
 		}
 		break;
 	case systems::Representational_Network:
-		//log - no system added
+		BOOST_LOG_TRIVIAL(warning) << "no system added";
 		break;
 	}
 }
@@ -198,7 +224,7 @@ void Framework::remove_system(systems system)
 		}
 		break;
 	case systems::Interpreter:
-		//log - can't remove interpreter
+		BOOST_LOG_TRIVIAL(warning) << "can't remove interpreter";
 		break;
 	case systems::Communications:
 		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
@@ -206,7 +232,7 @@ void Framework::remove_system(systems system)
 		}
 		break;
 	case systems::Representational_Network:
-		//log - can't remove Representational_Network
+		BOOST_LOG_TRIVIAL(warning) << "can't remove Representational_Network";
 		break;
 	}
 }
