@@ -68,7 +68,7 @@ Framework::Framework()
 
 	//logging starts
 	init_logging();
-	BOOST_LOG_TRIVIAL(info) << "Framework is initialized with:\tport:" << port_ << "\t\ip:" << host_;
+	BOOST_LOG_TRIVIAL(info) << "Framework is initialized with:\tport:" << port_ << "\tip:" << host_;
 	logging::core::get()->flush();
 
 	//add mandatory systems
