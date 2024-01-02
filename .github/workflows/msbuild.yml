@@ -41,21 +41,11 @@ jobs:
         
       - name: Build Boost dynamic
         uses: egor-tensin/build-boost@v1.4
-        id: boostdy
+        id: boost
         with:
           version: 1.81.0
           libraries: log filesystem program_options system
           platform: x64
-          toolset: msvc142
-          configuration: Debug
-      - name: Build Boost static
-        uses: egor-tensin/build-boost@v1.4
-        id: boostst
-        with:
-          version: 1.81.0
-          libraries: log filesystem program_options system
-          platform: x64
-          static: 1
           toolset: msvc142
           configuration: Debug
         
