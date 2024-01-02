@@ -72,4 +72,5 @@ target_link_libraries(Framework_exe PRIVATE
     sfml-window
     sfml-system
     sfml-audio
+    boost_log
 )
