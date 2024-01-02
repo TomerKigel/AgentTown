@@ -31,6 +31,7 @@ Contact information:
 	github:   https://github.com/TomerKigel
 */
 
+#define BOOST_ALL_DYN_LINK 1
 
 #include "Framework.h"
 #include "Component.h"
