@@ -47,7 +47,7 @@ jobs:
           libraries: log filesystem program_options system
           platform: x64
           toolset: msvc142
-          configuration: Debug
+          configuration: Release
         
       - name: Build project
         run: |
