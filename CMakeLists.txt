@@ -72,4 +72,5 @@ target_link_libraries(Framework_exe PRIVATE
     sfml-system
     sfml-audio
     ${Boost_LIBRARIES}
+    Boost::log
 )
