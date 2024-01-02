@@ -54,7 +54,7 @@ target_include_directories(Framework_exe PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
-set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS OFF)
 
 find_package(SFML 2.5.1 COMPONENTS graphics window system audio REQUIRED)
 find_package(Boost 1.81.0 EXACT)
