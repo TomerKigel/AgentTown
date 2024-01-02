@@ -41,7 +41,7 @@ jobs:
         
       - name: Build Boost dynamic
         uses: egor-tensin/build-boost@v1.4
-        id: boost
+        id: boostdy
         with:
           version: 1.81.0
           libraries: log filesystem program_options system
@@ -50,7 +50,7 @@ jobs:
           configuration: Debug
       - name: Build Boost static
         uses: egor-tensin/build-boost@v1.4
-        id: boost
+        id: boostst
         with:
           version: 1.81.0
           libraries: log filesystem program_options system
