@@ -1,1 +1,1 @@
-[2024-01-02 17:54:26.572472] [info]: Framework is initialized with:	port:7777	ip:127.0.0.1
+[2024-01-02 17:58:29.379758] [info]: Framework is initialized with:	port:7777	ip:127.0.0.1
