@@ -24,4 +24,5 @@ target_link_libraries(Framework_exe PRIVATE
     Network_Representation
     Server_Communications
     CAI
+    boost_log
 )
