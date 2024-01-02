@@ -53,11 +53,10 @@ target_include_directories(Framework_exe PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/CAI
     ${Boost_INCLUDE_DIRS}
 )
+find_package(SFML 2.5.1 COMPONENTS graphics window system audio REQUIRED)
+find_package(Boost 1.81.0 EXACT COMPONENTS log)
 
 set(Boost_USE_STATIC_LIBS OFF)
-
-find_package(SFML 2.5.1 COMPONENTS graphics window system audio REQUIRED)
-find_package(Boost 1.81.0 EXACT)
 
 # Link the libraries
 target_link_libraries(Framework_exe PRIVATE
@@ -72,5 +71,5 @@ target_link_libraries(Framework_exe PRIVATE
     sfml-window
     sfml-system
     sfml-audio
-    boost_log
+    ${Boost_LIBRARIES}
 )
