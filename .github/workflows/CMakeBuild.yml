@@ -36,9 +36,8 @@ jobs:
       id: boost
       with:
         version: 1.81.0
-        libraries: filesystem program_options system
+        libraries: log filesystem program_options system
         platform: x64
-        static: 1
         toolset: gcc
         configuration: Debug
 
