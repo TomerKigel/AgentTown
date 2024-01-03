@@ -92,7 +92,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;D:\a\AgentTown\boost\boost_1_81_0</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>
@@ -145,7 +145,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost;%(AdditionalIncludeDirectories);C:\Users\Tomer7\source\repos\AgentTown_continued\AI_Elements;C:\Users\Tomer7\source\repos\AgentTown_continued\Interfaces;C:\Users\Tomer7\source\repos\AgentTown_continued\Message_System;C:\Users\Tomer7\source\repos\AgentTown_continued\Network_Representation;C:\Users\Tomer7\source\repos\AgentTown_continued\Server_Communications;D:\a\AgentTown\boost\boost_1_81_0</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile>

@@ -114,7 +114,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Message_System;$(SolutionDir)\Interfaces;C:\Program Files\boost\boost_1_81_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Message_System;$(SolutionDir)\Interfaces;C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost\boost_1_81_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -134,7 +134,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Message_System;$(SolutionDir)\Interfaces;C:\Program Files\boost\boost_1_81_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Message_System;$(SolutionDir)\Interfaces;C:\Program Files\boost\boost_1_81_0;D:\a\AgentTown\boost\boost_1_81_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
