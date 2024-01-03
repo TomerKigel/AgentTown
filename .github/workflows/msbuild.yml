@@ -49,6 +49,7 @@ jobs:
           version: 1.81.0
           libraries: log filesystem program_options system
           platform: x64
+          static: 1
           toolset: msvc142
           configuration: Debug
           
