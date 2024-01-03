@@ -21,6 +21,7 @@ jobs:
       
       - name: Install SFML
         uses: oprypin/install-sfml@v1
+        sfml: 2.5.1
         
       - name: Checkout repository
         uses: actions/checkout@v3
