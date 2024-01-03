@@ -52,7 +52,11 @@ jobs:
           static: 1
           toolset: msvc142
           configuration: Debug
-          
+
+      - name: debug
+        run: |
+         cd "D:\a\AgentTown\boost\stage\x64\Debug\lib"
+         ls
         
       - name: Build project
         run: |
