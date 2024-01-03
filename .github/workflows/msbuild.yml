@@ -57,7 +57,7 @@ jobs:
         run: |
             # Define variables
             $boostVersion = "1.81.1"
-            $boostUrl = "https://dl.bintray.com/boostorg/release/$boostVersion/source/boost_$($boostVersion.Replace('.', '_')).zip"
+            $boostUrl = "https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.zip"
 
             # Create log file
             $logFilePath = "BoostInstallationLog.txt"
