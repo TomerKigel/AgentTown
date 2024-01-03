@@ -87,6 +87,9 @@ jobs:
             
             Write-Host "Boost $boostVersion has been installed to $installDir"
 
+            cd "D:\a\AgentTown\boost"
+            ls
+
 
         
       - name: Build project
