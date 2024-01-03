@@ -57,9 +57,9 @@ jobs:
         run: |
          cd "D:\a\AgentTown\boost\stage\x64\Debug\lib"
          ls
-         cd " D:\a\AgentTown\boost\stage"
+         cd "D:\a\AgentTown\boost\stage"
          ls
-         cd " D:\a\AgentTown\boost"
+         cd "D:\a\AgentTown\boost"
          ls
         
       - name: Build project
