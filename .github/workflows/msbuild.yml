@@ -87,10 +87,9 @@ jobs:
             
             Write-Host "Boost $boostVersion has been installed to $installDir"
 
-            cd "D:\a\AgentTown\boost\boost_1_81_0\stage"
+            cd "D:\a\AgentTown\boost\boost_1_81_0"
             ls
-            cd "D:\a\AgentTown\boost\boost_1_81_0\stage\lib"
-            ls
+            
            
 
         
