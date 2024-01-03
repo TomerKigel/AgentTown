@@ -57,7 +57,7 @@ jobs:
         run: |
             # Define Boost version and download URL
             $boostVersion = "1.81.0"
-            $boostDownloadUrl = "https://boostorg.jfrog.io/artifactory/main/release/$boostVersion/source/boost_$($boostVersion -replace '\.', '_').tar.gz"
+            $boostDownloadUrl = "https://boostorg.jfrog.io/artifactory/main/release/$boostVersion/source/boost_$($boostVersion -replace '\.', '_').zip"
             
             # Set installation directory to D:\a\AgentTown\boost
             $installDir = "D:\a\AgentTown\boost"
@@ -68,12 +68,12 @@ jobs:
             }
             
             # Download Boost
-            $boostZipFile = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_').tar.gz"
+            $boostZipFile = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_').zip"
             Invoke-WebRequest -Uri $boostDownloadUrl -OutFile $boostZipFile
             
             # Extract Boost directly into the installation directory
             Write-Host "Extracting Boost..."
-            tar -xzf $boostZipFile -C $installDir --strip-components 1
+            Expand-Archive -Path $boostZipFile -DestinationPath $installDir
             
             # Set current working directory to Boost source directory
             $boostSrcDir = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_')"
