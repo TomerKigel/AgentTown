@@ -83,7 +83,7 @@ jobs:
             & .\bootstrap.bat --with-toolset=msvc-14.2
             
             # Build and Install Boost with MSVC 14.2, link shared, and add --with-log
-            & .\b2 install -j4 --perfix="D:\a\AgentTown\boost\boost_1_81_0" toolset=msvc-14.2 link=shared --with-log
+            & .\b2 install -j4 --prefix="D:\a\AgentTown\boost\boost_1_81_0" toolset=msvc-14.2 link=shared --with-log
             
             Write-Host "Boost $boostVersion has been installed to $installDir"
 
