@@ -55,7 +55,7 @@ jobs:
         
       - name: Build project
         run: |
-          msbuild /m /p:Configuration=Debug /Platform:x64 CAI.sln
+          msbuild /m /p:Configuration=Debug CAI.sln
           
       - name: Setup VSTest and add to PATH
         uses: darenm/Setup-VSTest@v1
