@@ -55,7 +55,6 @@ jobs:
 
       - name: Build Boost manually
         run: |
-         - name: Build Boost
           # Define Boost version and download URL
           $boostVersion = "1.81.0"
           $boostDownloadUrl = "https://boostorg.jfrog.io/artifactory/main/release/$boostVersion/source/boost_$($boostVersion -replace '\.', '_').tar.gz"
