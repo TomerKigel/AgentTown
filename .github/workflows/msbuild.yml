@@ -55,37 +55,38 @@ jobs:
 
       - name: debug
         run: |
-          # Define Boost version and download URL
-          $boostVersion = "1.81.0"
-          $boostDownloadUrl = "https://boostorg.jfrog.io/artifactory/main/release/$boostVersion/source/boost_$($boostVersion -replace '\.', '_').tar.gz"
-          
-          # Set installation directory
-          $installDir = "C:\Boost"
-          
-          # Create installation directory if it doesn't exist
-          if (-not (Test-Path -Path $installDir)) {
-              New-Item -ItemType Directory -Path $installDir | Out-Null
-          }
-          
-          # Download Boost
-          $boostZipFile = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_').tar.gz"
-          Invoke-WebRequest -Uri $boostDownloadUrl -OutFile $boostZipFile
-          
-          # Extract Boost
-          Write-Host "Extracting Boost..."
-          tar -xzf $boostZipFile -C $installDir
-          
-          # Navigate to Boost source directory
-          $boostSrcDir = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_')"
-          Set-Location -Path $boostSrcDir
-          
-          # Bootstrap Boost.Build
-          & .\bootstrap.bat
-          
-          # Build and Install Boost
-          & .\b2 install -j4 --prefix=$installDir
-          
-          Write-Host "Boost $boostVersion has been installed to $installDir"
+         # Define Boost version and download URL
+         $boostVersion = "1.81.0"
+         $boostDownloadUrl = "https://boostorg.jfrog.io/artifactory/main/release/$boostVersion/source/boost_$($boostVersion -replace '\.', '_').tar.gz"
+        
+         # Set installation directory
+         $installDir = "C:\Boost"
+        
+         # Create installation directory if it doesn't exist
+         if (-not (Test-Path -Path $installDir)) {
+             New-Item -ItemType Directory -Path $installDir | Out-Null
+         }
+        
+         # Download Boost
+         $boostZipFile = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_').tar.gz"
+         Invoke-WebRequest -Uri $boostDownloadUrl -OutFile $boostZipFile
+        
+         # Extract Boost
+         Write-Host "Extracting Boost..."
+         tar -xzf $boostZipFile -C $installDir
+         
+         # Navigate to Boost source directory
+         $boostSrcDir = Join-Path $installDir "boost_$($boostVersion -replace '\.', '_')"
+         Set-Location -Path $boostSrcDir
+         
+         # Bootstrap Boost.Build with MSVC 14.2
+         & .\bootstrap.bat --with-toolset=msvc-14.2
+         
+         # Build and Install Boost with MSVC 14.2, link shared and add --with-log
+         & .\b2 install -j4 --prefix=$installDir toolset=msvc-14.2 link=shared --with-log
+         
+         Write-Host "Boost $boostVersion has been installed to $installDir"
+
 
         
       - name: Build project
