@@ -42,25 +42,46 @@ jobs:
       - name: Set up MSBuild
         uses: microsoft/setup-msbuild@v1.1   
         
-      - name: Build Boost dynamic
-        uses: egor-tensin/build-boost@v1.4
-        id: boost
-        with:
-          version: 1.81.0
-          libraries: log filesystem program_options system
-          platform: x64
-          static: 1
-          toolset: msvc142
-          configuration: Debug
+     # - name: Build Boost dynamic
+     #   uses: egor-tensin/build-boost@v1.4
+    #    id: boost
+    #    with:
+     #     version: 1.81.0
+     ##     libraries: log filesystem program_options system
+       #   platform: x64
+       #   static: 1
+       #   toolset: msvc142
+        #  configuration: Debug
 
       - name: debug
         run: |
-         cd "D:\a\AgentTown\boost\stage\x64\Debug\lib"
-         ls
-         cd "D:\a\AgentTown\boost\stage"
-         ls
-         cd "D:\a\AgentTown\boost"
-         ls
+            # Define variables
+            $boostVersion = "1.81.1"
+            $boostUrl = "https://dl.bintray.com/boostorg/release/$boostVersion/source/boost_$($boostVersion.Replace('.', '_')).zip"
+
+            # Create log file
+            $logFilePath = "BoostInstallationLog.txt"
+            New-Item -ItemType File -Path $logFilePath -Force
+
+            # Download Boost
+            Invoke-WebRequest -Uri $boostUrl -OutFile "Boost.zip"
+
+            # Extract Boost
+            Expand-Archive -Path "Boost.zip" -DestinationPath "Boost"
+
+            # Navigate to Boost directory
+            Set-Location -Path "Boost"
+
+            # Bootstrap and Build Boost with shared settings for x64 and debug variant
+            .\bootstrap.bat && .\b2 link=shared architecture=x86 address-model=64 threading=multi variant=debug | Out-File -Append -FilePath $logFilePath
+
+            # Install Boost
+            .\b2 install | Out-File -Append -FilePath $logFilePath
+
+            # Clean up
+            Remove-Item -Path "Boost.zip" -Force
+            Remove-Item -Path "Boost" -Recurse -Force
+
         
       - name: Build project
         run: |
