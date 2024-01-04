@@ -5,7 +5,7 @@
 typedef struct
 {
 	sf::SoundBuffer sbuf;
-	std::string name;
+	std::string name_;
 }sbuffer;
 
 class Sound

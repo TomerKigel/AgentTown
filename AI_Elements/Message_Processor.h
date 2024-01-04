@@ -46,10 +46,10 @@ Contact information:
 class Message_Processor : public Interface_Runnable
 {
 public:
-	Message_Processor(Agent_Parameters* params, std::vector<std::weak_ptr<Interface_Graphics_Observer>>* observers)
+	Message_Processor(Agent_Parameters* params, std::vector<std::weak_ptr<Interface_Graphics_Observer>>* observers_)
 	{
-		pParameters = params;
-		pObservers = observers;
+		parameters_ = params;
+		observers_ = observers_;
 	}
 	~Message_Processor()
 	{
@@ -76,9 +76,9 @@ private:
 	Queue_Manager<message::Parsed_Message> message_queue_;
 
 	//object state ptr
-	Agent_Parameters* pParameters; // maybe weak ptr 
+	Agent_Parameters* parameters_; // maybe weak ptr 
 
-	std::vector<std::weak_ptr<Interface_Graphics_Observer>>* pObservers;
+	std::vector<std::weak_ptr<Interface_Graphics_Observer>>* observers_;
 };
 
 void Message_Processor::event_controller_()
@@ -93,7 +93,7 @@ void Message_Processor::event_controller_()
 	if (msg)
 		process_message(msg.value());
 
-	if (pParameters->is_alive()) {
+	if (parameters_->is_alive()) {
 		event_controller_();
 	}
 }
@@ -108,7 +108,7 @@ void Message_Processor::push_message(message::Parsed_Message& msg)
 
 void Message_Processor::run()
 {
-	pParameters->close_for_change();
+	parameters_->close_for_change();
 	agent_thread_ = std::thread([this]() { event_controller_(); });
 }
 
@@ -117,13 +117,13 @@ void Message_Processor::process_message(message::Parsed_Message& msg)
 	std::lock_guard<std::mutex>lock(observers_mutex_);
 	if (msg.x_position && msg.y_position)
 	{
-		for (std::weak_ptr<Interface_Graphics_Observer> obs : *pObservers)
+		for (std::weak_ptr<Interface_Graphics_Observer> obs : *observers_)
 			obs.lock()->update_position(msg.x_position.value(), msg.y_position.value());
-		pParameters->setLocation(msg.x_position.value(), msg.y_position.value());
+		parameters_->setLocation(msg.x_position.value(), msg.y_position.value());
 	}
 	if (msg.type == "disconnect") {
-		for (std::weak_ptr<Interface_Graphics_Observer> obs : *pObservers)
+		for (std::weak_ptr<Interface_Graphics_Observer> obs : *observers_)
 			obs.lock()->kill();
-		pParameters->kill();
+		parameters_->kill();
 	}
 }

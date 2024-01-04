@@ -3,7 +3,7 @@
 Interpreter::Interpreter()
 {
 	alive_ = true;
-	system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::RUNNING;
 }
 
 Interpreter::~Interpreter()
@@ -51,7 +51,7 @@ std::string Interpreter::component_name()
 }
 void Interpreter::pause()
 {
-	system_state_ = system_state::PAUSED;
+	_system_state_ = system_state::PAUSED;
 	BOOST_LOG_TRIVIAL(info) << "Interpreter system paused";
 }
 

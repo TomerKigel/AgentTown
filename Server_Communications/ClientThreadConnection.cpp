@@ -37,7 +37,7 @@ ClientThreadConnection::ClientThreadConnection(tcp::socket&& socket, std::unorde
 	this->mediator_ = mediator_;
 	this->connections_ = &connections;
 	this->connection_id_ = connection_id_;
-	message_buffer.resize(MAX_MESSAGE_SIZE);
+	message_buffer_.resize(MAX_MESSAGE_SIZE);
 }
 
 ClientThreadConnection::~ClientThreadConnection()
@@ -77,15 +77,15 @@ bool ClientThreadConnection::proccess_complete_message(const string& input, cons
 		return false;
 
 	//extract type
-	incoming_msg.header.type = input.substr(start_type_location + message::open_header.length(), end_type_location - message::close_header.length());
+	incoming_msg_.header.type = input.substr(start_type_location + message::open_header.length(), end_type_location - message::close_header.length());
 
 	std::vector<char> incoming_data(input.begin() + start_message + message::open_message.length(), input.begin() + end_message);
-	incoming_msg << incoming_data;
-	incoming_msg.header.connection_id = this->connection_id_;
-	incoming_msg.direction = message::Message::message_direction::In;
+	incoming_msg_ << incoming_data;
+	incoming_msg_.header.connection_id = this->connection_id_;
+	incoming_msg_.direction = message::Message::message_direction::In;
 
-	mediator_->push_message(incoming_msg);
-	message::reset(incoming_msg);
+	mediator_->push_message(incoming_msg_);
+	message::reset(incoming_msg_);
 
 	if (end_message < input.length())
 		proccess_complete_message(input.substr(end_message + 1), size - (end_message + 1));
@@ -98,12 +98,12 @@ void ClientThreadConnection::read() {
 	try
 	{
 		auto self(shared_from_this());
-		socket_.async_read_some(buffer(message_buffer.data(), message_buffer.size()),
+		socket_.async_read_some(buffer(message_buffer_.data(), message_buffer_.size()),
 			[self, this](std::error_code ec, std::size_t length)
 			{
 				if (!ec)
 				{
-					if (!proccess_complete_message(message_buffer.data(), length))
+					if (!proccess_complete_message(message_buffer_.data(), length))
 					{
 						std::cout << "client serial number (" << connection_id_ << ") rejected" << endl;
 						disconnect();
@@ -124,7 +124,7 @@ void ClientThreadConnection::read() {
 }
 
 void ClientThreadConnection::send(const string& message){
-	std::scoped_lock<std::mutex> lock(send_mutex);
+	std::scoped_lock<std::mutex> lock(send_mutex_);
 	boost::asio::write(socket_, boost::asio::buffer(message));
 }
 

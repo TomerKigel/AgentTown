@@ -110,9 +110,9 @@ void Graphics::Draw()
 	}
 }
 
-void Graphics::AddResource(std::shared_ptr<sf::Texture> texture, std::string name, AABB* sizeofobj)
+void Graphics::AddResource(std::shared_ptr<sf::Texture> texture, std::string name_, AABB* sizeofobj)
 {
-	TexBuf ntb{ texture,name,1,1,1,1,nullptr };
+	TexBuf ntb{ texture,name_,1,1,1,1,nullptr };
 	sf::Vector2u a = ntb.local_texture_->getSize();
 	if (sizeofobj != nullptr) {
 		ntb.taf = sizeofobj;
@@ -142,11 +142,11 @@ void Graphics::AddResource(std::shared_ptr<sf::Texture> texture, std::string nam
 	TB.push_back(ntb);
 }
 
-void Graphics::ChangeResourceTo(std::string name)
+void Graphics::ChangeResourceTo(std::string name_)
 {
 	for (int i = 0; i < TB.size(); i++)
 	{
-		if (TB[i].name == name) {
+		if (TB[i].name_ == name_) {
 			spr.setTexture(*TB[i].local_texture_);
 			CurrentTB = i;
 		}
@@ -155,7 +155,7 @@ void Graphics::ChangeResourceTo(std::string name)
 
 std::string Graphics::GetCurrResourceName()
 {
-	return TB[CurrentTB].name;
+	return TB[CurrentTB].name_;
 }
 
 std::shared_ptr<sf::RenderWindow> Graphics::rewin()

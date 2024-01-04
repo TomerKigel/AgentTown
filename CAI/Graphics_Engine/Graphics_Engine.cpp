@@ -2,7 +2,7 @@
 
 Graphics_Engine::Graphics_Engine()
 {
-	system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::RUNNING;
 	window_ = std::make_shared<sf::RenderWindow>();
 	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
 	loading_screen();
@@ -14,7 +14,7 @@ Graphics_Engine::Graphics_Engine()
 //Graphics_Engine::Graphics_Engine(std::shared_ptr<QueueManager<message::message>> message_pipeline_)
 //{
 //	this->message_pipeline_ = message_pipeline_;
-//	system_state_ = RUNNING;
+//	_system_state_ = RUNNING;
 //	window_ = std::make_shared<sf::RenderWindow>();
 //	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 5/*sf::Style::Resize*/);
 //	loading_screen();
@@ -26,7 +26,7 @@ Graphics_Engine::Graphics_Engine()
 
 void Graphics_Engine::operator=(const Graphics_Engine&& gm) noexcept
 {
-	system_state_ = gm.system_state_;
+	_system_state_ = gm._system_state_;
 	window_ = gm.window_;
 	loading_screen();
 	Quadtree_ = std::make_unique<QuadTree>( -1980, -1080, 1980, 1080);
@@ -45,13 +45,13 @@ void Graphics_Engine::loading_screen()
 
 void Graphics_Engine::run()
 {
-	while (system_state_ == system_state::PAUSED);
-	if (system_state_ == system_state::RUNNING) {
+	while (_system_state_ == system_state::PAUSED);
+	if (_system_state_ == system_state::RUNNING) {
 		window_->setActive(true);
 
 		object_vector_ = Factory::extract_object_list();
 
-		while (window_->isOpen() && system_state_ != system_state::TERMINATED)
+		while (window_->isOpen() && _system_state_ != system_state::TERMINATED)
 		{
 			game_loop();
 		}
@@ -60,14 +60,14 @@ void Graphics_Engine::run()
 
 void Graphics_Engine::game_loop()
 {
-	if (system_state_ == system_state::RUNNING) {
+	if (_system_state_ == system_state::RUNNING) {
 		clean_dead_objects();
 		activate_objects();
 		objects_to_quadtree();
 		draw_objects();
 		event_loop();
 	}
-	while (system_state_ == system_state::PAUSED);
+	while (_system_state_ == system_state::PAUSED);
 		//add wait on lock, and notify on state change
 }
 
@@ -135,11 +135,11 @@ void Graphics_Engine::event_loop()
 		handle_messages();
 	}
 
-	if (system_state_ == system_state::TERMINATED)
+	if (_system_state_ == system_state::TERMINATED)
 	{
 	
 	}
-	else if (system_state_ == system_state::PAUSED)
+	else if (_system_state_ == system_state::PAUSED)
 	{
 	
 	}
@@ -206,7 +206,7 @@ std::string Graphics_Engine::component_name()
 //add mutex lock to sync state change
 void  Graphics_Engine::pause()
 {
-	system_state_ = system_state::PAUSED;
+	_system_state_ = system_state::PAUSED;
 }
 
 void Graphics_Engine::restart()
@@ -215,6 +215,6 @@ void Graphics_Engine::restart()
 }
 void Graphics_Engine::close()
 {
-	this->system_state_ = system_state::TERMINATED;
+	this->_system_state_ = system_state::TERMINATED;
 }
 

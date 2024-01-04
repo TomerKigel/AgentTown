@@ -35,37 +35,37 @@ Contact information:
 
 void Agent::push_message(message::Parsed_Message& msg)
 {
-	processor->push_message(msg);
+	processor_->push_message(msg);
 }
 
 Agent::Agent()
 {
-	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	processor_ = std::make_unique<Message_Processor>(&parameters_, &observers_);
 	parameters_.revive();
-	info.set_connection_id(0);
-	info.set_id(0);
-	processor->run();
+	info_.set_connection_id(0);
+	info_.set_id(0);
+	processor_->run();
 }
 
 Agent::Agent(int id, int connection_id)
 {
-	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	processor_ = std::make_unique<Message_Processor>(&parameters_, &observers_);
 	parameters_.revive();
 	if (id < 0)
 		throw std::runtime_error("Negative id in agent creation");
 	if (connection_id < 0)
 		throw std::runtime_error("Negative connection_id in agent creation");
-	info.set_connection_id(connection_id);
-	info.set_id(id);
-	processor->run();
+	info_.set_connection_id(connection_id);
+	info_.set_id(id);
+	processor_->run();
 }
 
 Agent::Agent(Agent& other_agent)
 {
-	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	processor_ = std::make_unique<Message_Processor>(&parameters_, &observers_);
 	Agent_Parameters a(other_agent.parameters_);
 	parameters_ = a;
-	processor->run();
+	processor_->run();
 }
 
 Agent& Agent::operator=(Agent& other)
@@ -73,7 +73,7 @@ Agent& Agent::operator=(Agent& other)
 	parameters_.revive();
 	Agent_Parameters a(other.parameters_);
 	parameters_ = a;
-	processor = std::make_unique<Message_Processor>(&parameters_, &observers);
+	processor_ = std::make_unique<Message_Processor>(&parameters_, &observers_);
 	return *this;
 }
 
@@ -110,19 +110,19 @@ bool Agent::remove_neighbour(int id)
 
 void Agent::set_connection_id(int id)
 {
-	info.set_connection_id(id);
+	info_.set_connection_id(id);
 }
 
 void Agent::set_id(int id)
 {
-	info.set_id(id);
+	info_.set_id(id);
 }
 
 unsigned int Agent::get_connection_id()
 {
 	std::lock_guard<std::mutex>lock(param_mutex_);
 	try {
-		return info.get_connection_id();
+		return info_.get_connection_id();
 	}
 	catch (std::exception e)
 	{
@@ -135,7 +135,7 @@ unsigned int Agent::get_agent_id()
 {
 	std::lock_guard<std::mutex>lock(param_mutex_);
 	try {
-		return info.get_id();
+		return info_.get_id();
 	}
 	catch (std::exception e)
 	{
@@ -153,13 +153,13 @@ void Agent::pause()
 void Agent::subscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 {
 	std::lock_guard<std::mutex>lock(observers_mutex_);
-	observers.push_back(obs);
+	observers_.push_back(obs);
 }
 
 void Agent::unsubscribe(std::shared_ptr<Interface_Graphics_Observer> obs)
 {
 	std::lock_guard<std::mutex>lock(observers_mutex_);
-	std::remove_if(observers.begin(), observers.end(), [obs](const std::weak_ptr<Interface_Graphics_Observer>& a) {return a.lock() == obs; });
+	std::remove_if(observers_.begin(), observers_.end(), [obs](const std::weak_ptr<Interface_Graphics_Observer>& a) {return a.lock() == obs; });
 }
 
 
@@ -174,6 +174,6 @@ void Agent::update_position(std::pair<double, double> x_y)
 	std::lock_guard<std::mutex>lock(param_mutex_);
 	parameters_.setLocation(x_y.first, x_y.second);
 	std::lock_guard<std::mutex>olock(observers_mutex_);
-	for (std::weak_ptr<Interface_Graphics_Observer> obs : observers)
+	for (std::weak_ptr<Interface_Graphics_Observer> obs : observers_)
 		obs.lock()->update_position(x_y.first, x_y.second);
 }

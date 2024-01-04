@@ -53,9 +53,9 @@ namespace sinks = boost::log::sinks;
 namespace expr = boost::log::expressions;
 namespace attrs = boost::log::attributes;
 
-void Framework::init_logging() {
+void Framework::init_logging_() {
 	logging::add_file_log(
-		"log.txt",  // File name
+		"log.txt",  // File name_
 		keywords::format = "[%TimeStamp%] [%Severity%]: %Message%"
 	);
 	logging::add_common_attributes();
@@ -68,7 +68,7 @@ Framework::Framework()
 	port_ = 7777;
 
 	//logging starts
-	init_logging();
+	init_logging_();
 	BOOST_LOG_TRIVIAL(info) << "Framework is initialized with:\tport:" << port_ << "\tip:" << host_;
 	
 
@@ -77,8 +77,8 @@ Framework::Framework()
 	SystemMediator_.add_component(&networks_manager_);
 
 	//set mandatory systems as active
-	list_of_active_components.push_back(&interpreter_);
-	list_of_active_components.push_back(&networks_manager_);
+	list_of_active_components_.push_back(&interpreter_);
+	list_of_active_components_.push_back(&networks_manager_);
 }
 
 void Framework::run_all()
@@ -89,13 +89,13 @@ void Framework::run_all()
 
 
 	//run optional systems
-	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
+	if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) != list_of_active_components_.end()) {
 		base_server_.run();
 		//context_thread_ = std::thread([this]() { io_context_.run(); });
 	}
 	
 	
-	if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) != list_of_active_components.end()) {
+	if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) != list_of_active_components_.end()) {
 		engine_.run(); // blocking system because of sfml. keep at the end of the code block as long as sfml is used.
 	}
 }
@@ -184,11 +184,11 @@ void Framework::add_system(systems system)
 	switch (system)
 	{
 	case systems::Graphics:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) == list_of_active_components.end()){
+		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) == list_of_active_components_.end()){
 			engine_ = Graphics_Engine();
 			SystemMediator_.add_component(&engine_);
 			networks_manager_.subscribe_to_network(&engine_);
-			list_of_active_components.push_back(&engine_);
+			list_of_active_components_.push_back(&engine_);
 		}
 		else
 		{
@@ -199,10 +199,10 @@ void Framework::add_system(systems system)
 		//log - no system added
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) == list_of_active_components.end()) {
+		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) == list_of_active_components_.end()) {
 			base_server_.bind_server(host_,port_);
 			SystemMediator_.add_component(&base_server_);
-			list_of_active_components.push_back(&base_server_);
+			list_of_active_components_.push_back(&base_server_);
 		}
 		else
 		{
@@ -220,7 +220,7 @@ void Framework::remove_system(systems system)
 	switch (system)
 	{
 	case systems::Graphics:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &engine_) != list_of_active_components.end()) {
+		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) != list_of_active_components_.end()) {
 			SystemMediator_.remove_component(&engine_);
 			networks_manager_.unsubscribe_from_network(&engine_);
 		}
@@ -229,7 +229,7 @@ void Framework::remove_system(systems system)
 		BOOST_LOG_TRIVIAL(warning) << "can't remove interpreter";
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components.begin(), list_of_active_components.end(), &base_server_) != list_of_active_components.end()) {
+		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) != list_of_active_components_.end()) {
 			SystemMediator_.remove_component(&base_server_);
 		}
 		break;
@@ -252,7 +252,7 @@ void Framework::delete_network(std::string network_name)
 std::vector<std::string> Framework::get_names_of_components()
 {
 	std::vector<std::string> component_names;
-	for (Component* component : list_of_active_components)
+	for (Component* component : list_of_active_components_)
 	{
 		component_names.push_back(component->component_name());
 	}

@@ -64,14 +64,14 @@ namespace cai
 		/// <summary>
 		/// adds a system to the framework
 		/// </summary>
-		/// <param name="system"> - the system to instantiate in the framework<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
+		/// <param name_="system"> - the system to instantiate in the framework<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
 		/// <exception cref= "std::runtime_error"> - Thrown when a system is already part of the framework</exception>
 		void add_system(systems system);
 
 		/// <summary>
 		/// removes a system to the framework
 		/// </summary>
-		/// <param name="system"> - the system to remove from the framework.<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
+		/// <param name_="system"> - the system to remove from the framework.<para /> Choices: systems::Graphics, systems::Interpreter, systems::Communications, systems::Representational_Network</param>
 		/// <exception cref= "std::runtime_error"> - Thrown when a system is not part of the framework, not added or already removed</exception>
 		void remove_system(systems system);
 
@@ -85,7 +85,7 @@ namespace cai
 		/// depends on the existence of a <see cref="Network_Representation"/> Component  <para />
 		/// thus if an instance was not yet passed to Framework, the Framework will instantiate it automatically.
 		/// </summary>
-		/// <param name="network_name"> - The name of the new network to be created.  <para />
+		/// <param name_="network_name"> - The name_ of the new network to be created.  <para />
 		/// defaults to 'DEFAULT' if no value is passed
 		/// </param>
 		void create_network(std::string network_name = "DEFAULT");
@@ -94,8 +94,8 @@ namespace cai
 		/// <summary>
 		/// deletes an existing representational network  <para />
 		/// </summary>
-		/// <param name="network_name"> - The name of the network to be deleted.</param>
-		/// <exception cref="std::runtime_error">- Thrown when invalid name is passed</exception> 
+		/// <param name_="network_name"> - The name_ of the network to be deleted.</param>
+		/// <exception cref="std::runtime_error">- Thrown when invalid name_ is passed</exception> 
 		void delete_network(std::string network_name);
 
 
@@ -117,7 +117,7 @@ namespace cai
 		/// <summary>
 		/// change state of a specific system to - RUN
 		/// </summary>
-		/// <param name = "system"> - the system to run, has to have the system previously added </param>
+		/// <param name_ = "system"> - the system to run, has to have the system previously added </param>
 		/// <exception cref="std::runtime_error">- Thrown when attempting to run a system that doesn't exist in the framework</exception> 
 		void run(systems system);
 
@@ -125,7 +125,7 @@ namespace cai
 		/// <summary>
 		/// change state of a specific system to - PAUSE
 		/// </summary>
-		/// <param name = "system"> - the system to halt, has to have the system previously added </param>
+		/// <param name_ = "system"> - the system to halt, has to have the system previously added </param>
 		/// <exception cref="std::runtime_error">- Thrown when attempting to halt a system that doesn't exist in the framework</exception> 
 		void halt(systems system);
 
@@ -149,7 +149,7 @@ namespace cai
 
 	private:
 		//logging init
-		void init_logging();
+		void init_logging_();
 
 		//network configuration variables for the base_server_ system
 		std::string host_;
@@ -170,7 +170,7 @@ namespace cai
 
 		//vector of all active systems 
 
-		std::vector<Component*> list_of_active_components;
+		std::vector<Component*> list_of_active_components_;
 	};
 }
 

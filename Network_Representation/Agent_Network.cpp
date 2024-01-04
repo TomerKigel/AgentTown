@@ -38,54 +38,54 @@ Contact information:
 #include "Agent_Network.h"
 
 
-Agent_Network::Agent_Network(std::string name)
+Agent_Network::Agent_Network(std::string name_)
 {
-	this->name = name;
+	this->name_ = name_;
 	alive_ = true;
-	system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::RUNNING;
 }
 void Agent_Network::add_node(int id, int connection)
 {
-	nodes.insert(std::make_pair(id, std::make_shared<Agent>(id, connection)));
-	for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
+	_nodes_.insert(std::make_pair(id, std::make_shared<Agent>(id, connection)));
+	for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
 	{
-		(*iter)->agent_added(nodes.at(id));
+		(*iter)->agent_added(_nodes_.at(id));
 	}
 }
 
 void Agent_Network::remove_node(int id)
 {
-	if (nodes.count(id) != 0) {
-		for (auto iter = network_observers.begin(); iter != network_observers.end(); iter++)
+	if (_nodes_.count(id) != 0) {
+		for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
 		{
-			(*iter)->agent_removed(nodes.at(id));
+			(*iter)->agent_removed(_nodes_.at(id));
 		}
-		std::erase_if(nodes, [id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == id; });
+		std::erase_if(_nodes_, [id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == id; });
 	}
 }
 
 void Agent_Network::add_neighbour_to_agent(int agent_id, int neighbour_id)
 {
-	auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
+	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->add_neighbour(neighbour_id);
 }
 
 void Agent_Network::remove_neighbour_to_agent(int agent_id, int neighbour_id)
 {
-	auto found_agent = std::find_if(nodes.begin(), nodes.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
+	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->remove_neighbour(neighbour_id);
 }
 
 void Agent_Network::subscribe_to_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 {
-	nodes.at(agent_id)->subscribe(observer);
+	_nodes_.at(agent_id)->subscribe(observer);
 }
 
 void Agent_Network::unsubscribe_from_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 {
-	nodes.at(agent_id)->unsubscribe(observer);
+	_nodes_.at(agent_id)->unsubscribe(observer);
 }
 
 void Agent_Network::provide_message(message::Parsed_Message& msg)
@@ -104,14 +104,14 @@ void Agent_Network::run()
 
 	message::Parsed_Message msg = incoming_messages_.stop_until_pop();
 	if (msg.to) {
-		for (auto iter = nodes.begin(); iter != nodes.end(); iter++)
+		for (auto iter = _nodes_.begin(); iter != _nodes_.end(); iter++)
 			if (iter->second->get_agent_id() == msg.to.value())
 				iter->second->push_message(msg);
 	}
 	if (msg.new_id)
 	{
 		add_node(msg.new_id.value(), msg.connection_id);
-		nodes.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
+		_nodes_.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
 
 	}
 
@@ -125,12 +125,12 @@ void Agent_Network::run()
 
 void Agent_Network::pause()
 {
-	system_state_ = system_state::PAUSED;
-	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name << " paused";
+	_system_state_ = system_state::PAUSED;
+	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " paused";
 }
 
 void Agent_Network::close()
 {
-	system_state_ = system_state::TERMINATED;
-	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name << " closed";
+	_system_state_ = system_state::TERMINATED;
+	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " closed";
 }

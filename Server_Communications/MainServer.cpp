@@ -37,7 +37,7 @@ Contact information:
 MainServer::MainServer() : acceptor_(io_context_, end_point_)
 {
 	running_connection_id_ = 1;
-	system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::RUNNING;
 }
 
 void MainServer::bind_server(std::string host, int port)
@@ -67,8 +67,8 @@ bool MainServer::run() {
 	std::cout << "Main-Server starting" << std::endl;
 	context_thread_ = std::thread([this]() { io_context_.run(); });
 	try {
-		system_state_ = system_state::RUNNING;
-		wait_for_connection();
+		_system_state_ = system_state::RUNNING;
+		wait_for_connection_();
 	}
 	catch (std::exception& e) {
 		std::cerr << "Could not initiate server." << std::endl;
@@ -79,13 +79,13 @@ bool MainServer::run() {
 
 void MainServer::pause()
 {
-	system_state_ = system_state::PAUSED;
+	_system_state_ = system_state::PAUSED;
 	acceptor_.cancel();
 	std::cout << "Main-Server paused" << std::endl;
 }
 
 
-void MainServer::wait_for_connection()
+void MainServer::wait_for_connection_()
 {
 	acceptor_.async_accept(
 		[this](boost::system::error_code ec, tcp::socket socket)
@@ -97,15 +97,15 @@ void MainServer::wait_for_connection()
 				connections_.insert(std::make_pair(running_connection_id_, connection_ptr));
 				connection_ptr->run();
 			}
-			if(system_state_ == system_state::RUNNING)
-				wait_for_connection();
+			if(_system_state_ == system_state::RUNNING)
+				wait_for_connection_();
 		});
 }
 
 
 void MainServer::close() {
 	try {
-		system_state_ = system_state::TERMINATED;
+		_system_state_ = system_state::TERMINATED;
 		acceptor_.close();
 		for (auto& connection : connections_)
 			connection.second->disconnect();

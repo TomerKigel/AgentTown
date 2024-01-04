@@ -43,9 +43,9 @@ public:
 
 	system_state state()
 	{
-		return system_state_;
+		return _system_state_;
 	}
 
 protected:
-	system_state system_state_;
+	system_state _system_state_;
 };

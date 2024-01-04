@@ -63,20 +63,20 @@ public:
     /// <summary>
     /// Send a message to the connection.
     /// </summary>
-    /// <param name="message">The message to be sent.</param>
+    /// <param name_="message">The message to be sent.</param>
     virtual void send(const std::string& message) = 0;
 
     /// <summary>
     /// Send a message to a specific list of connection IDs.
     /// </summary>
-    /// <param name="message">The message to be sent.</param>
-    /// <param name="id_list">The list of connection IDs to receive the message.</param>
+    /// <param name_="message">The message to be sent.</param>
+    /// <param name_="id_list">The list of connection IDs to receive the message.</param>
     virtual void send_to_id_list(const std::string& message, const std::vector<int> id_list) = 0;
 
     /// <summary>
     /// Send a message to all connected clients.
     /// </summary>
-    /// <param name="message">The message to be sent.</param>
+    /// <param name_="message">The message to be sent.</param>
     virtual void send_all(const std::string& message) = 0;
 
     /// <summary>

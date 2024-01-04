@@ -20,7 +20,7 @@ void Networks_Manager::delete_network(std::string network_name)
 		agent_network_map_.erase(network_name);
 	else if (network_name == "DEFAULT")
 	{
-		//log a name that cannot be removed
+		//log a name_ that cannot be removed
 	}
 	else
 	{

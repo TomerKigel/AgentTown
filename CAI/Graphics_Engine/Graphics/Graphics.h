@@ -5,7 +5,7 @@
 typedef struct
 {
 	std::shared_ptr<sf::Texture> local_texture_;
-	std::string name;
+	std::string name_;
 	short framesintxt, rows;
 	short current_frame_, current_row_;
 	AABB* taf;
@@ -65,9 +65,9 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////
 	void Draw();
 
-	void AddResource(std::shared_ptr<sf::Texture> texture, std::string name, AABB* sizeofobj);
+	void AddResource(std::shared_ptr<sf::Texture> texture, std::string name_, AABB* sizeofobj);
 
-	void ChangeResourceTo(std::string name);
+	void ChangeResourceTo(std::string name_);
 
 	std::string GetCurrResourceName();
 

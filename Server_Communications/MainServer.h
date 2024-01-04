@@ -60,8 +60,8 @@ public:
 	/// port:7777<para />
 	/// to rebind the endpoint see:<see cref="bind_server"/>
 	/// </summary>
-	/// <param name="io_context">- the boost::asio::io_context</param>
-	/// <param name="endpoint">- the ip::tcp::endpoint</param>
+	/// <param name_="io_context">- the boost::asio::io_context</param>
+	/// <param name_="endpoint">- the ip::tcp::endpoint</param>
 	MainServer();
 
 	/// <summary>
@@ -73,7 +73,7 @@ public:
 	/// allows rebinding the endpoint to the server. <para />
 	/// useful for instantiating a server on the stack and later rebinding it if inital binding is impossible
 	/// </summary>
-	/// <param name="endpoint"> - the ip::tcp::endpoint to rebind to</param>
+	/// <param name_="endpoint"> - the ip::tcp::endpoint to rebind to</param>
 	void bind_server(std::string host, int port);
 
 	/// <summary>
@@ -89,13 +89,13 @@ public:
 	/// <summary>
 	/// pass a message to this component for processing
 	/// </summary>
-	/// <param name="msg"> - the message to be passed</param>
+	/// <param name_="msg"> - the message to be passed</param>
 	void provide_message(message::Message& msg);
 
 	/// <summary>
-	/// an identification function to return the name of this component
+	/// an identification function to return the name_ of this component
 	/// </summary>
-	/// <returns>the name of the component</returns>
+	/// <returns>the name_ of the component</returns>
 	std::string component_name();
 
 
@@ -109,7 +109,7 @@ private:
 	/// A-sync wait for a client connection
 	/// priming the io_context  <para />
 	/// </summary>
-	void wait_for_connection();
+	void wait_for_connection_();
 
 	//endpoint parameters
 

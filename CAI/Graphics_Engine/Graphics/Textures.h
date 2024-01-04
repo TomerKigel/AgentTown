@@ -5,7 +5,7 @@
 struct tbuffer
 {
 	sf::Texture tbuf;
-	std::string name;
+	std::string name_;
 };
 
 class Textures

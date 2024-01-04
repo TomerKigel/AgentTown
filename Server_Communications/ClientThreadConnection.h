@@ -84,9 +84,9 @@ private:
 	int connection_id_;
 	tcp::socket socket_;
 	std::unordered_map<int, std::shared_ptr<Connection>>* connections_;
-	message::Message incoming_msg;
-	std::vector<char> message_buffer;
+	message::Message incoming_msg_;
+	std::vector<char> message_buffer_;
 
-	std::mutex send_mutex;
+	std::mutex send_mutex_;
 
 };

@@ -42,22 +42,22 @@ public:
     /// <summary>
     /// Constructor for the Component class.
     /// </summary>
-    /// <param name="mediator">The mediator to associate with the component.</param>
+    /// <param name_="mediator">The mediator to associate with the component.</param>
     Component(Interface_Mediator* mediator = nullptr) : mediator_(mediator) {}
 
     /// <summary>
     /// Set the mediator for the component.
     /// </summary>
-    /// <param name="mediator">The mediator to set.</param>
+    /// <param name_="mediator">The mediator to set.</param>
     void set_mediator(Interface_Mediator* mediator)
     {
         this->mediator_ = mediator;
     }
 
     /// <summary>
-    /// Get the name of the component.
+    /// Get the name_ of the component.
     /// </summary>
-    /// <returns>The name of the component.</returns>
+    /// <returns>The name_ of the component.</returns>
     virtual std::string component_name() = 0;
 
 protected:
