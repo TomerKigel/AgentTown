@@ -3,7 +3,9 @@ if it works but it is complex, it doesn't work. c++ is difficult enough, open so
   
 <h1>CI is a must.</h1>
 On GitHub actions, at least two actions will be set up at any given time. these actions build the project. Make sure that any commit passes both builds.  
+
 That is because the code written in this project is cross-platform and does not rely on OS libraries. You might add code that works in linux but won't run on windows  
+
 or visa-versa. to avoid running the code on multiple machines and to avoid errors when working with a team, just use the CI as a tool for error checking.
 
 
