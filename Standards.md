@@ -11,23 +11,23 @@ or visa-versa. to avoid running the code on multiple machines and to avoid error
 <h2>function and variable names </h2> 
 1.) The beginning of a word should start with a small letter.   
 
-2.) If multiple words are in the name, it should be spaced with an underscore as such: get_id()    
+2.) If multiple words are in the name, it should be spaced with an underscore as such: get_id(). 
   
 <h2>class names</h2>  
-1.) The beginning of a word should start with a capital letter.   
+1.) The beginning of a word should start with a capital letter.
 
-2.) If multiple words are in the name, it should be spaced with an underscore as such: Something_Class     
-  
+2.) If multiple words are in the name, it should be spaced with an underscore as such: Something_Class.
+
 <h2>interface names</h2>  
-1.) should start with Interface_ for example: Interface_Runnable    
+1.) should start with Interface_ for example: Interface_Runnable.
 
-2.) The beginning of a word should start with a capital letter.  
+2.) The beginning of a word should start with a capital letter.
 
-3.) If multiple words are in the name, it should be spaced with an underscore as such: Interface_Graphics_Observer    
+3.) If multiple words are in the name, it should be spaced with an underscore as such: Interface_Graphics_Observer.
   
   
 <h2>private member variables and functions</h2>    
-1.) should have a following underscore as such: function_()    
+1.) should have a following underscore as such: function_(). 
   
 <h2>protected member variables and functions</h2>    
-1.) should have an underscore before and after function as such: _function_()    
+1.) should have an underscore before and after function as such: _function_().
