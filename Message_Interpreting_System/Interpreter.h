@@ -35,7 +35,7 @@ Contact information:
 #define BOOST_ALL_DYN_LINK
 
 #include <boost/log/trivial.hpp>
-#include "debug.h"
+#include "Debug.h"
 
 #include "message.h"
 #include "boost/lexical_cast.hpp"
