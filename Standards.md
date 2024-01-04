@@ -1,5 +1,6 @@
 <h1>Kiss - keep it simple stupid</h1>  
-if it works but it is complex, it doesn't work. c++ is difficult enough, open source, and working in a team even more. So keep things simple and neat.  
+If it works but it is complex, it doesn't work. c++ is difficult enough, open source, and working in a team even more. So keep things simple and neat. 
+Be explicit as much as possible, don't use auto because it is easy. Use auto because it is clear what type you are working with. Basically, same as the Google style guide.
   
 <h1>CI is a must.</h1>
 On GitHub actions, at least two actions will be set up at any given time. these actions build the project. Make sure that any commit passes both builds.  
