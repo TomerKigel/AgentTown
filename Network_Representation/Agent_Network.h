@@ -31,6 +31,11 @@ Contact information:
 	github:   https://github.com/TomerKigel
 */
 #pragma once
+#define BOOST_ALL_DYN_LINK
+
+#include <boost/log/trivial.hpp>
+#include "Debug.h"
+
 #include "Network.h"
 #include "Agent.h"
 #include "System.h"

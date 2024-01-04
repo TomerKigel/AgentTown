@@ -11,7 +11,7 @@ void Networks_Manager::create_network(std::string network_name)
 		agent_network_map_.insert(std::make_pair(network_name,new Agent_Network(network_name)));
 	else
 	{
-		//log no network created
+		BOOST_LOG_TRIVIAL(info) << "No network was created because it already exists in function:Networks_Manager::create_network(std::string network_name)";
 	}
 }
 void Networks_Manager::delete_network(std::string network_name)
@@ -20,11 +20,11 @@ void Networks_Manager::delete_network(std::string network_name)
 		agent_network_map_.erase(network_name);
 	else if (network_name == "DEFAULT")
 	{
-		//log a name_ that cannot be removed
+		BOOST_LOG_TRIVIAL(info) << "'DEFAULT' network can't be removed in function Networks_Manager::delete_network(std::string network_name)";
 	}
 	else
 	{
-		//log no network removed
+		BOOST_LOG_TRIVIAL(info) << "'" << network_name << "' network can't be removed in function Networks_Manager::delete_network(std::string network_name) because it doesn't exist";
 	}
 }
 

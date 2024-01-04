@@ -31,6 +31,12 @@ Contact information:
 	github:   https://github.com/TomerKigel
 */
 #pragma once
+#define BOOST_ALL_DYN_LINK
+
+#include <boost/log/trivial.hpp>
+#include "Debug.h"
+
+
 #include "Agent_Network.h"
 
 class Networks_Manager :  public System<message::Parsed_Message>
