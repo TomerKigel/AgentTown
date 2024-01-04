@@ -24,6 +24,7 @@
   <ItemGroup>
     <ClInclude Include="Component.h" />
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="Interface_Actionable.h" />
     <ClInclude Include="Interface_Distance_Calculatable.h" />
     <ClInclude Include="Interface_Drawable.h" />

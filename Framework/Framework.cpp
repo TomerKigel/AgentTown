@@ -35,6 +35,7 @@ Contact information:
 
 #include "Framework.h"
 #include "Component.h"
+#include "Debug.h"
 
 #include <boost/log/trivial.hpp>
 #include <boost/log/core.hpp>
@@ -45,7 +46,6 @@ Contact information:
 #include <boost/log/utility/setup/common_attributes.hpp>
 
 using namespace cai;
-
 
 namespace keywords = boost::log::keywords;
 namespace logging = boost::log;
@@ -70,7 +70,7 @@ Framework::Framework()
 	//logging starts
 	init_logging();
 	BOOST_LOG_TRIVIAL(info) << "Framework is initialized with:\tport:" << port_ << "\tip:" << host_;
-	logging::core::get()->flush();
+	
 
 	//add mandatory systems
 	SystemMediator_.add_component(&interpreter_);
@@ -176,6 +176,7 @@ Framework::~Framework()
 {
 	interpreter_thread_.join();
 	representational_network_thread_.join();
+	logging::core::get()->flush();
 }
 
 void Framework::add_system(systems system)

@@ -31,6 +31,12 @@ Contact information:
 	github:   https://github.com/TomerKigel
 */
 #pragma once
+
+#define BOOST_ALL_DYN_LINK
+
+#include <boost/log/trivial.hpp>
+#include "debug.h"
+
 #include "message.h"
 #include "boost/lexical_cast.hpp"
 #include "System.h"
@@ -67,6 +73,7 @@ public:
 			if (pmsg.type.find("Error") != -1) {
 				message::Message error_message = Message_Generator::generate_error_message(pmsg.type);
 				mediator_->push_message(error_message);
+				BOOST_LOG_TRIVIAL(warning) << "incoming message type not found,error message generated to be sent to client";
 			}
 			else
 			{
@@ -91,17 +98,17 @@ public:
 	{
 		return "interpreter";
 	}
-
-
 	void pause()
 	{
 		system_state_ = system_state::PAUSED;
+		BOOST_LOG_TRIVIAL(info) << "Interpreter system paused";
 	}
 
 	void close()
 	{
 		std::scoped_lock lock(alive_mutex_);
 		alive_ = false;
+		BOOST_LOG_TRIVIAL(info) << "Interpreter system closed";
 	}
 private:
 	bool alive_;

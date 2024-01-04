@@ -59,6 +59,9 @@
     <ClInclude Include="System.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

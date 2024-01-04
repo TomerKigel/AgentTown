@@ -8,7 +8,7 @@ Networks_Manager::Networks_Manager()
 void Networks_Manager::create_network(std::string network_name)
 {
 	if(agent_network_map_.count(network_name) == 0)
-		agent_network_map_.insert(std::make_pair(network_name,new Agent_Network()));
+		agent_network_map_.insert(std::make_pair(network_name,new Agent_Network(network_name)));
 	else
 	{
 		//log no network created

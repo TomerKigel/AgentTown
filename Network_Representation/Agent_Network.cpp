@@ -30,10 +30,17 @@ Contact information:
 	Linkedin: https://www.linkedin.com/in/tomer-kigel/
 	github:   https://github.com/TomerKigel
 */
+#define BOOST_ALL_DYN_LINK
+
+#include <boost/log/trivial.hpp>
+#include "debug.h"
+
 #include "Agent_Network.h"
 
-Agent_Network::Agent_Network()
+
+Agent_Network::Agent_Network(std::string name)
 {
+	this->name = name;
 	alive_ = true;
 	system_state_ = system_state::RUNNING;
 }
@@ -119,9 +126,11 @@ void Agent_Network::run()
 void Agent_Network::pause()
 {
 	system_state_ = system_state::PAUSED;
+	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name << " paused";
 }
 
 void Agent_Network::close()
 {
 	system_state_ = system_state::TERMINATED;
+	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name << " closed";
 }

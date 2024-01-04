@@ -38,7 +38,7 @@ Contact information:
 class Agent_Network : public Network<std::shared_ptr<Agent>>, public System<message::Parsed_Message>, public Interface_Runnable
 {
 public:
-	Agent_Network();
+	Agent_Network(std::string name = "DEFAULT");
 
 	void add_node(int id, int connection);
 	void remove_node(int id);
@@ -59,5 +59,6 @@ public:
 private:
 	bool alive_;
 	std::mutex alive_mutex_;
+	std::string name;
 	Queue_Manager<message::Parsed_Message> incoming_messages_;
 };
