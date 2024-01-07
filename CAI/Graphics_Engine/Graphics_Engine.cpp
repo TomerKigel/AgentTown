@@ -111,7 +111,7 @@ void Graphics_Engine::draw_objects()
 void Graphics_Engine::event_loop()
 {
 	while (window_->pollEvent(event_))
-	{
+	{ 
 		if (event_.type == sf::Event::Closed) {
 			window_->close();
 		}

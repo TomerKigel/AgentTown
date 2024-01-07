@@ -54,16 +54,23 @@ void Networks_Manager::unsubscribe_from_network(const Interface_Network_Observer
 
 void Networks_Manager::run_all()
 {
-	for(std::pair<std::string,Agent_Network*> pair : agent_network_map_)
-		pair.second->run();
+	for (std::pair<std::string, Agent_Network*> pair : agent_network_map_) 
+			thread_network_map_.insert(std::make_pair(pair.first,
+				std::thread([=]()
+					{
+						pair.second->run();
+					})));
+	
 }
 void Networks_Manager::pause_all()
 {
+	//unsafe, needs sync
 	for (std::pair<std::string, Agent_Network*> pair : agent_network_map_)
 		pair.second->pause();
 }
 void Networks_Manager::close_all()
 {
+	//unsafe, needs sync
 	for (std::pair<std::string, Agent_Network*> pair : agent_network_map_)
 		pair.second->close();
 }

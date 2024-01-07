@@ -64,6 +64,7 @@ public:
 private:
 	bool alive_;
 	std::mutex alive_mutex_;
+	std::mutex nodes_mutex_;
 	std::string name_;
 	Queue_Manager<message::Parsed_Message> incoming_messages_;
 };

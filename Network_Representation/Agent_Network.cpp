@@ -41,6 +41,7 @@ Agent_Network::Agent_Network(std::string name_)
 }
 void Agent_Network::add_node(int id, int connection)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	_nodes_.insert(std::make_pair(id, std::make_shared<Agent>(id, connection)));
 	for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
 	{
@@ -50,6 +51,7 @@ void Agent_Network::add_node(int id, int connection)
 
 void Agent_Network::remove_node(int id)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	if (_nodes_.count(id) != 0) {
 		for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
 		{
@@ -61,6 +63,7 @@ void Agent_Network::remove_node(int id)
 
 void Agent_Network::add_neighbour_to_agent(int agent_id, int neighbour_id)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->add_neighbour(neighbour_id);
@@ -68,6 +71,7 @@ void Agent_Network::add_neighbour_to_agent(int agent_id, int neighbour_id)
 
 void Agent_Network::remove_neighbour_to_agent(int agent_id, int neighbour_id)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->remove_neighbour(neighbour_id);
@@ -75,11 +79,13 @@ void Agent_Network::remove_neighbour_to_agent(int agent_id, int neighbour_id)
 
 void Agent_Network::subscribe_to_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	_nodes_.at(agent_id)->subscribe(observer);
 }
 
 void Agent_Network::unsubscribe_from_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 {
+	std::scoped_lock lock(nodes_mutex_);
 	_nodes_.at(agent_id)->unsubscribe(observer);
 }
 
@@ -99,9 +105,12 @@ void Agent_Network::run()
 
 	message::Parsed_Message msg = incoming_messages_.stop_until_pop();
 	if (msg.to) {
-		for (auto iter = _nodes_.begin(); iter != _nodes_.end(); iter++)
-			if (iter->second->get_agent_id() == msg.to.value())
-				iter->second->push_message(msg);
+		std::scoped_lock Alock(nodes_mutex_);
+		for (const auto& pair : _nodes_) {
+			if (pair.second && pair.second->get_agent_id() == msg.to.value()) {
+				pair.second->push_message(msg);
+			}
+		}
 	}
 	if (msg.new_id)
 	{

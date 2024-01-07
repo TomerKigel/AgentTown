@@ -46,10 +46,10 @@ Contact information:
 class Message_Processor : public Interface_Runnable
 {
 public:
-	Message_Processor(Agent_Parameters* params, std::vector<std::weak_ptr<Interface_Graphics_Observer>>* observers_)
+	Message_Processor(Agent_Parameters* params, std::vector<std::weak_ptr<Interface_Graphics_Observer>>* observers)
 	{
 		parameters_ = params;
-		observers_ = observers_;
+		observers_ = observers;
 	}
 	~Message_Processor()
 	{

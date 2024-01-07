@@ -59,4 +59,5 @@ public:
 	void close_all();
 private:
 	std::unordered_map<std::string,Agent_Network*> agent_network_map_;
+	std::unordered_map<std::string,std::thread> thread_network_map_;
 };
