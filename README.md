@@ -45,6 +45,7 @@ Ideally in the future, virtual and simulated should become physical and real.
 To compile and run the project few things are required:
 
 Download and install Boost library. An explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
+(build with --toolset=msvc14.2 --with-log link=shared, an example can be found in the github workflows yml for windows)
 
 (mandatory for CAI project) Download SFML <b>64x(not 32bits!)</b>
 version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/) 
