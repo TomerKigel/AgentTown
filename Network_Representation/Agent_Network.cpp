@@ -37,10 +37,13 @@ Agent_Network::Agent_Network(std::string name_)
 {
 	this->name_ = name_;
 	alive_ = true;
-	_system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::PAUSED;
 }
 void Agent_Network::add_node(int id, int connection)
 {
+	if (_nodes_.count(id) != 0) {
+		throw std::runtime_error("attempt to add an agent that is already in the network");
+	}
 	std::scoped_lock lock(nodes_mutex_);
 	_nodes_.insert(std::make_pair(id, std::make_shared<Agent>(id, connection)));
 	for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
@@ -51,19 +54,24 @@ void Agent_Network::add_node(int id, int connection)
 
 void Agent_Network::remove_node(int id)
 {
-	std::scoped_lock lock(nodes_mutex_);
 	if (_nodes_.count(id) != 0) {
+		std::scoped_lock lock(nodes_mutex_);
 		for (auto iter = _network_observers_.begin(); iter != _network_observers_.end(); iter++)
 		{
 			(*iter)->agent_removed(_nodes_.at(id));
 		}
 		std::erase_if(_nodes_, [id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == id; });
 	}
+	else
+	{
+		//No agent exists
+	}
 }
 
 void Agent_Network::add_neighbour_to_agent(int agent_id, int neighbour_id)
 {
 	std::scoped_lock lock(nodes_mutex_);
+	//TODO: check what happens if agent not found, log accordingly
 	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->add_neighbour(neighbour_id);
@@ -72,6 +80,7 @@ void Agent_Network::add_neighbour_to_agent(int agent_id, int neighbour_id)
 void Agent_Network::remove_neighbour_to_agent(int agent_id, int neighbour_id)
 {
 	std::scoped_lock lock(nodes_mutex_);
+	//TODO: check what happens if agent not found, log accordingly
 	auto found_agent = std::find_if(_nodes_.begin(), _nodes_.end(), [agent_id](std::pair<int, std::shared_ptr<Agent>> a) {return a.first == agent_id; });
 	if ((*found_agent).second->get_agent_id() == agent_id)
 		(*found_agent).second->remove_neighbour(neighbour_id);
@@ -80,6 +89,7 @@ void Agent_Network::remove_neighbour_to_agent(int agent_id, int neighbour_id)
 void Agent_Network::subscribe_to_agent(int agent_id, std::shared_ptr<Interface_Graphics_Observer> observer)
 {
 	std::scoped_lock lock(nodes_mutex_);
+	//TODO: check what happens if agent_id not found, log accordingly
 	_nodes_.at(agent_id)->subscribe(observer);
 }
 
@@ -99,12 +109,28 @@ std::string Agent_Network::component_name()
 	return "representational network";
 }
 
-void Agent_Network::run()
+void Agent_Network::activate()
 {
+	std::unique_lock s_lock(system_state_mutex_);
+	while (_system_state_ == system_state::PAUSED)
+		system_state_condition_.wait(s_lock, [this] {return _system_state_ == system_state::RUNNING; });
+	
+	if (_system_state_ == system_state::TERMINATED) {
+		s_lock.unlock();
+		return;
+	}
+	s_lock.unlock();
+
 	std::unique_lock lock(alive_mutex_);
 
 	message::Parsed_Message msg = incoming_messages_.stop_until_pop();
-	if (msg.to) {
+	
+	if (msg.new_id) // new agent creation on the network
+	{
+		add_node(msg.new_id.value(), msg.connection_id);
+		_nodes_.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
+	}
+	else if (msg.to) { //every other messages that needs to be passed to a specific agent
 		std::scoped_lock Alock(nodes_mutex_);
 		for (const auto& pair : _nodes_) {
 			if (pair.second && pair.second->get_agent_id() == msg.to.value()) {
@@ -112,29 +138,31 @@ void Agent_Network::run()
 			}
 		}
 	}
-	if (msg.new_id)
-	{
-		add_node(msg.new_id.value(), msg.connection_id);
-		_nodes_.at(msg.new_id.value())->update_position(std::make_pair(msg.x_position.value(), msg.y_position.value()));
-
-	}
-
 	if (alive_) {
 		lock.unlock();
-		run();
+		activate();
 	}
 	else
 		lock.unlock();
 }
 
+void Agent_Network::run()
+{
+	std::scoped_lock s_lock(system_state_mutex_);
+	_system_state_ = system_state::RUNNING;
+	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " is now running";
+}
+
 void Agent_Network::pause()
 {
+	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::PAUSED;
 	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " paused";
 }
 
 void Agent_Network::close()
 {
+	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::TERMINATED;
 	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " closed";
 }

@@ -89,9 +89,10 @@ public:
 
 private:
 	Agent_Parameters parameters_;
+	Identification_Details info_;
 	std::vector<std::weak_ptr<Interface_Graphics_Observer>> observers_;
 	std::unique_ptr<Message_Processor> processor_;
-	Identification_Details info_;
+	
 
 	//concurrency variables
 	std::mutex param_mutex_;

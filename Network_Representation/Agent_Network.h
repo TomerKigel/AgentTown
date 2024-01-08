@@ -58,6 +58,7 @@ public:
 
 	std::string component_name();
 
+	void activate();
 	void run();
 	void pause();
 	void close();
@@ -65,6 +66,8 @@ private:
 	bool alive_;
 	std::mutex alive_mutex_;
 	std::mutex nodes_mutex_;
+	std::mutex system_state_mutex_;
+	std::condition_variable system_state_condition_;
 	std::string name_;
 	Queue_Manager<message::Parsed_Message> incoming_messages_;
 };
