@@ -45,7 +45,7 @@ Ideally in the future, virtual and simulated should become physical and real.
 To compile and run the project few things are required:
 
 Download and install Boost library. An explanation can be found here: [tutorial](https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html)
-(build with --toolset=msvc14.2 --with-log link=shared, an example can be found in the github workflows yml for windows)
+(build with --toolset=msvc14.2 --with-log link=shared, an example can be found in the GitHub workflows yml for Windows)
 
 (mandatory for CAI project) Download SFML <b>64x(not 32bits!)</b>
 version 2.5.1 or newer. link: [download](https://www.sfml-dev.org/download/sfml/2.5.1/) 
@@ -56,9 +56,8 @@ all settings are already set up properly in the .vcxproj files accordingly. Afte
 directories you have installed.
 
 
-The project was developed in Visual Studio 2019 and uses toolset v142 but should work fine with any newer toolset.
-If you are trying to build on a newer version of Visual Studio (2022 or higher) you might not have toolset v142 installed so you have two options.
-Either install the older toolset or change the toolset from v142 to the new toolset(v143 or higher).
+The project was developed in Visual Studio 2019 and uses toolset v142.
+If you are trying to build on a newer version of Visual Studio (2022 or higher) you might not have toolset v142 installed so you will need to install it.
 
 In the 
 
