@@ -121,6 +121,6 @@ https://github.com/TomerKigel/AgentTown/assets/88850793/b202e44e-e3e6-445b-9a8c-
 
 <h2>Stay in touch</h2>
 
-•[Tomer Kigel](https://www.linkedin.com/in/tomer-kigel/ "Tomer Kigel") on Linkedin
+•[Tomer Kigel](https://www.linkedin.com/in/tomer-kigel/ "Tomer Kigel") on Linkedin.
 
-•[Tomer Kigel](https://www.facebook.com/suminona.a) on Facebook
+•[Tomer Kigel](https://www.facebook.com/suminona.a) on Facebook.
