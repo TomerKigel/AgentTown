@@ -125,9 +125,9 @@ namespace cai
 		/// <summary>
 		/// change state of a specific system to - PAUSE
 		/// </summary>
-		/// <param name_ = "system"> - the system to halt, has to have the system previously added </param>
-		/// <exception cref="std::runtime_error">- Thrown when attempting to halt a system that doesn't exist in the framework</exception> 
-		void halt(systems system);
+		/// <param name_ = "system"> - the system to pause, has to have the system previously added </param>
+		/// <exception cref="std::runtime_error">- Thrown when attempting to pause a system that doesn't exist in the framework</exception> 
+		void pause(systems system);
 
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace cai
 		/// <summary>
 		/// change state of all systems in the framework to - PAUSE
 		/// </summary>
-		void halt_all();
+		void pause_all();
 
 
 		/// <summary>
@@ -170,7 +170,7 @@ namespace cai
 
 		//vector of all active systems 
 
-		std::vector<Component*> list_of_active_components_;
+		std::unordered_map<systems, activity> map_of_active_components_;
 	};
 }
 

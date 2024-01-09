@@ -77,8 +77,8 @@ Framework::Framework()
 	SystemMediator_.add_component(&networks_manager_);
 
 	//set mandatory systems as active
-	list_of_active_components_.push_back(&interpreter_);
-	list_of_active_components_.push_back(&networks_manager_);
+	map_of_active_components_.insert(std::make_pair(systems::Interpreter, activity::Active));
+	map_of_active_components_.insert(std::make_pair(systems::Representational_Network, activity::Active));
 }
 
 void Framework::run_all()
@@ -89,13 +89,13 @@ void Framework::run_all()
 
 
 	//run optional systems
-	if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) != list_of_active_components_.end()) {
+	if (map_of_active_components_.count(systems::Communications) == 1 && map_of_active_components_.at(systems::Communications) == activity::Active){
 		base_server_.run();
 		//context_thread_ = std::thread([this]() { io_context_.run(); });
 	}
 	
 	
-	if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) != list_of_active_components_.end()) {
+	if(map_of_active_components_.count(systems::Graphics) == 1 && map_of_active_components_.at(systems::Graphics) == activity::Active) {
 		engine_.run(); // blocking system because of sfml. keep at the end of the code block as long as sfml is used.
 	}
 }
@@ -128,7 +128,7 @@ void Framework::run(systems system)
 	}
 }
 
-void Framework::halt_all()
+void Framework::pause_all()
 {
 	interpreter_.pause();
 	networks_manager_.pause_all();
@@ -136,7 +136,7 @@ void Framework::halt_all()
 	base_server_.pause();
 }
 
-void Framework::halt(systems system)
+void Framework::pause(systems system)
 {
 	switch (system) {
 	case systems::Communications:
@@ -166,10 +166,16 @@ void Framework::halt(systems system)
 
 void Framework::close() noexcept
 {
-	networks_manager_.close_all();
-	interpreter_.close();
+	//think how close is different to pause and implement it accordingly
+	networks_manager_.pause_all();
+	interpreter_.pause();
+	SystemMediator_.remove_component(&networks_manager_);
+
+
 	engine_.close();
 	base_server_.close();
+	map_of_active_components_.at(systems::Graphics) = activity::InActive;
+	map_of_active_components_.at(systems::Communications) = activity::InActive;
 }
 
 Framework::~Framework()
@@ -184,11 +190,11 @@ void Framework::add_system(systems system)
 	switch (system)
 	{
 	case systems::Graphics:
-		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) == list_of_active_components_.end()){
+		if (map_of_active_components_.count(systems::Graphics) == 0 || map_of_active_components_.at(systems::Graphics) == activity::InActive){
 			engine_ = Graphics_Engine();
 			SystemMediator_.add_component(&engine_);
 			networks_manager_.subscribe_to_network(&engine_);
-			list_of_active_components_.push_back(&engine_);
+			map_of_active_components_.insert(std::make_pair(systems::Graphics, activity::Active));
 		}
 		else
 		{
@@ -199,10 +205,10 @@ void Framework::add_system(systems system)
 		//log - no system added
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) == list_of_active_components_.end()) {
+		if (map_of_active_components_.count(systems::Communications) == 0 || map_of_active_components_.at(systems::Communications) == activity::InActive) {
 			base_server_.bind_server(host_,port_);
 			SystemMediator_.add_component(&base_server_);
-			list_of_active_components_.push_back(&base_server_);
+			map_of_active_components_.insert(std::make_pair(systems::Communications, activity::Active));
 		}
 		else
 		{
@@ -220,7 +226,7 @@ void Framework::remove_system(systems system)
 	switch (system)
 	{
 	case systems::Graphics:
-		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &engine_) != list_of_active_components_.end()) {
+		if (map_of_active_components_.count(systems::Graphics) == 1 && map_of_active_components_.at(systems::Graphics) == activity::Active) {
 			SystemMediator_.remove_component(&engine_);
 			networks_manager_.unsubscribe_from_network(&engine_);
 		}
@@ -229,7 +235,7 @@ void Framework::remove_system(systems system)
 		BOOST_LOG_TRIVIAL(warning) << "can't remove interpreter";
 		break;
 	case systems::Communications:
-		if (std::find(list_of_active_components_.begin(), list_of_active_components_.end(), &base_server_) != list_of_active_components_.end()) {
+		if (map_of_active_components_.count(systems::Communications) == 1 && map_of_active_components_.at(systems::Communications) == activity::Active) {
 			SystemMediator_.remove_component(&base_server_);
 		}
 		break;
@@ -251,10 +257,5 @@ void Framework::delete_network(std::string network_name)
 
 std::vector<std::string> Framework::get_names_of_components()
 {
-	std::vector<std::string> component_names;
-	for (Component* component : list_of_active_components_)
-	{
-		component_names.push_back(component->component_name());
-	}
-	return component_names;
+	return SystemMediator_.get_component_names();
 }

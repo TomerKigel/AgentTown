@@ -102,6 +102,16 @@ public:
         std::erase(components_, component);
     }
 
+    std::vector<std::string> get_component_names()
+    {
+        std::vector<std::string> component_names;
+        for (Component* component : components_)
+        {
+            component_names.push_back(component->component_name());
+        }
+        return component_names;
+    }
+
 private:
     std::vector<Component*> components_;
 

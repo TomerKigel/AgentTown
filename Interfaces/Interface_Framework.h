@@ -44,6 +44,7 @@ public:
 	//components api
 
 	enum class systems { Graphics, Interpreter, Communications, Representational_Network };
+	enum class activity { Active, InActive };
 
 	virtual void add_system(systems system) = 0;
 
@@ -65,11 +66,11 @@ public:
 
 	virtual void run(systems system) = 0;
 
-	virtual void halt(systems system) = 0;
+	virtual void pause(systems system) = 0;
 
 	virtual void run_all() = 0;
 
-	virtual void halt_all() = 0;
+	virtual void pause_all() = 0;
 
 	virtual void close() noexcept = 0;
 };
