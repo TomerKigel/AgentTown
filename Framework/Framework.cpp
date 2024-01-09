@@ -166,7 +166,6 @@ void Framework::pause(systems system)
 
 void Framework::close() noexcept
 {
-	//think how close is different to pause and implement it accordingly
 	networks_manager_.pause_all();
 	interpreter_.pause();
 	SystemMediator_.remove_component(&networks_manager_);
