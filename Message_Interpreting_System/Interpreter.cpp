@@ -2,8 +2,8 @@
 
 Interpreter::Interpreter()
 {
-	alive_ = true;
-	_system_state_ = system_state::RUNNING;
+	alive_ = false;
+	_system_state_ = system_state::PAUSED;
 }
 
 Interpreter::~Interpreter()
@@ -11,8 +11,18 @@ Interpreter::~Interpreter()
 	close();
 }
 
-void Interpreter::run()
+void Interpreter::activate_()
 {
+	std::unique_lock s_lock(system_state_mutex_);
+	while (_system_state_ == system_state::PAUSED)
+		system_state_condition_.wait(s_lock, [this] {return _system_state_ == system_state::RUNNING; });
+
+	if (_system_state_ == system_state::TERMINATED) {
+		s_lock.unlock();
+		return;
+	}
+	s_lock.unlock();
+
 	std::unique_lock lock(alive_mutex_);
 
 	message::Message msg = incoming_messages_.stop_until_pop();
@@ -35,7 +45,7 @@ void Interpreter::run()
 	}
 	if (alive_) {
 		lock.unlock();
-		run();
+		activate_();
 	}
 	else
 		lock.unlock();
@@ -49,8 +59,24 @@ std::string Interpreter::component_name()
 {
 	return "interpreter";
 }
+
+void Interpreter::run()
+{
+	std::unique_lock s_lock(system_state_mutex_);
+	_system_state_ = system_state::RUNNING;
+	s_lock.unlock();
+	BOOST_LOG_TRIVIAL(info) << "Interpreter system is now running";
+	std::unique_lock lock(alive_mutex_);
+	if (alive_ == false) {
+		alive_ = true;
+		alive_mutex_.unlock();
+		activate_();
+	}
+}
+
 void Interpreter::pause()
 {
+	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::PAUSED;
 	BOOST_LOG_TRIVIAL(info) << "Interpreter system paused";
 }

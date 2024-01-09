@@ -1,2 +1,3 @@
-[2024-01-08 17:02:03.932793] [info]: Framework is initialized with:	port:7777	ip:127.0.0.1
-[2024-01-08 17:02:04.135791] [info]: Agent_Network named:DEFAULT is now running
+[2024-01-09 20:07:51.412618] [info]: Framework is initialized with:	port:7777	ip:127.0.0.1
+[2024-01-09 20:07:51.611618] [info]: Interpreter system is now running
+[2024-01-09 20:07:51.612618] [info]: Agent_Network named:DEFAULT is now running

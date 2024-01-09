@@ -36,9 +36,15 @@ Contact information:
 Agent_Network::Agent_Network(std::string name_)
 {
 	this->name_ = name_;
-	alive_ = true;
+	alive_ = false;
 	_system_state_ = system_state::PAUSED;
 }
+
+Agent_Network::~Agent_Network()
+{
+	close();
+}
+
 void Agent_Network::add_node(int id, int connection)
 {
 	if (_nodes_.count(id) != 0) {
@@ -109,7 +115,7 @@ std::string Agent_Network::component_name()
 	return "representational network";
 }
 
-void Agent_Network::activate()
+void Agent_Network::activate_()
 {
 	std::unique_lock s_lock(system_state_mutex_);
 	while (_system_state_ == system_state::PAUSED)
@@ -140,7 +146,7 @@ void Agent_Network::activate()
 	}
 	if (alive_) {
 		lock.unlock();
-		activate();
+		activate_();
 	}
 	else
 		lock.unlock();
@@ -148,9 +154,16 @@ void Agent_Network::activate()
 
 void Agent_Network::run()
 {
-	std::scoped_lock s_lock(system_state_mutex_);
+	std::unique_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::RUNNING;
+	s_lock.unlock();
 	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " is now running";
+	std::unique_lock lock(alive_mutex_);
+	if (alive_ == false) {
+		alive_ = true;
+		alive_mutex_.unlock();
+		activate_();
+	}
 }
 
 void Agent_Network::pause()
@@ -164,5 +177,6 @@ void Agent_Network::close()
 {
 	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::TERMINATED;
+	alive_ = false;
 	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " closed";
 }

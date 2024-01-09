@@ -59,7 +59,6 @@ void Networks_Manager::run_all()
 				std::thread([=]()
 					{
 						pair.second->run();
-						pair.second->activate();
 					})));
 	
 }

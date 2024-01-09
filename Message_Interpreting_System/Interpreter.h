@@ -51,13 +51,16 @@ class Interpreter : public System<message::Message>, public Interface_Runnable
 public:
 	Interpreter();
 	~Interpreter();
-	void run();
 	virtual void provide_message(message::Message& msg);
 	std::string component_name();
+	void run();
 	void pause();
 	void close();
 private:
+	void activate_();
 	bool alive_;
 	std::mutex alive_mutex_;
+	std::mutex system_state_mutex_;
+	std::condition_variable system_state_condition_;
 	Queue_Manager<message::Message> incoming_messages_;
 };

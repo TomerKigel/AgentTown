@@ -44,6 +44,7 @@ class Agent_Network : public Network<std::shared_ptr<Agent>>, public System<mess
 {
 public:
 	Agent_Network(std::string name_ = "DEFAULT");
+	virtual ~Agent_Network();
 
 	void add_node(int id, int connection);
 	void remove_node(int id);
@@ -58,11 +59,11 @@ public:
 
 	std::string component_name();
 
-	void activate();
 	void run();
 	void pause();
 	void close();
 private:
+	void activate_();
 	bool alive_;
 	std::mutex alive_mutex_;
 	std::mutex nodes_mutex_;
