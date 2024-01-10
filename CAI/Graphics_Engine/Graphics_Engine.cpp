@@ -37,7 +37,7 @@ void Graphics_Engine::loading_screen()
 {
 	std::shared_ptr<sf::Texture> loadingtxt = std::make_shared<sf::Texture>();
 	if (!loadingtxt->loadFromFile("loading.png"))
-		throw("loading");
+		throw std::runtime_error("loading.png failed");
 	Graphics loading(sf::Vector2f(0, 0), loadingtxt, window_);
 	loading.Draw();
 	window_->display();

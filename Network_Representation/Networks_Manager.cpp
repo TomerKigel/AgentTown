@@ -24,7 +24,7 @@ void Networks_Manager::delete_network(std::string network_name)
 	}
 	else
 	{
-		//add throw here
+		throw std::runtime_error("Error: attempt to remove a network that doesn't exist, named:" + network_name);
 		BOOST_LOG_TRIVIAL(error) << "'" << network_name << "' network can't be removed in function Networks_Manager::delete_network(std::string network_name) because it doesn't exist";
 	}
 }

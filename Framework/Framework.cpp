@@ -124,7 +124,7 @@ void Framework::run(systems system)
 		}
 		break;
 	default:
-		throw "Error: attempt to start a system that doesn't exist";
+		throw std::runtime_error("Error: attempt to start a system that doesn't exist");
 	}
 }
 
@@ -160,7 +160,7 @@ void Framework::pause(systems system)
 		}
 		break;
 	default:
-		throw "Error: attempt to start a system that doesn't exist";
+		throw std::runtime_error("Error: attempt to start a system that doesn't exist");
 	}
 }
 

@@ -71,7 +71,8 @@ public:
 	unsigned int get_id() const
 	{
 		if (agent_id_ == -1)
-			throw std::runtime_error("agent has no valid id");
+			
+			std::runtime_error("agent has no valid id");
 		return agent_id_;
 	}
 
