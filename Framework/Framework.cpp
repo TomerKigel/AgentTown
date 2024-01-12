@@ -201,7 +201,7 @@ void Framework::add_system(systems system)
 		}
 		break;
 	case systems::Interpreter:
-		//log - no system added
+		BOOST_LOG_TRIVIAL(warning) << "no system  was added, since it is an essential system that exists by default";
 		break;
 	case systems::Communications:
 		if (map_of_active_components_.count(systems::Communications) == 0 || map_of_active_components_.at(systems::Communications) == activity::InActive) {
@@ -215,7 +215,7 @@ void Framework::add_system(systems system)
 		}
 		break;
 	case systems::Representational_Network:
-		BOOST_LOG_TRIVIAL(warning) << "no system added";
+		BOOST_LOG_TRIVIAL(warning) << "no system added, since it is an essential system that exists by default";
 		break;
 	}
 }

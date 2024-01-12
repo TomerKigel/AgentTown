@@ -62,10 +62,15 @@ std::string Interpreter::component_name()
 
 void Interpreter::run()
 {
+	//change state
 	std::unique_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::RUNNING;
 	s_lock.unlock();
+
+	//log the change
 	BOOST_LOG_TRIVIAL(info) << "Interpreter system is now running";
+
+	//activate main loop if isn't already running
 	std::unique_lock lock(alive_mutex_);
 	if (alive_ == false) {
 		alive_ = true;

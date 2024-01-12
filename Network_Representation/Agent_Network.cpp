@@ -154,10 +154,15 @@ void Agent_Network::activate_()
 
 void Agent_Network::run()
 {
+	//change state
 	std::unique_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::RUNNING;
 	s_lock.unlock();
-	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " is now running";
+
+	//log the change
+	BOOST_LOG_TRIVIAL(info) << "Agent Network named:" << name_ << " is now running";
+	
+	//activate main loop if isn't already running
 	std::unique_lock lock(alive_mutex_);
 	if (alive_ == false) {
 		alive_ = true;
@@ -170,7 +175,7 @@ void Agent_Network::pause()
 {
 	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::PAUSED;
-	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " paused";
+	BOOST_LOG_TRIVIAL(info) << "Agent Network named:" << name_ << " paused";
 }
 
 void Agent_Network::close()
@@ -178,5 +183,5 @@ void Agent_Network::close()
 	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::TERMINATED;
 	alive_ = false;
-	BOOST_LOG_TRIVIAL(info) << "Agent_Network named:" << name_ << " closed";
+	BOOST_LOG_TRIVIAL(info) << "Agent Network named:" << name_ << " closed";
 }

@@ -37,7 +37,7 @@ Contact information:
 MainServer::MainServer() : acceptor_(io_context_, end_point_)
 {
 	running_connection_id_ = 1;
-	_system_state_ = system_state::RUNNING;
+	_system_state_ = system_state::PAUSED;
 }
 
 void MainServer::bind_server(std::string host, int port)
@@ -65,13 +65,14 @@ MainServer::~MainServer() {
 
 bool MainServer::run() {
 	std::cout << "Main-Server starting" << std::endl;
+	BOOST_LOG_TRIVIAL(info) << "Communications system is now running";
 	context_thread_ = std::thread([this]() { io_context_.run(); });
 	try {
 		_system_state_ = system_state::RUNNING;
 		wait_for_connection_();
 	}
 	catch (std::exception& e) {
-		std::cerr << "Could not initiate server." << std::endl;
+		BOOST_LOG_TRIVIAL(error) << "Could not initiate server.";
 		return false;
 	}
 	return true;
@@ -79,20 +80,22 @@ bool MainServer::run() {
 
 void MainServer::pause()
 {
+	std::scoped_lock s_lock(system_state_mutex_);
 	_system_state_ = system_state::PAUSED;
 	acceptor_.cancel();
-	std::cout << "Main-Server paused" << std::endl;
+	BOOST_LOG_TRIVIAL(info) << "Main Server paused";
 }
 
 
 void MainServer::wait_for_connection_()
 {
 	acceptor_.async_accept(
-		[this](boost::system::error_code ec, tcp::socket socket)
+		[this](boost::system::error_code error_code, tcp::socket socket)
 		{
-			if (!ec)
+			if (!error_code)
 			{
 				cout << "Established connection with connection id: " << running_connection_id_ << endl;
+				BOOST_LOG_TRIVIAL(info) << "Established connection with connection id: " << running_connection_id_;
 				auto connection_ptr = std::make_shared<ClientThreadConnection>(std::move(socket), connections_, running_connection_id_++, mediator_);
 				connections_.insert(std::make_pair(running_connection_id_, connection_ptr));
 				connection_ptr->run();
@@ -105,14 +108,16 @@ void MainServer::wait_for_connection_()
 
 void MainServer::close() {
 	try {
+		std::scoped_lock s_lock(system_state_mutex_);
 		_system_state_ = system_state::TERMINATED;
 		acceptor_.close();
 		for (auto& connection : connections_)
 			connection.second->disconnect();
 		context_thread_.join();
+		BOOST_LOG_TRIVIAL(info) << "Main Server closed";
 	}
 	catch (...) {
-		std::cout << "closing failed: connection already closed" << std::endl;
+		BOOST_LOG_TRIVIAL(error) << "closing failed: connection already closed";
 	}
 }
 

@@ -31,6 +31,11 @@ Contact information:
 	github:   https://github.com/TomerKigel
 */
 #pragma once
+#define BOOST_ALL_DYN_LINK
+
+#include <boost/log/trivial.hpp>
+#include "Debug.h"
+
 
 #include <string>
 #include <iostream>
@@ -129,4 +134,7 @@ private:
 
 	boost::asio::io_context io_context_;
 	tcp::acceptor acceptor_;
+
+	//mutexes
+	std::mutex system_state_mutex_;
 };

@@ -2,12 +2,12 @@
 
 Graphics_Engine::Graphics_Engine()
 {
-	_system_state_ = system_state::RUNNING;
-	window_ = std::make_shared<sf::RenderWindow>();
-	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
-	loading_screen();
-	Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
-	window_->setActive(false);
+	//_system_state_ = system_state::RUNNING;
+	//window_ = std::make_shared<sf::RenderWindow>();
+	//window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
+	//loading_screen();
+	//Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
+	//window_->setActive(false);
 }
 
 
@@ -26,11 +26,11 @@ Graphics_Engine::Graphics_Engine()
 
 void Graphics_Engine::operator=(const Graphics_Engine&& gm) noexcept
 {
-	_system_state_ = gm._system_state_;
-	window_ = gm.window_;
-	loading_screen();
-	Quadtree_ = std::make_unique<QuadTree>( -1980, -1080, 1980, 1080);
-	window_->setActive(false);
+	//_system_state_ = gm._system_state_;
+	//window_ = gm.window_;
+	//loading_screen();
+	//Quadtree_ = std::make_unique<QuadTree>( -1980, -1080, 1980, 1080);
+	//window_->setActive(false);
 }
 
 void Graphics_Engine::loading_screen()
@@ -45,9 +45,18 @@ void Graphics_Engine::loading_screen()
 
 void Graphics_Engine::run()
 {
+	//init
+	BOOST_LOG_TRIVIAL(info) << "Graphics system is now running";
+	_system_state_ = system_state::RUNNING;
+	window_ = std::make_shared<sf::RenderWindow>();
+	window_->create(sf::VideoMode(1920, 1080), "Agent Town", 3/*sf::Style::Resize*/);
+	loading_screen();
+	Quadtree_ = std::make_unique<QuadTree>(-1980, -1080, 1980, 1080);
+	
+
 	while (_system_state_ == system_state::PAUSED);
 	if (_system_state_ == system_state::RUNNING) {
-		window_->setActive(true);
+		//window_->setActive(true);
 
 		object_vector_ = Factory::extract_object_list();
 
