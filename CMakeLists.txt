@@ -59,6 +59,7 @@ ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 #set(Boost_USE_STATIC_LIBS OFF)
 find_package(SFML 2.5.1 COMPONENTS graphics window system audio REQUIRED)
 find_package(Boost 1.81.0 EXACT COMPONENTS log)
+find_package(Boost 1.81.0 EXACT COMPONENTS log_setup)
 
 
 
@@ -77,4 +78,5 @@ target_link_libraries(Framework_exe PRIVATE
     sfml-audio
     ${Boost_LIBRARIES}
     Boost::log
+    Boost::log_setup
 )
